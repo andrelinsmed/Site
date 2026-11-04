@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Morfologia e Medicina Laboratorial</title>
+<style>
+/* Morfologia — biblioteca de roteiros respondidos, na roupagem vitrine do site "Banco de questões" */
+:root{
+  --bg:#f5f5f7; --card:#ffffff; --ink:#1d1d1f; --muted:#6e6e73; --line:#d2d2d7; --soft:#f5f5f7; --hover:#ebebef;
+  --accent:#0066cc; --accent-soft:#e8f2fd; --tip:#fff8e1; --tipline:#f0d78c;
+  --shadow:0 1px 3px rgba(0,0,0,.04),0 10px 30px rgba(0,0,0,.045); --bar:rgba(245,245,247,.86);
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --bg:#000000; --card:#1d1d1f; --ink:#f5f5f7; --muted:#a1a1a6; --line:#38383a; --soft:#2c2c2e; --hover:#2c2c2e;
+  --accent:#2997ff; --accent-soft:#0b2a4a; --tip:#2b2610; --tipline:#5c4f1c;
+  --shadow:0 1px 2px rgba(0,0,0,.4); --bar:rgba(22,22,23,.82);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{background:var(--bg)}
+body{margin:0;color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  padding:0 max(22px,env(safe-area-inset-right,0px)) 60px max(22px,env(safe-area-inset-left,0px))}
+button{font-family:var(--font)}
+.kicker{font-size:11px;letter-spacing:.13em;font-weight:700;color:var(--muted);text-transform:uppercase}
+.ghost{font:600 13px var(--font);color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer}
+.ghost:hover{background:var(--hover)}
+
+/* Biblioteca */
+.lib{max-width:1080px;margin:0 auto;padding-top:64px}
+.lib h1{max-width:900px;font-size:clamp(40px,6vw,68px);line-height:1.02;letter-spacing:-.06em;margin:14px 0 12px;font-weight:750}
+.lib .lead{font-size:19px;color:var(--muted);max-width:620px;margin:0 0 40px}
+.shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:20px}
+.rcard{display:flex;flex-direction:column;text-align:left;border:0;border-radius:24px;background:var(--card);box-shadow:var(--shadow);padding:0;overflow:hidden;cursor:pointer;color:var(--ink);
+  transition:transform .4s cubic-bezier(.2,.75,.25,1),box-shadow .4s}
+.rcard:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.11)}
+.rcard:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.rcard .cv{padding:18px 18px 0;background:var(--card)}
+.rcard .cv img{width:100%;height:auto;display:block}
+.rcard .bd{padding:20px 22px 22px;display:flex;flex-direction:column;gap:6px}
+.rcard .sp{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.rcard .tt{font-size:24px;font-weight:700;letter-spacing:-.04em;line-height:1.12}
+.rcard .ds{font-size:14px;color:var(--muted)}
+.rcard .go{font-size:15px;font-weight:600;color:var(--accent);margin-top:6px}
+.soon{border:2px dashed var(--line);border-radius:24px;padding:28px;color:var(--muted);font-size:15px;display:flex;flex-direction:column;justify-content:center;gap:6px;min-height:200px}
+.soon b{color:var(--ink);font-size:18px;letter-spacing:-.02em}
+
+/* Leitura */
+.reader{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:250px minmax(0,1fr);gap:40px;padding-top:24px}
+.toc{position:sticky;top:20px;align-self:start;max-height:calc(100vh - 40px);overflow-y:auto;padding:8px 0 20px}
+.toc .back{margin-bottom:18px}
+.toc ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px}
+.toc a{display:block;color:var(--ink);text-decoration:none;font-size:13.5px;line-height:1.35;padding:6px 10px;border-radius:10px}
+.toc a:hover{background:var(--hover)}
+.toc a.h3{padding-left:22px;color:var(--muted);font-size:13px}
+.toc a.on{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.toc-btn{display:none}
+.doc{background:var(--card);border-radius:28px;box-shadow:var(--shadow);padding:48px clamp(22px,5vw,64px) 56px;min-width:0}
+.doc-head{margin-bottom:28px}
+.doc-banner{display:block;width:100%;height:auto;margin:0 0 22px}
+.doc.pages{padding:18px;background:var(--card)}
+.pg{display:block;width:100%;height:auto;border-radius:12px;background:#fff;margin:0 0 14px;cursor:zoom-in;box-shadow:0 0 0 1px var(--line)}
+.zoom{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.88);overflow:auto;-webkit-overflow-scrolling:touch;cursor:zoom-out}
+.zoom img{display:block;width:min(1600px,200vw);max-width:none;margin:0 auto}
+.zoom-x{position:fixed;top:12px;right:12px;z-index:51;font:600 14px var(--font);color:#fff;background:rgba(255,255,255,.18);border:0;border-radius:999px;padding:9px 16px;cursor:pointer}
+.doc-head h1{font-size:clamp(34px,5vw,52px);line-height:1.04;letter-spacing:-.055em;margin:12px 0 8px}
+.doc-head p{color:var(--muted);margin:0}
+.doc h2{font-size:clamp(24px,3vw,30px);letter-spacing:-.04em;line-height:1.15;margin:48px 0 14px;padding-top:24px;border-top:1px solid var(--line);scroll-margin-top:24px}
+.doc h3{font-size:19px;letter-spacing:-.02em;margin:30px 0 8px;scroll-margin-top:24px}
+.doc p,.doc li{font-size:16.5px}
+.doc p{margin:0 0 12px}
+.doc ol,.doc ul{padding-left:22px;margin:0 0 14px}
+.doc li p{margin:0 0 4px}
+.doc strong{font-weight:650}
+.doc img{max-width:100%;height:auto;display:block;border-radius:14px;margin:8px auto}
+.doc blockquote{margin:16px 0;padding:14px 18px;background:var(--tip);border:1px solid var(--tipline);border-radius:16px}
+.doc blockquote p:last-child{margin:0}
+.tbl{overflow-x:auto;margin:14px 0 20px;border-radius:16px;border:1px solid var(--line)}
+.doc table{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.45}
+.doc th,.doc td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.doc th{background:var(--soft);font-weight:650}
+.doc tr:last-child td{border-bottom:0}
+.tbl.figs{border:0;border-radius:0}
+.tbl.figs td{border:0;padding:6px;width:50%;font-size:13.5px;color:var(--muted)}
+.doc .fig-cap{font-size:13.5px;color:var(--muted)}
+
+
+/* roteiros exportados do Notion: mantém cores, destaques, quadros e colunas do original */
+body.loading{cursor:progress}
+.doc.notion p,.doc.notion li{white-space:pre-wrap}
+.doc.notion h4,.doc.notion h5{font-size:17px;margin:22px 0 8px;letter-spacing:-.01em}
+.doc.notion figure{margin:18px 0}
+.doc.notion figure.image{text-align:center}
+.doc.notion figure.image img{display:inline-block;margin:0 auto}
+.doc.notion .callout{display:flex;gap:10px;border-radius:14px;padding:14px 16px;margin:16px 0;white-space:normal}
+.doc.notion .callout p{margin:0}
+.doc.notion .column-list{display:flex;gap:28px;margin:14px 0}
+.doc.notion .column{flex:1;min-width:0}
+.doc.notion .column > *:first-child{margin-top:0}
+.doc.notion .icon{display:inline-flex;align-items:center;justify-content:center;max-width:1.2em;max-height:1.2em;vertical-align:text-bottom;margin-right:.4em}
+.doc.notion details{margin:10px 0;padding:10px 14px;border-radius:12px;background:var(--soft)}
+.doc.notion summary{cursor:pointer;font-weight:600}
+.doc.notion ul.toggle{list-style:none;padding-left:0}
+.doc.notion blockquote{margin:14px 0;padding:4px 0 4px 16px;border-left:3px solid var(--ink);background:none;border-radius:0}
+.doc.notion .simple-table-header-color{background:var(--soft)}
+.doc.notion .simple-table-header{font-weight:650}
+.doc .block-color-orange,.doc .highlight-orange{color:#d27b2d}.doc .block-color-red,.doc .highlight-red{color:#cf5148}
+.doc .block-color-blue,.doc .highlight-blue{color:#387dc9}.doc .block-color-teal,.doc .highlight-teal{color:#50946e}
+.doc .block-color-purple,.doc .highlight-purple{color:#9a6bb4}.doc .block-color-pink,.doc .highlight-pink{color:#c14c8a}
+.doc .block-color-gray,.doc .highlight-gray{color:#7d7a75}.doc .block-color-yellow,.doc .highlight-yellow{color:#cb9434}
+.doc .block-color-gray_background{background:#f0efed}.doc .block-color-orange_background{background:#fbebde}.doc .block-color-yellow_background{background:#f9f3dc}
+.doc .block-color-teal_background{background:#e8f1ec}.doc .block-color-blue_background{background:#e5f2fc}.doc .block-color-purple_background{background:#f3ebf9}
+.doc .block-color-pink_background{background:#fae9f1}.doc .block-color-red_background{background:#fce9e7}
+.doc [class*="_background"]{color:#1d1d1f;border-radius:6px}
+.doc li[class*="_background"],.doc p[class*="_background"]{padding:2px 6px}
+.doc .highlight-gray_background{background:rgba(42,28,0,.07)}.doc .highlight-orange_background{background:rgba(224,101,1,.13)}.doc .highlight-yellow_background{background:rgba(211,168,0,.14)}
+.doc .highlight-blue_background{background:rgba(0,124,215,.1)}.doc .highlight-red_background{background:rgba(223,22,0,.1)}.doc .highlight-teal_background{background:rgba(0,100,45,.09)}
+:root[data-theme="dark"] .doc .block-color-orange,:root[data-theme="dark"] .doc .highlight-orange{color:#e8955a}
+:root[data-theme="dark"] .doc .block-color-red,:root[data-theme="dark"] .doc .highlight-red{color:#ee7f78}
+:root[data-theme="dark"] .doc [class*="highlight-"][class*="_background"]{color:inherit;background:rgba(255,255,255,.12)}
+@media (max-width:700px){.doc.notion .column-list{flex-direction:column;gap:0}}
+@media (max-width:900px){
+  body{padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px))}
+  .reader{grid-template-columns:minmax(0,1fr);gap:14px;padding-top:14px}
+  .toc{position:static;max-height:none;padding:0}
+  .toc-btn{display:inline-block;margin-left:8px}
+  .toc ol{display:none;margin-top:10px;background:var(--card);border-radius:18px;padding:8px;box-shadow:var(--shadow)}
+  .toc.open ol{display:flex}
+  .toc .back{margin-bottom:0}
+  .doc{border-radius:22px;padding:32px 18px 40px}
+  .doc.pages{padding:6px;border-radius:16px}
+  .pg{margin-bottom:6px;border-radius:10px}
+  .lib{padding-top:36px}
+}
+/* ---------- Flashcards ---------- */
+.fc-seg{display:inline-flex;gap:2px;padding:3px;margin:0 0 22px;background:var(--hover);border-radius:999px}
+.fc-seg button{font:600 14px var(--font);color:var(--muted);background:none;border:0;border-radius:999px;padding:8px 16px;cursor:pointer}
+.fc-seg button[aria-pressed="true"]{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.doc.pages .fc-seg{margin:10px 10px 16px}
+.reader.fc-mode .toc ol,.reader.fc-mode .toc .toc-btn{display:none!important}
+.fc{max-width:680px;margin:6px auto 10px;text-align:center}
+.fc .fc-intro{color:var(--muted);font-size:15.5px;margin:0 auto 22px;max-width:460px;text-align:center}
+.fc .fc-k{font-size:11px;letter-spacing:.13em;font-weight:700;text-transform:uppercase;color:var(--muted)}
+.fc .fc-gen{font:600 15px var(--font);color:#fff;background:var(--accent-solid,#0071e3);border:0;border-radius:999px;padding:12px 24px;cursor:pointer;margin-top:4px}
+.fc .fc-gen:hover{filter:brightness(1.07)}
+.fc-card{perspective:1400px;margin:22px 0 16px;cursor:pointer;outline:none}
+.fc-in{position:relative;min-height:300px;transition:transform .55s cubic-bezier(.2,.75,.25,1);transform-style:preserve-3d}
+.fc-card.flip .fc-in{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:24px;padding:34px 34px 28px;display:flex;flex-direction:column;justify-content:center;gap:14px;text-align:left}
+.fc-front{background:var(--card);box-shadow:var(--shadow),0 0 0 1px var(--line)}
+.fc-back{background:var(--ink);color:var(--card);transform:rotateY(180deg)}
+.fc-face .lab{font-size:11px;letter-spacing:.13em;font-weight:700;text-transform:uppercase;color:var(--muted)}
+.fc-back .lab{color:inherit;opacity:.62}
+.fc-face .tx{font-size:clamp(19px,2.4vw,23px);line-height:1.38;letter-spacing:-.02em;font-weight:600;text-align:left;hyphens:manual}
+.fc-back .tx{font-size:clamp(16.5px,2vw,19px);font-weight:500;line-height:1.5}
+.fc-face .hint{margin-top:auto;font-size:12.5px;color:var(--muted)}
+.fc-back .hint{color:inherit;opacity:.55}
+.fc-bar{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+.fc-bar .ghost{font-size:14px;padding:9px 16px}
+.fc-cnt{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums;min-width:70px}
+.fc-prog{height:4px;border-radius:2px;background:var(--hover);overflow:hidden;max-width:300px;margin:14px auto 0}
+.fc-prog i{display:block;height:100%;background:var(--accent);transition:width .3s}
+.fc-end{padding:30px 10px}
+.fc-end b{display:block;font-size:24px;letter-spacing:-.03em;margin-bottom:6px}
+@media (max-width:600px){.fc-in{min-height:340px}.fc-face{padding:26px 22px 20px}}
+</style>
+</head>
+<body>
+
+<section class="lib" id="lib">
+  <div class="kicker">02 · Bases morfofuncionais e diagnóstico</div>
+  <h1>Morfologia e Medicina Laboratorial.</h1>
+  <p class="lead">Roteiros respondidos de Morfofuncional e Medicina Laboratorial, por situação-problema. Toque numa página para ampliar.</p>
+  <div class="shelf" id="shelf"></div>
+</section>
+
+<section class="reader" id="reader" hidden>
+  <nav class="toc" id="toc" aria-label="Sumário">
+    <button class="ghost back" id="backLib" type="button">← Roteiros</button><button class="ghost toc-btn" id="tocBtn" type="button" aria-expanded="false">Sumário</button>
+    <ol id="tocList"></ol>
+  </nav>
+  <article class="doc" id="doc"></article>
+</section>
+<div class="zoom" id="zoom" hidden><img id="zoomImg" alt=""></div><button class="zoom-x" id="zoomX" type="button" hidden>Fechar ✕</button>
+
+<script>
+const ROTEIROS = [{"id": "sp-1-1", "sp": "SP 1.1", "titulo": "Pele e câncer de pele", "subtitulo": "Morfofuncional e Medicina Laboratorial", "resumo": "Histofisiologia da epiderme, lâminas de carcinomas cutâneos e, na Medicina Laboratorial, laudos histopatológicos e marcadores.", "kind": "notion", "banner": "img/f0a74e9ca8aedff2.webp", "src": "roteiros/sp-1-1.json"}, {"id": "sp-1-2", "sp": "SP 1.2", "titulo": "Próstata e câncer de próstata", "subtitulo": "Morfofuncional e Medicina Laboratorial", "resumo": "Macroscopia e histologia da próstata, carcinoma e, na Medicina Laboratorial, fisiopatologia, PSA, Gleason e exames de imagem.", "kind": "notion", "banner": "img/840c82d2e4b7fb69.webp", "src": "roteiros/sp-1-2.json"}, {"id": "sp-1-3", "sp": "SP 1.3", "titulo": "Intestino grosso e câncer colorretal", "subtitulo": "Morfofuncional e Medicina Laboratorial", "resumo": "Macroscopia e vascularização do intestino grosso, microscopia virtual, Radiopaedia e alterações da mucosa no câncer colorretal.", "kind": "notion", "banner": "img/07c67c4fb80101e6.webp", "src": "roteiros/sp-1-3.json"}, {"id": "sp-1-4", "sp": "SP 1.4", "titulo": "Pulmão e câncer de pulmão", "subtitulo": "Morfofuncional e Medicina Laboratorial", "resumo": "Segmentação pulmonar e vascularização, exames de imagem, classificação dos carcinomas brônquicos e marcadores tumorais.", "kind": "notion", "banner": "img/c04d82ab28198f4c.webp", "src": "roteiros/sp-1-4.json"}, {"id": "sp-1-5", "sp": "SP 1.5", "titulo": "Colo do útero", "subtitulo": "Morfofuncional e Medicina Laboratorial", "resumo": "Tipos celulares do colo e neoplasias, microscópio virtual, macroscopia do útero e lesões intraepiteliais no citopatológico.", "kind": "notion", "banner": "img/25f37ef9858f6a0f.webp", "src": "roteiros/sp-1-5.json"}, {"id": "sp-2-1", "sp": "SP 2.1", "titulo": "Mamas e climatério", "resumo": "Morfologia e microscopia das mamas, exames de imagem e, na Medicina Laboratorial, painel hormonal, risco cardiovascular e osteoporose no climatério.", "banner": "img/e75dd52699db9e7a.webp", "src": "roteiros/sp-2-1.json"}, {"id": "sp-2-2", "sp": "SP 2.2", "titulo": "Placenta e diabetes gestacional", "resumo": "Microscopia da placenta, circulação materno-fetal, anormalidades placentárias e, na Medicina Laboratorial, diagnóstico e conduta do DM gestacional.", "banner": "img/057d57e389115fda.webp", "src": "roteiros/sp-2-2.json"}, {"id": "sp-2-3", "sp": "SP 2.3", "titulo": "Pelve feminina e assoalho pélvico", "resumo": "Pelve óssea, músculos do assoalho pélvico, órgãos reprodutivos e IST, radiologia da pelve e, na Medicina Laboratorial, investigação e manejo das IST.", "banner": "img/24e0a4b4211eaeb0.webp", "src": "roteiros/sp-2-3.json"}, {"id": "sp-2-4", "sp": "SP 2.4", "titulo": "Sangramento uterino anormal", "subtitulo": "Morfofuncional e Medicina Laboratorial · caso de Ana Paula, 38 anos", "resumo": "Vascularização uterina, histologia do endométrio, PALM-COEIN e, na Medicina Laboratorial, exames e manejo do SUA.", "banner": "img/32e39224041ee81e.webp", "src": "roteiros/sp-2-4.json"}];
+const $ = id => document.getElementById(id);
+
+/* Tema compartilhado com a página inicial e os bancos */
+const TKEY = "bancos-tema";
+function applyTheme(m){ if (m === "escuro") document.documentElement.setAttribute("data-theme","dark"); else document.documentElement.removeAttribute("data-theme"); }
+try { applyTheme(localStorage.getItem(TKEY) === "escuro" ? "escuro" : "claro"); } catch(e){}
+window.addEventListener("message", e=>{ const m = e.data && e.data.bancosTema; if (m === "claro" || m === "escuro") applyTheme(m); });
+
+/* Biblioteca */
+ROTEIROS.forEach(r=>{
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "rcard";
+  b.innerHTML = `<div class="cv"><img alt=""></div><div class="bd"><span class="sp"></span><span class="tt"></span><span class="ds"></span><span class="go">Ler roteiro →</span></div>`;
+  b.querySelector("img").src = r.banner; b.querySelector("img").alt = r.sp + " · Morfofuncional";
+  b.querySelector(".sp").textContent = r.sp;
+  b.querySelector(".tt").textContent = r.titulo;
+  b.querySelector(".ds").textContent = r.resumo;
+  b.addEventListener("click", ()=>openR(r.id));
+  $("shelf").appendChild(b);
+});
+const soon = document.createElement("div"); soon.className = "soon";
+soon.innerHTML = "<b>Próximos roteiros</b>Os roteiros das próximas SPs entram aqui.";
+$("shelf").appendChild(soon);
+
+/* Flashcards salvos para cada conteúdo, mostrados em ordem aleatória a cada "Gerar flashcards" */
+const FLASH = {"sp-1-1": [["Quais são os estratos da epiderme, do mais profundo ao mais superficial?", "Basal, espinhoso, granuloso, lúcido (só na pele espessa) e córneo."], ["Como é o estrato basal?", "Uma camada única de células cúbicas ou colunares sobre a membrana basal, com intensa atividade mitótica. Ali ficam também os melanócitos e as células de Merkel."], ["Como é o estrato espinhoso?", "Várias camadas de queratinócitos poligonais unidos por desmossomos, que dão o aspecto de espinhos. Contém as células de Langerhans."], ["O que caracteriza o estrato granuloso?", "Células achatadas com grânulos de querato-hialina e grânulos lamelares, que liberam lipídios e formam a barreira de impermeabilidade."], ["O que caracteriza o estrato córneo?", "Células mortas, anucleadas e achatadas, cheias de queratina, que descamam continuamente e protegem contra atrito e perda de água."], ["Qual é a função dos melanócitos?", "Produzir melanina nos melanossomos e transferi-la aos queratinócitos, onde ela forma um capuz sobre o núcleo que absorve a radiação UV e protege o DNA."], ["Por que a melanina reduz o risco de câncer de pele?", "Ela absorve parte da radiação UV e diminui o dano ao DNA. Menos dano significa menos mutações em genes que controlam a divisão e a sobrevivência celular."], ["Qual a diferença entre eumelanina e feomelanina?", "A eumelanina é marrom-escura e muito protetora. A feomelanina é avermelhada, protege menos e predomina em peles claras e ruivas."], ["De quais células se originam CBC, CEC e melanoma?", "CBC: células basais da epiderme. CEC: queratinócitos do estrato espinhoso. Melanoma: melanócitos."], ["Quais são as alterações histológicas do carcinoma espinocelular?", "Proliferação de células escamosas atípicas com perda da organização da epiderme, pleomorfismo, mitoses anormais e ninhos que invadem a derme, com pérolas córneas."], ["O que são pérolas córneas?", "Estruturas arredondadas formadas por camadas concêntricas de queratina produzida pelas células escamosas tumorais, típicas do CEC bem diferenciado."], ["Como é a histologia do carcinoma basocelular?", "Ninhos de células basaloides (pequenas, núcleo escuro, pouco citoplasma) com núcleos em paliçada na periferia e fendas de retração entre o tumor e o estroma."], ["Quais achados histológicos sugerem melanoma?", "Melanócitos atípicos em ninhos irregulares e células isoladas subindo pela epiderme (disseminação pagetoide), assimetria, mitoses na derme e falta de maturação em profundidade."], ["Por que face, pescoço e dorso das mãos têm mais câncer de pele?", "Porque recebem radiação UV de forma contínua ao longo da vida, acumulando dano no DNA dos queratinócitos."], ["Por que o melanoma é mais agressivo que o CBC?", "O melanoma ultrapassa rapidamente as camadas da pele, alcança vasos linfáticos e sanguíneos e dá metástases. O CBC cresce devagar e tem comportamento predominantemente local."], ["Quais são os critérios histológicos gerais de malignidade?", "Pleomorfismo, núcleos grandes e hipercromáticos, aumento da relação núcleo-citoplasma, mitoses atípicas, perda de polaridade e invasão além da membrana basal."], ["Qual a diferença entre carcinoma in situ e invasivo?", "No in situ as células atípicas ocupam a epiderme mas não ultrapassam a membrana basal. No invasivo a membrana é rompida e o tumor chega à derme, onde há vasos."], ["Quais são as camadas da derme?", "Papilar, de tecido conjuntivo frouxo com capilares, e reticular, de conjuntivo denso não modelado. A invasão da derme dá ao tumor acesso a vasos."], ["O que significam hiperceratose e paraceratose no laudo?", "Hiperceratose é o espessamento da camada córnea. Paraceratose é a presença de núcleos retidos na camada córnea, sinal de maturação acelerada ou anormal."], ["O que é o índice de Breslow no laudo de melanoma?", "A espessura do tumor em milímetros, medida da camada granulosa até o ponto mais profundo de invasão. É o principal fator prognóstico."]], "sp-1-2": [["Quais são as relações anatômicas da próstata?", "Fica abaixo da bexiga, à frente do reto, atrás da sínfise púbica e acima do diafragma urogenital, envolvendo a uretra prostática."], ["Qual face da próstata é palpável ao toque retal?", "A face posterior (inferoposterior), que corresponde à zona periférica, onde está a maior parte do tecido glandular."], ["Quais são as zonas anatomofuncionais da próstata?", "Periférica (maior porção glandular), central (em torno dos ductos ejaculatórios), de transição (em torno da uretra) e estroma fibromuscular anterior (sem glândulas)."], ["Em qual zona surgem o câncer e a HPB?", "O câncer surge principalmente na zona periférica. A HPB surge na zona de transição, junto à uretra, por isso dá sintomas urinários mais cedo."], ["O que é a fáscia de Denonvilliers e por que ela importa?", "É a fáscia retoprostática, entre a próstata e o reto. Serve de referência cirúrgica para poupar os nervos e funciona como barreira contra a disseminação posterior do tumor."], ["Como é a drenagem venosa da próstata?", "Pelo plexo venoso prostático, que recebe a veia dorsal profunda do pênis, comunica-se com o plexo vesical e drena para as veias ilíacas internas."], ["Por que o câncer de próstata vai para os ossos e raramente para o fígado?", "O plexo prostático se comunica com o plexo venoso vertebral (Batson), levando células à coluna, pelve e sacro. O sangue prostático não passa pela veia porta, diferente do intestino."], ["Qual é a drenagem linfática da próstata?", "Primeiro para linfonodos pélvicos (obturadores e ilíacos) e depois para linfonodos retroperitoneais."], ["Como é a histologia da próstata normal?", "Glândulas tubuloalveolares com epitélio de duas camadas (células secretoras luminais e células basais), corpos amiláceos na luz e estroma fibromuscular."], ["O que são corpos amiláceos?", "Concreções lamelares de secreção prostática na luz das glândulas, que aumentam com a idade e podem calcificar."], ["Qual achado histológico ajuda a diagnosticar o adenocarcinoma de próstata?", "Glândulas pequenas e infiltrativas sem a camada de células basais, com núcleos aumentados e nucléolos evidentes, às vezes com invasão perineural."], ["Como aparece o câncer de próstata na ressonância em T2?", "A zona periférica normal tem sinal alto (hiperintensa). O tumor aparece como área de hipossinal, às vezes com rotura da cápsula."], ["O que o escore de Gleason avalia?", "O padrão arquitetural das glândulas tumorais (o grau de diferenciação). Quanto maior o escore, mais indiferenciado e agressivo o tumor."], ["O que é o PSA e onde ele é produzido?", "Uma serino-protease (calicreína) produzida pelo epitélio prostático, que liquefaz o sêmen. Uma pequena fração passa ao sangue."], ["O que indica uma relação PSA livre/total baixa?", "Maior probabilidade de câncer. No câncer predomina o PSA ligado a proteínas, então a fração livre fica proporcionalmente menor."], ["Quais situações elevam o PSA sem câncer?", "HPB, prostatite, ejaculação recente, ciclismo, sondagem, biópsia e manipulação da próstata."], ["Compare sensibilidade e especificidade do toque retal e do PSA.", "O toque tem sensibilidade baixa a moderada (exame normal não exclui câncer). O PSA é mais sensível, mas pouco específico."], ["Qual exame localiza a lesão e orienta a biópsia?", "A ressonância magnética multiparamétrica da próstata, com alta sensibilidade para câncer clinicamente significativo."], ["Para que serve a cintilografia óssea no câncer de próstata?", "Para detectar metástases ósseas no estadiamento de doença de risco alto, PSA muito elevado ou dor óssea. Não diagnostica o tumor primário."], ["O que sugere PSA muito elevado com dor óssea e próstata pétrea?", "Câncer de próstata avançado com provável metástase óssea, que deve ser confirmado por biópsia e estadiado com exames de imagem."]], "sp-1-3": [["Quais estruturas externas distinguem o cólon do intestino delgado?", "Tênias do colo (mesocólica, omental e livre), saculações (haustros) e apêndices omentais (adiposos)."], ["O que são as tênias do colo?", "Três faixas longitudinais formadas pela camada muscular externa, que encurtam o cólon e formam as saculações. Elas convergem na base do apêndice."], ["Quais artérias irrigam o cólon direito?", "Ramos da artéria mesentérica superior: ileocólica, cólica direita e cólica média (que irriga a maior parte do transverso)."], ["Quais artérias irrigam o cólon esquerdo?", "Ramos da artéria mesentérica inferior: cólica esquerda, sigmoideas e retal superior."], ["O que é o arco justacólico (artéria marginal)?", "Uma anastomose contínua ao longo da margem mesentérica do cólon que liga os ramos das artérias mesentéricas superior e inferior."], ["Como é irrigado o reto?", "Pela artéria retal superior (da mesentérica inferior), pelas retais médias (das ilíacas internas) e pelas retais inferiores (das pudendas internas)."], ["Para onde drena a veia retal superior e qual o alvo metastático?", "Veia retal superior → mesentérica inferior → esplênica → porta → fígado. Tumores do reto superior metastatizam mais para o fígado."], ["Para onde drenam as veias retais média e inferior e qual o alvo metastático?", "Para a veia ilíaca interna → ilíaca comum → cava inferior → coração → pulmões. Tumores do reto baixo podem metastatizar primeiro para o pulmão."], ["Como se forma a veia porta?", "Pela união da veia mesentérica superior com a veia esplênica, que já recebeu a mesentérica inferior."], ["Qual a importância da linha pectínea?", "Marca a transição entre o canal anal de origem endodérmica e ectodérmica. Acima, a drenagem é portal e para linfonodos internos; abaixo, sistêmica e para linfonodos inguinais."], ["Quais são as camadas da parede do intestino grosso?", "Mucosa (epitélio, lâmina própria e muscular da mucosa), submucosa, muscular própria (circular interna e longitudinal externa) e serosa ou adventícia."], ["Como é a mucosa do intestino grosso ao microscópio?", "Sem vilosidades, com criptas retas e longas revestidas por células absortivas e muitas células caliciformes produtoras de muco."], ["Por que o carcinoma restrito à mucosa do cólon quase não dá metástase?", "Porque a lâmina própria do cólon tem poucos ou nenhum vaso linfático. O risco de metástase surge quando o tumor ultrapassa a muscular da mucosa e chega à submucosa."], ["Quais tipos de pólipos podem virar câncer?", "Os adenomas (tubular, tubuloviloso e viloso) e os pólipos serrilhados sésseis. Os pólipos hiperplásicos pequenos têm risco muito baixo."], ["Que características aumentam o risco de malignização de um adenoma?", "Tamanho maior que 1 cm, componente viloso e displasia de alto grau."], ["Como funciona o teste do guaiaco para sangue oculto?", "É colorimétrico e detecta a atividade pseudoperoxidase do heme. Não é específico para sangue humano e detecta sangramento de qualquer parte do tubo digestivo."], ["Como funciona o teste imunoquímico fecal (FIT)?", "Usa anticorpos monoclonais contra a globina humana. É mais específico para sangramento do cólon e do reto, porque a globina vinda do trato alto é digerida."], ["Quais interferentes afetam o teste do guaiaco?", "Falso-positivo com carne vermelha, vegetais ricos em peroxidase e AINEs. Falso-negativo com excesso de vitamina C."], ["Por que o tumor do cólon direito raramente obstrui?", "Porque o cólon direito tem maior calibre e as fezes ainda são líquidas. O sintoma típico é anemia por sangramento oculto."], ["Por que o tumor do cólon esquerdo e sigmoide obstrui com mais facilidade?", "A luz é mais estreita e as fezes são sólidas. O tumor costuma ser anular e causa mudança do hábito intestinal, fezes afiladas e sangue vivo."]], "sp-1-4": [["Quantos segmentos broncopulmonares tem o pulmão direito?", "Dez: superior (apical, posterior, anterior), médio (lateral, medial) e inferior (superior, basal medial, basal anterior, basal lateral e basal posterior)."], ["Como se dividem os segmentos do pulmão esquerdo?", "Lobo superior: apicoposterior, anterior, lingular superior e lingular inferior. Lobo inferior: superior e basais (anteromedial, lateral e posterior)."], ["O que é um segmento broncopulmonar e por que ele importa?", "Uma unidade com brônquio segmentar e ramo da artéria pulmonar próprios, separada por tecido conjuntivo, que pode ser ressecada cirurgicamente sem comprometer o restante."], ["Qual é a dupla irrigação dos pulmões?", "As artérias pulmonares levam sangue venoso para a troca gasosa. As artérias brônquicas, ramos da aorta, nutrem brônquios e tecido pulmonar."], ["Para onde drenam as veias pulmonares e as brônquicas?", "As pulmonares levam sangue oxigenado ao átrio esquerdo. As brônquicas drenam para o sistema ázigo."], ["O que é o sistema ázigo?", "Um conjunto de veias da parede posterior do tronco que drena tórax e abdome e conecta as veias cavas inferior e superior, servindo de via colateral em obstruções."], ["Como é a drenagem linfática do pulmão?", "Dos plexos subpleural e profundo para os linfonodos broncopulmonares (hilares), depois traqueobronquiais, paratraqueais e troncos broncomediastinais."], ["Onde se localiza o tumor de Pancoast?", "No ápice do pulmão, no sulco superior, junto à 1ª e 2ª costelas, ao plexo braquial e à cadeia simpática."], ["Por que o tumor de Pancoast causa atrofia dos músculos da mão?", "Porque invade o tronco inferior do plexo braquial (raízes C8 e T1), que origina o nervo ulnar e inerva os músculos intrínsecos da mão."], ["Por que o tumor de Pancoast causa dor no ombro e no braço?", "Porque invade a pleura parietal, as primeiras costelas e as raízes nervosas. A dor irradia pela face interna do braço."], ["O que é a síndrome de Horner no tumor de Pancoast?", "Ptose, miose e anidrose do mesmo lado, pela invasão da cadeia simpática cervical (gânglio estrelado)."], ["Quais são os dois grandes grupos de carcinoma de pulmão?", "Carcinoma de pequenas células e carcinoma não pequenas células (epidermoide, adenocarcinoma e grandes células)."], ["Como é o carcinoma de pequenas células?", "Células pequenas, com pouco citoplasma e aspecto de grão de aveia (oat cell). É central, altamente maligno, dissemina rápido e se associa a síndromes paraneoplásicas."], ["Como é o carcinoma epidermoide de pulmão?", "Geralmente central e ligado ao tabagismo, com pontes intercelulares e queratina ao microscópio. Pode cavitar."], ["Como é o adenocarcinoma de pulmão?", "Geralmente periférico, com diferenciação glandular e produção de muco. É mais frequente em mulheres e não fumantes e sua incidência vem aumentando."], ["Como é o carcinoma de grandes células?", "Células grandes, indiferenciadas, sem diferenciação glandular ou escamosa, de localização predominantemente periférica."], ["O que é um marcador tumoral?", "Substância produzida pelo tumor ou pelo hospedeiro em resposta a ele, medida no sangue ou em secreções, usada para ajudar a diferenciar tumor de tecido normal."], ["Marcadores tumorais servem para diagnosticar câncer sozinhos?", "Não. Têm sensibilidade e especificidade limitadas, sobem em doenças benignas e precisam ser interpretados com clínica, imagem e anatomopatológico."], ["Dê exemplos de marcadores que sobem em condições benignas.", "PSA em prostatite e HPB; CA-125 em menstruação, gravidez e endometriose; beta-hCG na gestação; CEA em tabagistas e inflamações."], ["Para que o CEA é realmente útil?", "No seguimento do câncer colorretal já diagnosticado: valor basal antes do tratamento, queda após a cirurgia e nova elevação persistente sugerindo recidiva."], ["Por que não pedir marcadores tumorais para rastrear câncer em pessoa assintomática?", "Porque geram falsos-positivos, ansiedade e exames desnecessários. O rastreamento deve usar métodos validados, como citopatológico, mamografia e sangue oculto nas fezes."]], "sp-1-5": [["Qual epitélio reveste a ectocérvice?", "Epitélio estratificado pavimentoso não queratinizado, rico em glicogênio."], ["Qual epitélio reveste a endocérvice?", "Epitélio colunar simples mucossecretor, que forma criptas glandulares."], ["O que é a zona de transformação?", "A área entre a junção escamocolunar original e a atual, onde o epitélio colunar é substituído por metaplasia escamosa. É onde surgem quase todas as lesões por HPV."], ["O que são cistos de Naboth?", "Glândulas endocervicais cujo orifício foi coberto pela metaplasia escamosa, retendo muco. São benignos."], ["Como é o leiomioma uterino ao microscópio?", "Feixes de músculo liso entrelaçados em padrão de redemoinho, bem delimitados, sem atipias importantes nem muitas mitoses."], ["Como é o leiomioma ao exame macroscópico?", "Nódulo firme, esbranquiçado, com superfície de corte fasciculada e bem delimitado do miométrio. Pode ser submucoso, intramural ou subseroso."], ["Como é o carcinoma epidermoide do colo ao microscópio?", "Ninhos de células escamosas atípicas invadindo o estroma. Áreas bem diferenciadas mostram queratinização e pérolas córneas; as pouco diferenciadas não."], ["Como o HPV infecta o colo do útero?", "Alcança as células basais por microlesões do epitélio, sobretudo na zona de transformação, e se replica acompanhando a maturação do epitélio."], ["Quais são as características do coilócito?", "Halo claro ao redor do núcleo, núcleo aumentado, hipercromático e de contorno irregular (aspecto de uva-passa) e, às vezes, binucleação."], ["O que fazem as proteínas E6 e E7 do HPV?", "A E6 degrada o p53 e a E7 inativa o Rb, liberando o E2F. A célula prolifera sem controle e acumula alterações."], ["Por que a proteína p16 ajuda no diagnóstico?", "Quando a E7 inativa o Rb, a p16 se acumula. Sua positividade na imuno-histoquímica indica lesão transformada pelo HPV."], ["Quais são as categorias escamosas do sistema Bethesda?", "ASC-US, ASC-H, LSIL, HSIL e carcinoma escamoso."], ["Quais são as categorias glandulares do sistema Bethesda?", "Células glandulares atípicas (AGC), adenocarcinoma in situ (AIS) e adenocarcinoma."], ["A que correspondem LSIL e HSIL na histologia?", "LSIL corresponde a NIC 1 (alteração no terço inferior do epitélio). HSIL corresponde a NIC 2 e 3 (dois terços ou toda a espessura)."], ["O que significa ASC-US?", "Células escamosas atípicas de significado indeterminado: alterações que não definem lesão. A conduta é repetir a citologia ou testar para HPV."], ["O que significa ASC-H e qual a conduta?", "Células escamosas atípicas em que não se pode excluir lesão de alto grau. A conduta é colposcopia."], ["O que separa uma lesão intraepitelial de um carcinoma invasor?", "A integridade da membrana basal. Na lesão intraepitelial ela está preservada; no carcinoma invasor foi rompida."], ["Qual a evolução natural da maioria das infecções por HPV?", "A maioria é transitória e eliminada pela imunidade em 1 a 2 anos. O risco está na persistência de tipos de alto risco."], ["Quais são as partes e camadas do útero?", "Fundo, corpo, istmo e colo. A parede tem endométrio, miométrio e perimétrio (serosa)."], ["Com qual tipo de HPV o adenocarcinoma do colo mais se associa?", "Com o HPV 18. Origina-se do epitélio glandular da endocérvice, mais difícil de amostrar na citologia."]], "sp-2-1": [["Quais são os limites da mama feminina?", "Verticalmente da 2ª à 6ª costela. Horizontalmente da margem lateral do esterno até a linha axilar média."], ["Sobre quais músculos a mama se apoia?", "Dois terços do leito estão sobre a fáscia do peitoral maior e um terço sobre a fáscia do serrátil anterior."], ["O que é o processo axilar (cauda de Spence)?", "Uma extensão do tecido mamário em direção à axila. Ajuda a explicar por que o quadrante superior externo concentra mais tecido glandular e mais tumores."], ["Quais artérias irrigam a mama?", "Ramos perfurantes da torácica interna (porção medial), torácica lateral e toracoacromial (ramos da axilar) e intercostais posteriores."], ["Para onde vai a maior parte da linfa da mama?", "Cerca de 75% para os linfonodos axilares. O restante vai para os paraesternais (sobretudo dos quadrantes mediais), supraclaviculares e outros."], ["O que é o linfonodo sentinela?", "O primeiro linfonodo da cadeia que recebe a linfa da área do tumor. É pesquisado para saber se houve disseminação linfática."], ["Por que a linfadenectomia axilar pode causar linfedema?", "Porque interrompe a principal via de drenagem linfática do membro superior, e a linfa se acumula no braço."], ["O que são os ligamentos de Cooper?", "Ligamentos suspensores que ligam a pele à fáscia profunda. Quando o tumor os infiltra, encurtam e causam retração da pele."], ["Como é organizada a mama ao microscópio?", "Lobos separados por septos de conjuntivo e tecido adiposo, cada um com um ducto lactífero. Os lóbulos contêm ductos intralobulares e ácinos."], ["Qual epitélio reveste ductos e ácinos mamários?", "Epitélio cúbico ou colunar simples, apoiado por uma camada de células mioepiteliais contráteis."], ["O que é a unidade ductolobular terminal?", "O conjunto do ducto terminal com seu lóbulo. É onde se origina a maioria dos carcinomas de mama."], ["O que acontece com a mama após a menopausa?", "Involução: atrofia dos lóbulos, colapso dos ácinos e substituição do tecido glandular por gordura. Na mamografia, a mama fica menos densa."], ["Como é o painel hormonal típico da pós-menopausa?", "FSH e LH altos (FSH mais que LH), estradiol baixo, inibina B e hormônio antimülleriano muito baixos ou indetectáveis."], ["Por que o FSH sobe antes do LH no climatério?", "Porque cai primeiro a inibina B, que inibe seletivamente o FSH."], ["Como o perfil lipídico muda no climatério?", "Sobem LDL e triglicérides, cai o HDL e aumenta a resistência à insulina, pela perda dos efeitos metabólicos do estrogênio."], ["Como a queda do estrogênio leva à osteoporose?", "O estrogênio inibe os osteoclastos. Sem ele, a atividade osteoclástica aumenta e a reabsorção supera a formação óssea."], ["Qual o papel da vitamina D no osso?", "Pelo receptor VDR, aumenta a absorção intestinal de cálcio e fósforo. A deficiência favorece perda óssea e hiperparatireoidismo secundário."], ["Quais exames laboratoriais pedir na investigação da osteoporose?", "Cálcio, fósforo, fosfatase alcalina, creatinina, 25-OH-vitamina D e PTH, para avaliar o metabolismo mineral e excluir causas secundárias."], ["Qual exame avalia a densidade mineral óssea?", "A densitometria óssea por DXA. Um T-score de -2,5 ou menor define osteoporose."], ["Fratura vertebral por baixo trauma em mulher pós-menopausa: o que significa?", "É uma fratura por fragilidade, que já caracteriza osteoporose clínica, mesmo antes do resultado da densitometria."]], "sp-2-2": [["Como funciona a circulação materna na placenta?", "O sangue materno chega pelas artérias espiraladas do útero e enche o espaço interviloso, banhando as vilosidades coriônicas."], ["Como funciona a circulação fetal na placenta?", "O sangue fetal chega pelas duas artérias umbilicais, passa pelos capilares dentro das vilosidades e volta oxigenado pela veia umbilical."], ["Quais camadas formam a barreira placentária?", "Do sangue materno ao fetal: sinciciotrofoblasto, citotrofoblasto, membranas basais e estroma viloso, e endotélio dos capilares fetais."], ["Quais são as funções do sinciciotrofoblasto?", "É a principal interface de troca, faz transporte seletivo, produz hormônios (hCG, lactogênio placentário, progesterona, estrogênios) e participa da proteção imunológica."], ["Como a barreira placentária muda ao longo da gestação?", "O citotrofoblasto fica descontínuo e a barreira fica mais fina, com vilosidades menores e capilares encostados no sinciciotrofoblasto, facilitando as trocas."], ["Como passam os gases pela placenta?", "Por difusão simples, a favor do gradiente de pressão parcial: o oxigênio vai da mãe ao feto e o CO₂ faz o caminho inverso."], ["Como a glicose atravessa a placenta?", "Por difusão facilitada, principalmente pelo transportador GLUT1, a favor do gradiente e sem gasto direto de ATP."], ["Como os aminoácidos e a IgG atravessam a placenta?", "Os aminoácidos por transporte ativo. A IgG por endocitose e transcitose mediada por receptor."], ["O que é placenta prévia?", "Placenta inserida no segmento inferior do útero, próxima ao orifício interno do colo ou cobrindo-o. Causa sangramento vaginal indolor após 20 semanas."], ["Como se classifica a placenta prévia?", "Baixa (a até 2 cm do orifício, sem tocá-lo), marginal (alcança a borda), parcial (cobre parte) e completa (cobre todo o orifício)."], ["Quais são os fatores de risco para placenta prévia?", "Cesárea prévia e outras cicatrizes uterinas, multiparidade, idade acima de 35 anos, gestação múltipla, tabagismo, prévia anterior e reprodução assistida."], ["O que é o espectro do acretismo placentário?", "Invasão anormal das vilosidades na parede uterina por falta da decídua basal e da camada de Nitabuch: acreta (adere ao miométrio), increta (invade o miométrio) e percreta (atravessa até a serosa)."], ["Por que o acretismo se associa à cesárea prévia?", "A invasão ocorre sobre a cicatriz da cesárea, na parede anterior do segmento inferior, onde a decídua é deficiente. Cesárea prévia com placenta prévia anterior deve levantar a suspeita."], ["A partir de quando cai a sensibilidade à insulina na gestação?", "A partir do segundo trimestre, por volta de 20 semanas, e progride até o terceiro trimestre."], ["Quais hormônios causam a resistência à insulina da gestação?", "Lactogênio placentário, GH placentário, progesterona, cortisol e prolactina."], ["Quando o TOTG não deve ser feito?", "Quando a glicemia de jejum inicial já fechou o diagnóstico: de 92 a 125 mg/dL é DMG e 126 ou mais é diabetes diagnosticado na gestação."], ["Quais são as metas glicêmicas no diabetes gestacional?", "Jejum abaixo de 95 mg/dL, 1 hora pós-prandial abaixo de 140 e 2 horas pós-prandial abaixo de 120."], ["Quando iniciar insulina no diabetes gestacional?", "Quando, após 1 a 2 semanas de dieta e atividade física, cerca de 30% ou mais das medidas ficam fora da meta. A insulina é a primeira escolha; a metformina é alternativa em casos selecionados."], ["Quais são os riscos fetais do diabetes gestacional mal controlado?", "Macrossomia, polidrâmnio, distocia de ombro, hipoglicemia neonatal e atraso na maturação pulmonar."], ["O que fazer após o parto na mulher que teve diabetes gestacional?", "Suspender a insulina, fazer TOTG 75 g entre 6 e 12 semanas para reclassificar e manter rastreamento periódico, pelo risco aumentado de diabetes tipo 2."]], "sp-2-3": [["Quais ossos formam a pelve?", "Os dois ossos do quadril (cada um formado por ílio, ísquio e púbis fundidos no acetábulo), o sacro e o cóccix."], ["Por que a espinha isquiática é importante na obstetrícia?", "Marca o plano zero de De Lee, usado para avaliar a altura da apresentação, e o diâmetro biespinha, o mais estreito da pelve."], ["Para que serve o promontório do sacro na obstetrícia?", "É o ponto de referência da conjugata obstétrica, o diâmetro anteroposterior real do estreito superior."], ["O que separa a pelve maior da pelve menor?", "A linha terminal (que inclui a linha arqueada do ílio e o promontório). A pelve menor é o canal do parto."], ["O que acontece com a sínfise púbica na gestação?", "É uma articulação cartilaginosa que se relaxa pela ação da relaxina, aumentando a mobilidade da pelve."], ["O que delimita o forame obturado?", "O ísquio e o púbis. Ele é quase todo fechado pela membrana obturadora."], ["Qual a diferença entre osso cortical e esponjoso?", "O cortical é compacto, organizado em ósteons, e dá resistência e força. O esponjoso tem trabéculas com medula entre elas e absorve impactos."], ["Quais músculos formam o diafragma pélvico?", "O levantador do ânus (puborretal, pubococcígeo e iliococcígeo) e o coccígeo."], ["O que é o corpo do períneo?", "Um nó fibromuscular entre o ânus e a vagina onde convergem vários músculos do períneo. Sua lesão no parto favorece prolapsos e incontinência."], ["Como é o músculo estriado esquelético ao microscópio?", "Fibras longas e multinucleadas, com núcleos periféricos e estriações transversais."], ["O que é a via ascendente de disseminação das IST?", "Vagina → colo → endométrio → tubas → peritônio. É a via da clamídia e do gonococo e causa a doença inflamatória pélvica."], ["Quais IST se disseminam pela via linfática?", "Linfogranuloma venéreo, cancroide, sífilis e herpes, da vulva para os linfonodos inguinais."], ["Quais IST se disseminam pela via hematogênica?", "Sífilis, HIV e hepatites B e C."], ["Onde aparecem as principais manifestações das IST no trato genital?", "Vulva: úlceras e verrugas. Bartholin: abscesso. Uretra: uretrite. Vagina: corrimento. Colo: cervicite. Útero e anexos: DIP. Inguinais: bubão."], ["Quais são as sequelas da doença inflamatória pélvica?", "Infertilidade tubária, gravidez ectópica e dor pélvica crônica."], ["Onde se coletam os exames das IST?", "Ectocérvice e JEC: Papanicolau e HPV. Endocérvice, uretra ou urina: PCR para clamídia e gonococo. Vagina: pH e exame a fresco. Úlcera: raspado. Sangue: sorologias."], ["O que é o paramétrio e por que ele importa?", "O tecido conjuntivo ao lado do útero, na base do ligamento largo, por onde passam a artéria uterina e o ureter. É avaliado no estadiamento do câncer do colo."], ["O que é a escavação retouterina (fundo de saco de Douglas)?", "O ponto mais baixo da cavidade peritoneal feminina, entre o útero e o reto, onde se acumulam sangue, pus ou líquido."], ["O que são o ligamento largo e o ligamento redondo?", "O largo é uma dupla prega de peritônio que vai do útero à parede pélvica (com mesométrio, mesossalpinge e mesovário). O redondo vai do útero, pelo canal inguinal, até os grandes lábios."], ["Quais são as camadas do útero e qual descama na menstruação?", "Endométrio, miométrio e perimétrio. Descama a camada funcional do endométrio."]], "sp-2-4": [["Qual é a principal artéria do útero e de onde ela vem?", "A artéria uterina, ramo da ilíaca interna, que sobe pela margem lateral do útero e se anastomosa com a artéria ovárica."], ["Qual é a relação entre artéria uterina e ureter?", "O ureter passa por baixo da artéria uterina (como água sob a ponte), perto do colo, e pode ser lesado na histerectomia."], ["Como a artéria uterina se ramifica dentro do útero?", "Arqueadas → radiais → artérias basais (camada basal) e artérias espiraladas (camada funcional do endométrio)."], ["Como é a drenagem venosa do útero?", "Pelo plexo venoso uterino, que drena para as veias uterinas e destas para as ilíacas internas."], ["Qual a relação entre a vascularização e o sangramento menstrual?", "As artérias espiraladas respondem aos hormônios. Quando a progesterona cai, elas se contraem, a camada funcional fica isquêmica e descama."], ["Quais são as camadas do endométrio?", "A funcional, que cresce e descama a cada ciclo, e a basal, que permanece e regenera o endométrio."], ["Como é o endométrio na fase proliferativa?", "Sob estrogênio, glândulas retas e tubulares, mitoses frequentes, estroma denso e artérias espiraladas em crescimento."], ["Como é o endométrio na fase secretora?", "Sob progesterona, glândulas tortuosas e secretoras (com vacúolos no início), estroma edemaciado e preparação para a decidualização."], ["Como acontece a menstruação?", "O corpo lúteo regride, caem progesterona e estrogênio, sobem as prostaglandinas, as artérias espiraladas se contraem e a camada funcional necrosa e descama."], ["O que acontece com o endométrio quando não há ovulação?", "Sem progesterona, o estrogênio age sem oposição: o endométrio fica espesso, frágil e descama de forma irregular. A longo prazo, há risco de hiperplasia."], ["O que é adenomiose?", "Glândulas e estroma endometriais dentro do miométrio. O útero fica aumentado de forma difusa e causa sangramento aumentado e dismenorreia."], ["Por que o mioma submucoso causa sangramento?", "Aumenta a superfície endometrial, deforma a cavidade e atrapalha a contração do miométrio e a hemostasia."], ["O que é um pólipo endometrial?", "Crescimento focal de glândulas e estroma endometriais com vasos de parede espessa, que costuma causar sangramento intermenstrual."], ["Oligomenorreia com ganho de peso em jovem: o que investigar?", "Pensar em SOP. Pedir beta-hCG, TSH, prolactina, testosterona e 17-OH-progesterona, além de glicemia e perfil lipídico, e ultrassonografia."], ["Amenorreia secundária em jovem: qual o primeiro exame e o que vem depois?", "Primeiro o beta-hCG. Depois TSH, prolactina, FSH e estradiol, lembrando da amenorreia hipotalâmica por estresse, perda de peso ou exercício."], ["Quais exames pedir em sangramento aumentado e frequente?", "Hemograma e ferritina, beta-hCG, TSH, coagulograma se houver suspeita de coagulopatia e ultrassonografia transvaginal."], ["Como o progestagênio controla o sangramento?", "Transforma o endométrio proliferativo em secretor e depois atrófico, dando estabilidade. O DIU de levonorgestrel faz isso localmente."], ["Como o contraceptivo combinado regulariza o ciclo?", "Suprime FSH e LH, bloqueia a ovulação e mantém o endométrio fino, com sangramentos previsíveis."], ["Como age o ácido tranexâmico?", "É antifibrinolítico: impede a degradação do coágulo de fibrina e reduz o volume do sangramento."], ["Quais marcadores mostram resposta ao tratamento do SUA?", "Melhora da hemoglobina e da ferritina, redução do fluxo no diário menstrual e regularização dos ciclos."]]};
+function fcShuffle(a){ a = a.slice(); for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function fcEsc(s){ return String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+function flashRender(host, id, titulo){
+  const all = FLASH[id] || [];
+  let deck = [], i = 0;
+  host.innerHTML = `<div class="fc"><div class="fc-k">Flashcards · ${fcEsc(titulo)}</div>
+    <p class="fc-intro" style="margin-top:10px">${all.length} cartões sobre este tema. A cada clique em “Gerar flashcards” eles vêm em uma ordem diferente. Toque no cartão para ver a resposta.</p>
+    <button class="fc-gen" type="button">Gerar flashcards</button><div class="fc-run"></div></div>`;
+  const run = host.querySelector(".fc-run"), gen = host.querySelector(".fc-gen");
+  function draw(){
+    if (i >= deck.length){
+      run.innerHTML = `<div class="fc-end"><b>Fim do baralho.</b><span class="fc-intro">Você passou pelos ${deck.length} cartões. Gere de novo para embaralhar.</span></div>`;
+      gen.textContent = "Gerar flashcards de novo"; return;
+    }
+    const [q, a] = deck[i];
+    run.innerHTML = `<div class="fc-card" tabindex="0" role="button" aria-label="Virar cartão"><div class="fc-in">
+        <div class="fc-face fc-front"><span class="lab">Pergunta</span><span class="tx">${fcEsc(q)}</span><span class="hint">Toque para ver a resposta</span></div>
+        <div class="fc-face fc-back"><span class="lab">Resposta</span><span class="tx">${fcEsc(a)}</span><span class="hint">Toque para voltar à pergunta</span></div></div></div>
+      <div class="fc-bar"><button class="ghost fc-prev" type="button">← Anterior</button><span class="fc-cnt">${i + 1} de ${deck.length}</span><button class="ghost fc-next" type="button">Próximo →</button></div>
+      <div class="fc-prog"><i style="width:${(i + 1) / deck.length * 100}%"></i></div>`;
+    const card = run.querySelector(".fc-card");
+    const flip = ()=>card.classList.toggle("flip");
+    card.addEventListener("click", flip);
+    card.addEventListener("keydown", e=>{ if (e.key === " " || e.key === "Enter"){ e.preventDefault(); flip(); } });
+    run.querySelector(".fc-prev").disabled = i === 0;
+    run.querySelector(".fc-prev").addEventListener("click", ()=>{ if (i > 0){ i--; draw(); } });
+    run.querySelector(".fc-next").addEventListener("click", ()=>{ i++; draw(); });
+    card.focus({preventScroll:true});
+  }
+  gen.addEventListener("click", ()=>{ deck = fcShuffle(all); i = 0; host.querySelector(".fc-intro").hidden = true; gen.textContent = "Embaralhar de novo"; draw(); });
+}
+document.addEventListener("keydown", e=>{
+  const run = document.querySelector(".fc-run"); if (!run || !run.offsetParent) return;
+  if (e.key === "ArrowRight") run.querySelector(".fc-next")?.click();
+  if (e.key === "ArrowLeft") run.querySelector(".fc-prev")?.click();
+});
+/* Abas "Conteúdo | Flashcards" no leitor (Tutoria, Morfologia, Fisiologia) */
+function flashTabs(id, titulo){
+  const doc = document.getElementById("doc"), reader = document.getElementById("reader");
+  reader.classList.remove("fc-mode");
+  if (!(FLASH[id] || []).length) return;
+  const body = document.createElement("div"); body.className = "fc-body";
+  while (doc.firstChild) body.appendChild(doc.firstChild);
+  const seg = document.createElement("div"); seg.className = "fc-seg"; seg.setAttribute("role", "group"); seg.setAttribute("aria-label", "Modo");
+  seg.innerHTML = `<button type="button" data-m="c" aria-pressed="true">Conteúdo</button><button type="button" data-m="f" aria-pressed="false">Flashcards</button>`;
+  const pane = document.createElement("div"); pane.className = "fc-pane"; pane.hidden = true;
+  doc.append(seg, body, pane);
+  seg.querySelectorAll("button").forEach(b=>b.addEventListener("click", ()=>{
+    const f = b.dataset.m === "f";
+    seg.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed", String(x === b)));
+    body.hidden = f; pane.hidden = !f; reader.classList.toggle("fc-mode", f);
+    if (f && !pane.firstChild) flashRender(pane, id, titulo);
+    window.scrollTo({top:0});
+  }));
+}
+
+/* Leitura */
+let spy = null;
+const cache = {};
+async function load(r){
+  if (r.html || r.pages) return r;
+  if (!cache[r.id]) cache[r.id] = fetch(r.src).then(x=>x.json());
+  Object.assign(r, await cache[r.id]); return r;
+}
+async function openR(id){
+  const r0 = ROTEIROS.find(x=>x.id===id); if (!r0) return;
+  if (!r0.html && !r0.pages){ document.body.classList.add("loading"); }
+  let r; try { r = await load(r0); } catch(e){ document.body.classList.remove("loading"); alert("Não foi possível abrir o roteiro. Verifique a conexão."); return; }
+  document.body.classList.remove("loading");
+  const doc = $("doc"), tl = $("tocList"); tl.innerHTML = "";
+  const addToc = (txt, cls, target)=>{
+    const li = document.createElement("li"), a = document.createElement("a");
+    a.href = "#"; a.textContent = txt; a.className = cls; a._t = target;
+    a.addEventListener("click", e=>{ e.preventDefault(); a._t(); $("toc").classList.remove("open"); $("tocBtn").setAttribute("aria-expanded","false"); });
+    li.appendChild(a); tl.appendChild(li); return a;
+  };
+  if (r.pages){
+    doc.className = "doc pages"; doc.innerHTML = "";
+    r.pages.forEach((src,i)=>{ const im = document.createElement("img"); im.className = "pg"; im.id = "pg" + (i+1); im.loading = i < 2 ? "eager" : "lazy";
+      im.alt = r.sp + " · página " + (i+1); im.src = src; im.addEventListener("click", ()=>zoom(src)); doc.appendChild(im); });
+    r.toc.forEach(h=>addToc(h.t, h.lvl === 3 ? "h3" : "h2", ()=>{
+      const im = $("pg" + h.page); const top = im.getBoundingClientRect().top + window.scrollY + im.offsetHeight * h.y - 16;
+      window.scrollTo({top: Math.max(0, top), behavior:"smooth"}); }));
+  } else {
+    doc.className = "doc" + (r.kind === "notion" ? " notion" : "");
+    doc.innerHTML = `<img class="doc-banner" alt=""><header class="doc-head"><div class="kicker"></div><h1></h1><p></p></header>` + r.html;
+    doc.querySelector(".doc-banner").src = r.banner;
+    doc.querySelector(".kicker").textContent = r.sp + " · Roteiro respondido";
+    doc.querySelector("h1").textContent = r.titulo;
+    doc.querySelector(".doc-head p").textContent = r.subtitulo;
+    doc.querySelectorAll("h2,h3").forEach((h,i)=>{ if (!h.id) h.id = "s" + i;
+      addToc(h.textContent, h.tagName.toLowerCase(), ()=>h.scrollIntoView({behavior:"smooth", block:"start"}))._h = h; });
+  }
+  flashTabs(r.id || id, r.sp + (r.titulo ? " · " + r.titulo : ""));
+  $("lib").hidden = true; $("reader").hidden = false; window.scrollTo({top:0});
+  try { history.replaceState(null, "", "#" + id); } catch(e){}
+  if (spy) spy.disconnect();
+  if (r.pages) return;
+  const links = [...tl.querySelectorAll("a")];
+  spy = new IntersectionObserver(es=>{
+    es.forEach(en=>{ if (en.isIntersecting){ links.forEach(a=>a.classList.toggle("on", a._h===en.target)); } });
+  }, {rootMargin:"0px 0px -75% 0px"});
+  doc.querySelectorAll("h2,h3").forEach(h=>spy.observe(h));
+}
+$("backLib").addEventListener("click", ()=>{ $("reader").hidden = true; $("lib").hidden = false; window.scrollTo({top:0}); try { history.replaceState(null, "", location.pathname + location.search); } catch(e){} });
+$("tocBtn").addEventListener("click", ()=>{ const o = $("toc").classList.toggle("open"); $("tocBtn").setAttribute("aria-expanded", o ? "true" : "false"); });
+function zoom(src){ $("zoomImg").src = src; $("zoom").hidden = false; $("zoomX").hidden = false; $("zoom").scrollTo(0,0); }
+function unzoom(){ $("zoom").hidden = true; $("zoomX").hidden = true; }
+$("zoom").addEventListener("click", unzoom); $("zoomX").addEventListener("click", unzoom);
+document.addEventListener("keydown", e=>{ if (e.key === "Escape") unzoom(); });
+const start = location.hash.slice(1);
+if (start && ROTEIROS.some(r=>r.id===start)) openR(start);
+</script>
+</body>
+</html>
