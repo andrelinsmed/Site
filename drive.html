@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Materiais · Google Drive</title>
+<style>
+:root{--bg:#f5f5f7;--card:#fff;--ink:#1d1d1f;--muted:#6e6e73;--line:rgba(0,0,0,.08);--accent:#0071e3;--font:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter","Segoe UI",Roboto,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#000;--card:#1c1c1e;--ink:#f5f5f7;--muted:#a1a1a6;--line:rgba(255,255,255,.12);--accent:#2997ff;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#000;--card:#1c1c1e;--ink:#f5f5f7;--muted:#a1a1a6;--line:rgba(255,255,255,.12);--accent:#2997ff;color-scheme:dark}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.5 var(--font);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1100px;margin:0 auto;padding:56px 22px 60px}
+.k{font-size:12px;letter-spacing:.14em;font-weight:700;text-transform:uppercase;color:var(--muted)}
+h1{font-size:clamp(40px,6vw,64px);letter-spacing:-.045em;line-height:1.02;font-weight:700;margin:10px 0 14px}
+.lead{color:var(--muted);font-size:19px;max-width:640px}
+.bar{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0 22px}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 15px var(--font);border-radius:999px;padding:11px 20px;text-decoration:none;border:0;cursor:pointer}
+.pri{background:var(--accent);color:#fff}.sec{background:var(--card);color:var(--ink);box-shadow:0 0 0 1px var(--line)}
+.seg{display:inline-flex;padding:3px;background:var(--card);border-radius:999px;box-shadow:0 0 0 1px var(--line)}
+.seg button{font:600 14px var(--font);border:0;background:none;color:var(--muted);padding:8px 16px;border-radius:999px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.frame{background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.04),0 20px 50px rgba(0,0,0,.08)}
+.frame iframe{display:block;width:100%;height:min(72vh,760px);border:0}
+.note{color:var(--muted);font-size:14px;margin-top:16px;max-width:720px}
+</style></head><body><div class="wrap">
+<div class="k">Materiais</div>
+<h1>Google Drive.</h1>
+<p class="lead">Os materiais da turma, direto da pasta compartilhada. O que for adicionado ou alterado no Drive aparece aqui automaticamente.</p>
+<div class="bar">
+ <a class="btn pri" id="open" href="https://drive.google.com/drive/folders/1kfy2hk4olKxDB6SoIe7mrTrhWVDQxmTM" target="_blank" rel="noopener">Abrir no Google Drive ↗</a>
+ <div class="seg" role="group" aria-label="Visualização"><button type="button" data-v="list" aria-pressed="true">Lista</button><button type="button" data-v="grid" aria-pressed="false">Grade</button></div>
+</div>
+<div class="frame"><iframe id="fr" title="Pasta de materiais no Google Drive" src="https://drive.google.com/embeddedfolderview?id=1kfy2hk4olKxDB6SoIe7mrTrhWVDQxmTM#list" loading="lazy"></iframe></div>
+<p class="note">Clique em um arquivo para abrir a visualização do Google Drive; ali o botão de download baixa o arquivo. Pastas abrem em uma nova aba do Drive.</p>
+</div>
+<script>
+const ID = "1kfy2hk4olKxDB6SoIe7mrTrhWVDQxmTM", fr = document.getElementById("fr");
+document.querySelectorAll(".seg button").forEach(b=>b.addEventListener("click", ()=>{
+  document.querySelectorAll(".seg button").forEach(x=>x.setAttribute("aria-pressed", String(x===b)));
+  fr.src = "https://drive.google.com/embeddedfolderview?id=" + ID + "#" + b.dataset.v; }));
+</script></body></html>
