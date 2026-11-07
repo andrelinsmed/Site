@@ -142,7 +142,9 @@ button.content-tile:focus-visible{outline:3px solid var(--accent);outline-offset
   .err-sum{padding:26px 22px}
   .err-row{padding:18px 20px}
 }
-@media (max-width:560px){.store-nav nav{display:none}}
+/* Menu do topo à esquerda, ao lado do nome; também no celular */
+.store-nav nav{margin-right:auto}
+@media (max-width:560px){.store-nav{gap:14px}.store-nav nav{gap:14px}.store-nav .brand{font-size:13px}}
 @media (max-width:420px){.content-grid{grid-template-columns:1fr}}
 /* ---------- Protótipo: áreas em destaque ---------- */
 .store-hero h1{font-size:clamp(46px,6.6vw,82px)}
