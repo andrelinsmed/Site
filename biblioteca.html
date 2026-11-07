@@ -175,42 +175,42 @@ const PASTA = 'https://drive.google.com/drive/folders/1zKKgoaPMbZtfKTrxEwffAsvTc
 // Um livro por linha: [título, autor, área, edição, capa, cor da lombada, link].
 // Capa: arquivo em capas/ (sem capa, o livro usa o desenho padrão). Link: PDF próprio, Google Drive ou biblioteca digital.
 const BOOKS = [
-  ['Atlas de Anatomia Humana','Netter','ana','8ª','netter','#1c3f6e',''],
-  ['Anatomia Orientada para a Clínica','Moore','ana','9ª','moore','#8a1c22',''],
-  ['Princípios de Bioquímica','Lehninger','bio','8ª','lehninger','#1d4f7a',''],
-  ['Tratado de Cirurgia','Sabiston','cir','21ª','sabiston','#2b2b2b',''],
-  ['Medicina Interna de Harrison','Harrison','cli','21ª','harrison','#7d1d1d',''],
-  ['Tratado de Medicina Interna','Goldman-Cecil','cli','26ª','cecil','#163a5f',''],
-  ['As Bases Farmacológicas da Terapêutica','Goodman & Gilman','far','13ª','goodman','#7a2f1f',''],
-  ['Farmacologia Ilustrada','Karen Whalen','far','6ª','whalen','#7a0c1e',''],
-  ['Farmacologia','Rang & Dale','far','10ª','rang-dale','#28305c',''],
-  ['Fisiologia Humana','Silverthorn','fis','7ª','silverthorn','#013356',''],
-  ['Tratado de Fisiologia Médica','Guyton & Hall','fis','14ª','guyton','#232630',''],
+  ['Atlas de Anatomia Humana','Netter','ana','8ª','netter','#010200',''],
+  ['Anatomia Orientada para a Clínica','Moore','ana','9ª','moore','#2e3a45',''],
+  ['Princípios de Bioquímica','Lehninger','bio','8ª','lehninger','#08191d',''],
+  ['Tratado de Cirurgia','Sabiston','cir','21ª','sabiston','#0e2635',''],
+  ['Medicina Interna de Harrison','Harrison','cli','21ª','harrison','#cf2226',''],
+  ['Tratado de Medicina Interna','Goldman-Cecil','cli','26ª','cecil','#151f32',''],
+  ['As Bases Farmacológicas da Terapêutica','Goodman & Gilman','far','13ª','goodman','#2b3259',''],
+  ['Farmacologia Ilustrada','Karen Whalen','far','6ª','whalen','#9b1b38',''],
+  ['Farmacologia','Rang & Dale','far','10ª','rang-dale','#28305e',''],
+  ['Fisiologia Humana','Silverthorn','fis','7ª','silverthorn','#013256',''],
+  ['Tratado de Fisiologia Médica','Guyton & Hall','fis','14ª','guyton','#232632',''],
   ['Tratado de Ginecologia','Febrasgo','gin','2025','febrasgo','#3a98b1',''],
-  ['Tratado de Ginecologia','Lasmar','gin','1ª','lasmar','#dfbba9',''],
-  ['Febrasgo para o Médico Residente','Liao et al.','gin','2ª','febrasgo-residente','#3b6e8f',''],
-  ['Histologia: Texto e Atlas','Ross & Pawlina','his','9ª','ross','#6b1f3a',''],
-  ['Histologia Básica','Junqueira & Carneiro','his','14ª','junqueira','#3d6b35',''],
-  ['Imunologia Celular e Molecular','Abbas','imu','10ª','abbas','#5a2d6e',''],
-  ['PCDT de Infecções Sexualmente Transmissíveis','Ministério da Saúde','inf','2022','pcdt-ist','#1f5f4a',''],
-  ['Manual Técnico para o Diagnóstico da Sífilis','Ministério da Saúde','inf','2021','sifilis','#7a3b2e',''],
-  ['Microbiologia Médica','Murray','mic','9ª','murray','#2f6b5e',''],
-  ['Obstetrícia de Williams','Cunningham et al.','obs','25ª','williams','#9e9fa3',''],
-  ['Obstetrícia Fundamental','Rezende','obs','15ª','rezende','#6f9a88',''],
-  ['Zugaib Obstetrícia','Zugaib','obs','5ª','zugaib','#04686a',''],
-  ['Pré-natal de Baixo Risco · Caderno 32','Ministério da Saúde','obs','2012','caderno32','#2d6a8a',''],
+  ['Tratado de Ginecologia','Lasmar','gin','1ª','lasmar','#c99d83',''],
+  ['Febrasgo para o Médico Residente','Liao et al.','gin','2ª','febrasgo-residente','#ffca06',''],
+  ['Histologia: Texto e Atlas','Ross & Pawlina','his','9ª','ross','#6d598c',''],
+  ['Histologia Básica','Junqueira & Carneiro','his','14ª','junqueira','#293a5a',''],
+  ['Imunologia Celular e Molecular','Abbas','imu','10ª','abbas','#875661',''],
+  ['PCDT de Infecções Sexualmente Transmissíveis','Ministério da Saúde','inf','2022','pcdt-ist','#0cb7b6',''],
+  ['Manual Técnico para o Diagnóstico da Sífilis','Ministério da Saúde','inf','2021','sifilis','#38ac5d',''],
+  ['Microbiologia Médica','Murray','mic','9ª','murray','#7873b0',''],
+  ['Obstetrícia de Williams','Cunningham et al.','obs','25ª','williams','#9ea0a4',''],
+  ['Obstetrícia Fundamental','Rezende','obs','15ª','rezende','#16385e',''],
+  ['Zugaib Obstetrícia','Zugaib','obs','5ª','zugaib','#0d8082',''],
+  ['Pré-natal de Baixo Risco · Caderno 32','Ministério da Saúde','obs','2012','caderno32','#86809b',''],
   ['A Situação do Câncer no Brasil','INCA','onc','2ª','','#2a4d6e',''],
   ['Detecção Precoce do Câncer','INCA','onc','2023','','#00626b',''],
   ['Estimativa 2023: Incidência de Câncer no Brasil','INCA','onc','','','#3f5f7f',''],
   ['Manual de Cuidados Paliativos','Hospital Sírio-Libanês','onc','2ª','','#5e7d4a',''],
-  ['Patologia Básica','Robbins & Kumar','pat','11ª','robbins-basica','#0e7a94',''],
-  ['Bases Patológicas das Doenças','Robbins & Cotran','pat','10ª','robbins-cotran','#663077',''],
-  ['Bogliolo Patologia','Geraldo Brasileiro Filho','pat','10ª','bogliolo','#5b2333',''],
+  ['Patologia Básica','Robbins & Kumar','pat','11ª','robbins-basica','#0d7992',''],
+  ['Bases Patológicas das Doenças','Robbins & Cotran','pat','10ª','robbins-cotran','#642e75',''],
+  ['Bogliolo Patologia','Geraldo Brasileiro Filho','pat','10ª','bogliolo','#222a4b',''],
   ['Manual de Padronização de Laudos Histopatológicos','SBP','pat','2026','','#2e4a62',''],
   ['Tratado de Pediatria','Nelson','ped','','','#d07a2a',''],
   ['Compêndio de Psiquiatria','Kaplan & Sadock','psi','','','#4a3c6b',''],
-  ['Propedêutica Médica','Bates','sem','13ª','bates','#973b41',''],
-  ['Semiologia Médica','Porto','sem','9ª','porto','#1f3239',''],
+  ['Propedêutica Médica','Bates','sem','13ª','bates','#943940',''],
+  ['Semiologia Médica','Porto','sem','9ª','porto','#1d2e36',''],
 ].map(([t,au,a,ed,img,c,url],i) => ({t,au,a,ed,c,img: img && CAPAS[img], url:drive(url || PASTA), tone:TONES[i % TONES.length], art:ARTS[i * 5 % ARTS.length]}));
 
 // Converte um link de arquivo do Google Drive para o modo de visualização embutida.
@@ -224,7 +224,7 @@ const touch = matchMedia('(hover:none),(pointer:coarse)');
 let list = [], cur = -1, timer, raf;
 
 const cover = b => b.img ? `<span class="cv img"></span>`
-  : `<span class="cv ${b.tone}"><small>${b.au}</small><b>${b.t}</b><span class="art ${b.art}"></span><span class="ft"><span>${b.a.toUpperCase()}</span><span>${edition(b)}</span><span>✦</span></span></span>`;
+  : `<span class="cv ${b.tone}" style="--cv:${b.c};--ci:${ink(b.c)}"><small>${b.au}</small><b>${b.t}</b><span class="art ${b.art}"></span><span class="ft"><span>${b.a.toUpperCase()}</span><span>${edition(b)}</span><span>✦</span></span></span>`;
 const vars = b => `--sp:${b.c};--si:${ink(b.c)}` + (b.img ? `;--img:url('${b.img}')` : '');
 const book = (b,i) => `<button class="b" style="${vars(b)}" role="listitem" type="button" data-i="${i}" aria-label="${b.t}, ${b.au}"><span class="sp"><span class="${b.img ? 'thumb' : 'art ' + b.art}"></span><b>${b.t}</b><small>${b.a.toUpperCase()}</small></span>${cover(b)}</button>`;
 
