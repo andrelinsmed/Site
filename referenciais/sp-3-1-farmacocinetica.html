@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Farmacocinética — Referencial Teórico Interativo</title>
+<style>
+:root{
+  --ink:#1f1f22; --muted:#5d5d66; --line:#e4ded9; --paper:#fff; --bg:#f7f4f1;
+  --red:#8b1a1a; --salmon:#fbd9cf; --salmon2:#fdeae3; --hl:#fff3a8;
+  --blue:#1f5fa8; --blue2:#dce8f7; --orange:#c25b12; --orange2:#fbe6d5;
+  --green:#2e7d4f; --green2:#dff1e6; --rose:#b3261e; --rose2:#f9dedc;
+  --violet:#6a3fa0; --violet2:#ece3f7; --oct:#f0cf72; --wat:#9cc9f0;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.62}
+main{max-width:980px;margin:0 auto;padding:26px 20px 90px}
+header.cover{background:linear-gradient(135deg,#781414,#ab342b);color:#fff;border-radius:18px;padding:32px 32px 26px;margin-bottom:24px}
+header.cover h1{margin:0 0 8px;font-size:30px;line-height:1.2}
+header.cover p{margin:3px 0;text-indent:0;text-align:left;opacity:.94;font-size:15px}
+header.cover .obj{margin-top:16px;background:rgba(255,255,255,.13);border-radius:12px;padding:14px 18px;font-size:14.5px;line-height:1.55}
+header.intro{padding:6px 4px 4px;margin-bottom:22px}
+header.intro h1{margin:0 0 16px;font-size:30px;line-height:1.2;color:var(--ink)}
+header.intro .obj-t{margin:0 0 6px;color:var(--red)}
+header.intro ol.objs{margin:0;padding-left:22px}
+header.intro ol.objs li{margin:0 0 8px;text-align:justify}
+nav.toc{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 22px 18px;margin-bottom:28px}
+nav.toc strong{color:var(--red)}
+nav.toc ol{margin:8px 0 0;padding-left:20px}
+nav.toc li{margin:3px 0}
+nav.toc a{color:var(--red);text-decoration:none}
+nav.toc a:hover{text-decoration:underline}
+section.blk{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:28px 32px;margin:0 0 32px}
+h1.q{font-size:23px;color:var(--red);background:var(--salmon);padding:9px 14px;border-radius:6px;margin:0 0 18px;line-height:1.3}
+h2{font-size:18.5px;color:var(--red);background:var(--salmon2);display:inline-block;padding:4px 12px;border-radius:5px;margin:32px 0 12px;line-height:1.35}
+h3{font-size:16.5px;color:#6d1515;margin:22px 0 8px}
+p{text-align:justify;text-indent:1.25cm;margin:0 0 14px;hyphens:auto}
+p.ni{text-indent:0}
+mark{background:var(--hl);padding:0 2px}
+ul.b{list-style:none;padding-left:0;margin:8px 0 16px}
+ul.b>li{position:relative;padding-left:24px;margin-bottom:12px;text-align:justify;hyphens:auto}
+ul.b>li::before{content:"●";position:absolute;left:2px;top:1px;color:var(--red);font-size:12px}
+ul.c{list-style:none;padding-left:22px;margin:8px 0 10px}
+ul.c>li{position:relative;padding-left:22px;margin-bottom:8px;text-align:justify}
+ul.c>li::before{content:"○";position:absolute;left:0;top:1px;color:var(--red);font-size:12px}
+table{border-collapse:collapse;width:100%;font-size:13.6px;margin:12px 0 10px}
+caption{caption-side:top;text-align:left;font-weight:bold;color:var(--red);font-size:15px;padding:10px 0 8px}
+th,td{border:1px solid #cfc7c1;padding:7px 9px;vertical-align:top;text-align:justify}
+th{background:var(--salmon2);font-size:13.4px}
+td.grp{background:#faf6f3;font-weight:bold;white-space:nowrap}
+.fig{border:1px solid var(--line);border-radius:14px;padding:16px 18px 18px;margin:20px 0 24px;background:#fcfbfa}
+.fig .cap{font-size:13.4px;color:var(--muted);text-indent:0;text-align:left;margin:0 0 12px}
+.fig .cap b{color:var(--red)}
+.ctrls{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}
+button.pill{font:inherit;font-size:13.5px;border:1px solid #c9bfb8;background:#fff;color:var(--ink);padding:6px 13px;border-radius:999px;cursor:pointer;transition:.15s}
+button.pill:hover{border-color:var(--red)}
+button.pill[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff}
+.readout{font-size:13.6px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--red);border-radius:8px;padding:10px 13px;margin-top:12px;min-height:46px;text-align:justify}
+.readout b{color:var(--red)}
+svg{display:block;width:100%;height:auto;touch-action:manipulation}
+svg text{font-family:Arial,Helvetica,sans-serif}
+.hit{cursor:pointer}
+.hit:hover{opacity:.86}
+input[type=range]{width:100%;accent-color:var(--red)}
+.slider-row{display:flex;align-items:center;gap:12px;margin:10px 0 2px;font-size:13.5px}
+.slider-row label{white-space:nowrap;color:var(--muted)}
+.slider-row output{font-weight:bold;color:var(--red);min-width:70px;text-align:right}
+.note{background:var(--blue2);border-left:4px solid var(--blue);border-radius:8px;padding:12px 16px;margin:16px 0;font-size:14.6px}
+.note p{text-indent:0;margin:0 0 8px}
+.note p:last-child{margin:0}
+.note b{color:var(--blue)}
+.alert{background:var(--rose2);border-left:4px solid var(--rose);border-radius:8px;padding:12px 16px;margin:16px 0;font-size:14.6px}
+.alert p{text-indent:0;margin:0 0 8px}
+.alert p:last-child{margin:0}
+.alert b{color:var(--rose)}
+.refs{font-size:13.8px}
+.refs p{text-indent:-1.25cm;padding-left:1.25cm;margin-bottom:10px}
+.closing{border-top:1px solid var(--line);padding-top:16px;margin-top:22px}
+.sum li{margin-bottom:10px}
+@media (max-width:640px){
+  main{padding:16px 12px 60px}
+  section.blk{padding:20px 16px}
+  header.cover{padding:24px 20px}
+  header.cover h1{font-size:24px}
+  p{text-indent:0}
+  table{font-size:12.6px}
+  th,td{padding:5px 6px}
+}
+</style>
+</head>
+<body>
+<main>
+
+<header class="intro">
+  <h1>Farmacocinética: o que o organismo faz com o fármaco</h1>
+  <p class="ni obj-t"><strong>Objetivos de aprendizagem</strong></p>
+  <ol class="objs"><li>Compreender os princípios fundamentais da farmacocinética e da farmacodinâmica, explicando como o organismo influencia o fármaco e como o fármaco exerce seus efeitos no organismo.</li><li>Analisar a relação dose-resposta e os principais alvos moleculares dos fármacos, correlacionando esses conceitos com a eficácia, a segurança e o uso racional dos medicamentos.</li></ol>
+</header>
+<section class="blk" id="s1">
+<h1 class="q">1 — Arquitetura conceitual: o que o organismo faz com o fármaco e o que o fármaco faz com o organismo</h1>
+
+<p>A farmacologia clínica organiza-se em torno de duas perguntas complementares que, juntas, explicam por que uma mesma dose de um mesmo medicamento produz respostas distintas em pacientes diferentes. A primeira indaga o que o organismo faz com o fármaco, isto é, como a molécula administrada é absorvida, distribuída, biotransformada e excretada ao longo do tempo; essa é a <mark>farmacocinética</mark>, disciplina que descreve quantitativamente o decurso temporal da concentração do fármaco nos diferentes compartimentos corporais. A segunda pergunta inverte a perspectiva e investiga o que o fármaco faz com o organismo, ou seja, quais alvos moleculares ele reconhece, com que afinidade se liga a eles e que cadeia de eventos bioquímicos converte essa ligação em resposta fisiológica mensurável; essa é a <mark>farmacodinâmica</mark>. Do ponto de vista conceitual, a farmacocinética determina a concentração que efetivamente alcança o sítio de ação, enquanto a farmacodinâmica determina a intensidade do efeito produzido por aquela concentração, de modo que a resposta clínica observada à beira do leito constitui sempre o produto da interação entre os dois domínios.</p>
+
+<p>Historicamente, a separação entre esses dois campos permitiu superar uma concepção simplista, ainda frequente entre estudantes, segundo a qual a dose administrada equivaleria diretamente ao efeito obtido. A dose prescrita corresponde apenas à quantidade de fármaco que atravessa a porta de entrada do organismo; entre ela e a resposta clínica interpõem-se múltiplas etapas de perda, retenção, transformação e eliminação que reduzem, retardam ou prolongam a exposição do receptor à molécula ativa. Essa cadeia pode ser representada como uma sequência de concentrações sucessivas: a dose administrada gera uma <b>concentração na circulação sistêmica</b>, que por sua vez determina a <b>concentração no local de ação</b>, da qual decorre o <b>efeito farmacológico</b> e, por fim, a <b>resposta clínica</b>, cujo desfecho pode ser tanto a eficácia terapêutica desejada quanto a toxicidade indesejada. A farmacocinética governa os dois primeiros elos dessa cadeia por meio dos processos de <mark>absorção, distribuição, biotransformação e excreção</mark> — conjunto tradicionalmente designado pelo acrônimo <b>ADME</b> —, ao passo que a farmacodinâmica governa os elos finais.</p>
+
+<p>Essa arquitetura tem consequência prática imediata. Quando um paciente não responde a um medicamento corretamente indicado, o raciocínio clínico deve percorrer sistematicamente a cadeia para identificar onde ela se rompeu: houve falha de absorção por vômitos, diarreia ou interação com alimentos? Houve sequestro do fármaco em compartimentos de distribuição que o afastaram do alvo? Houve aceleração do metabolismo hepático por indução enzimática decorrente de um segundo medicamento? Houve perda renal aumentada? Ou, finalmente, o alvo molecular encontra-se alterado, dessensibilizado ou ausente, configurando falha farmacodinâmica verdadeira? A mesma lógica se aplica, em sentido inverso, à investigação de um efeito adverso inesperado, que frequentemente resulta de acúmulo farmacocinético e não de erro de indicação. O esquema interativo a seguir percorre essa jornada etapa por etapa.</p>
+
+<div class="fig">
+  <p class="cap"><b>Esquema 1.</b> A jornada do fármaco, da dose administrada à resposta clínica. Toque em cada estação do percurso para ver o que acontece com a molécula naquele ponto e qual domínio da farmacologia a descreve.</p>
+  <svg viewBox="0 0 900 360" role="img" aria-label="Fluxo da dose administrada até a resposta clínica">
+    <defs>
+      <marker id="ar1" markerWidth="9" markerHeight="9" refX="7" refY="3.2" orient="auto">
+        <path d="M0,0 L7,3.2 L0,6.4 Z" fill="#8b7f78"/>
+      </marker>
+    </defs>
+    <rect x="14" y="12" width="498" height="212" rx="12" fill="#dce8f7" opacity=".45"/>
+    <text x="24" y="33" font-size="12.5" font-weight="bold" fill="#1f5fa8">FARMACOCINÉTICA — o organismo age sobre o fármaco</text>
+    <rect x="530" y="12" width="356" height="212" rx="12" fill="#fbe6d5" opacity=".55"/>
+    <text x="540" y="33" font-size="12.5" font-weight="bold" fill="#c25b12">FARMACODINÂMICA — o fármaco age sobre o organismo</text>
+
+    <g class="hit" data-k="dose"><rect x="34" y="52" width="150" height="54" rx="9" fill="#fff" stroke="#1f5fa8" stroke-width="1.6"/><text x="109" y="75" font-size="13" text-anchor="middle" font-weight="bold">Dose</text><text x="109" y="93" font-size="12" text-anchor="middle" fill="#5d5d66">administrada</text></g>
+    <g class="hit" data-k="abs"><rect x="214" y="52" width="150" height="54" rx="9" fill="#fff" stroke="#1f5fa8" stroke-width="1.6"/><text x="289" y="75" font-size="13" text-anchor="middle" font-weight="bold">Absorção</text><text x="289" y="93" font-size="12" text-anchor="middle" fill="#5d5d66">1ª passagem</text></g>
+    <g class="hit" data-k="circ"><rect x="34" y="140" width="150" height="62" rx="9" fill="#fff" stroke="#1f5fa8" stroke-width="1.6"/><text x="109" y="163" font-size="12.5" text-anchor="middle" font-weight="bold">Concentração</text><text x="109" y="180" font-size="11.5" text-anchor="middle" fill="#5d5d66">na circulação</text><text x="109" y="194" font-size="11.5" text-anchor="middle" fill="#5d5d66">sistêmica</text></g>
+    <g class="hit" data-k="dist"><rect x="214" y="140" width="150" height="62" rx="9" fill="#fff" stroke="#1f5fa8" stroke-width="1.6"/><text x="289" y="163" font-size="12.5" text-anchor="middle" font-weight="bold">Distribuição</text><text x="289" y="180" font-size="11.5" text-anchor="middle" fill="#5d5d66">tecidos e</text><text x="289" y="194" font-size="11.5" text-anchor="middle" fill="#5d5d66">reservatórios</text></g>
+    <g class="hit" data-k="meta"><rect x="382" y="96" width="120" height="62" rx="9" fill="#fff" stroke="#1f5fa8" stroke-width="1.6"/><text x="442" y="119" font-size="12.5" text-anchor="middle" font-weight="bold">Biotransf.</text><text x="442" y="136" font-size="11.5" text-anchor="middle" fill="#5d5d66">e excreção</text><text x="442" y="150" font-size="11.5" text-anchor="middle" fill="#5d5d66">(eliminação)</text></g>
+
+    <g class="hit" data-k="alvo"><rect x="556" y="52" width="150" height="54" rx="9" fill="#fff" stroke="#c25b12" stroke-width="1.6"/><text x="631" y="75" font-size="13" text-anchor="middle" font-weight="bold">Concentração</text><text x="631" y="93" font-size="12" text-anchor="middle" fill="#5d5d66">no local de ação</text></g>
+    <g class="hit" data-k="efe"><rect x="556" y="140" width="150" height="54" rx="9" fill="#fff" stroke="#c25b12" stroke-width="1.6"/><text x="631" y="163" font-size="13" text-anchor="middle" font-weight="bold">Efeito</text><text x="631" y="181" font-size="12" text-anchor="middle" fill="#5d5d66">farmacológico</text></g>
+    <g class="hit" data-k="resp"><rect x="736" y="96" width="134" height="54" rx="9" fill="#fff" stroke="#c25b12" stroke-width="1.8"/><text x="803" y="119" font-size="13" text-anchor="middle" font-weight="bold">Resposta</text><text x="803" y="137" font-size="12" text-anchor="middle" fill="#5d5d66">clínica</text></g>
+    <g class="hit" data-k="efic"><rect x="736" y="240" width="134" height="40" rx="9" fill="#dff1e6" stroke="#2e7d4f" stroke-width="1.5"/><text x="803" y="265" font-size="12.5" text-anchor="middle" font-weight="bold" fill="#2e7d4f">Eficácia</text></g>
+    <g class="hit" data-k="tox"><rect x="736" y="294" width="134" height="40" rx="9" fill="#f9dedc" stroke="#b3261e" stroke-width="1.5"/><text x="803" y="319" font-size="12.5" text-anchor="middle" font-weight="bold" fill="#b3261e">Toxicidade</text></g>
+
+    <path d="M184,79 H208" stroke="#8b7f78" stroke-width="1.6" marker-end="url(#ar1)" fill="none"/>
+    <path d="M109,106 V134" stroke="#8b7f78" stroke-width="1.6" marker-end="url(#ar1)" fill="none"/>
+    <path d="M289,106 V134" stroke="#8b7f78" stroke-width="1.6" marker-end="url(#ar1)" fill="none"/>
+    <path d="M184,171 H208" stroke="#8b7f78" stroke-width="1.6" marker-end="url(#ar1)" fill="none"/>
+    <path d="M364,160 L380,140" stroke="#8b7f78" stroke-width="1.6" marker-end="url(#ar1)" fill="none"/>
+    <path d="M364,79 Q430,79 436,90" stroke="#8b7f78" stroke-width="1.6" marker-end="url(#ar1)" fill="none"/>
+    <path d="M502,120 Q530,120 548,95" stroke="#8b7f78" stroke-width="1.6" marker-end="url(#ar1)" fill="none"/>
+    <path d="M631,106 V134" stroke="#8b7f78" stroke-width="1.6" marker-end="url(#ar1)" fill="none"/>
+    <path d="M706,160 Q730,160 760,152" stroke="#8b7f78" stroke-width="1.6" marker-end="url(#ar1)" fill="none"/>
+    <path d="M803,150 V234" stroke="#8b7f78" stroke-width="1.6" marker-end="url(#ar1)" fill="none"/>
+    <path d="M803,150 Q700,200 760,292" stroke="#8b7f78" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#ar1)" fill="none"/>
+    <text x="300" y="300" font-size="12" fill="#5d5d66">A mesma dose gera respostas diferentes porque cada etapa azul</text>
+    <text x="300" y="318" font-size="12" fill="#5d5d66">varia entre pacientes — e todas antecedem o encontro com o alvo.</text>
+  </svg>
+  <div class="readout" id="ro1">Toque em qualquer etapa do esquema para ler a descrição correspondente.</div>
+</div>
+
+<h2>A distinção entre o percurso do fármaco e o encontro com o alvo</h2>
+
+<p>O percurso farmacocinético pode ser descrito como uma sucessão de perdas. Da dose administrada por via oral, uma fração não se dissolve e é eliminada nas fezes; outra fração sofre degradação pelo ácido gástrico ou pelas enzimas da mucosa intestinal; parte do que atravessa o enterócito é captada pelo fígado através da veia porta e metabolizada antes mesmo de alcançar o coração esquerdo, fenômeno denominado <mark>metabolismo de primeira passagem</mark>; e somente o remanescente atinge a circulação sistêmica em forma ativa. A molécula que sobrevive a essa sequência distribui-se então pelos tecidos segundo o fluxo sanguíneo regional e suas próprias propriedades físico-químicas, podendo acumular-se em reservatórios — notadamente o tecido adiposo — que a devolvem lentamente ao plasma durante dias. Paralelamente, o fígado converte a molécula em metabólitos mais polares, e o rim, a bile, o pulmão e as glândulas sudoríparas promovem sua eliminação definitiva.</p>
+
+<p>A principal implicação desse encadeamento reside no fato de que a farmacocinética é quase inteiramente determinada por propriedades <b>físico-químicas</b> da molécula — massa molecular, lipossolubilidade, grau de ionização em pH fisiológico, capacidade de formar ligações de hidrogênio —, ao passo que a farmacodinâmica depende de propriedades de <b>reconhecimento molecular</b>, isto é, da complementaridade estrutural entre o fármaco e seu receptor, enzima, canal iônico ou transportador. Essa diferença explica por que duas moléculas quimicamente muito semelhantes podem apresentar o mesmo mecanismo de ação, porém perfis clínicos radicalmente distintos: a semelhança estrutural preserva a farmacodinâmica, enquanto pequenas alterações químicas alteram profundamente a farmacocinética. Esse princípio organiza todas as comparações exploradas adiante e constitui o fio condutor dos exemplos selecionados na aula.</p>
+
+<p class="ni closing">Compreendida essa arquitetura, a sequência natural do estudo acompanha o próprio trajeto da molécula no organismo: inicia-se pela absorção, que define quanto do fármaco administrado alcança a circulação; prossegue pela distribuição, que define aonde ele chega; avança pela ligação às proteínas plasmáticas, que define quanto dele está livre para agir; e culmina na biotransformação, que define por quanto tempo ele permanece ativo — três perguntas que, respondidas em conjunto, determinam se um medicamento será eficaz, inócuo ou tóxico.</p>
+
+<h2>Referências Bibliográficas</h2>
+<div class="refs">
+<p>BRUNTON, L. L.; KNOLLMANN, B. C. (ed.). <b>Goodman &amp; Gilman: as bases farmacológicas da terapêutica</b>. 14. ed. Porto Alegre: AMGH, 2023. Cap. 2: Farmacocinética: a dinâmica da absorção, distribuição, metabolismo e eliminação de fármacos, p. 21-40.</p>
+<p>KATZUNG, B. G.; VANDERAH, T. W. (ed.). <b>Farmacologia básica e clínica</b>. 15. ed. Porto Alegre: AMGH, 2023. Cap. 1: Introdução: a natureza dos fármacos e seu desenvolvimento e regulamentação, p. 1-17; Cap. 3: Farmacocinética e farmacodinâmica, p. 37-57.</p>
+<p>RANG, H. P. <i>et al.</i> <b>Rang &amp; Dale: farmacologia</b>. 9. ed. Rio de Janeiro: Guanabara Koogan, 2020. Cap. 9: Absorção e distribuição de fármacos, p. 115-128.</p>
+<p>ROWLAND, M.; TOZER, T. N. <b>Clinical pharmacokinetics and pharmacodynamics: concepts and applications</b>. 5. ed. Philadelphia: Wolters Kluwer, 2020. Cap. 1-3.</p>
+</div>
+</section>
+<section class="blk" id="s2">
+<h1 class="q">2 — Absorção: barreiras biológicas, vias de administração e biodisponibilidade</h1>
+
+<p>A absorção corresponde ao processo pelo qual o fármaco deixa o local de administração e alcança a circulação sistêmica, atravessando, para isso, um número variável de barreiras biológicas. O slide define o fenômeno de maneira sintética — "quando o medicamento atravessa barreiras até atingir a circulação sanguínea" —, formulação que merece ser expandida em dois sentidos. Primeiro, a barreira a que se refere a definição não é anatômica, mas essencialmente <mark>molecular</mark>: trata-se da bicamada lipídica das membranas celulares, cuja região central hidrofóbica impede a passagem livre de moléculas polares e permite a difusão de moléculas apolares. Segundo, atravessar a barreira não basta: a molécula precisa atravessá-la em quantidade suficiente e em velocidade compatível com a finalidade terapêutica, razão pela qual a absorção é sempre caracterizada por dois parâmetros simultâneos, a <b>extensão</b> (quanto chega) e a <b>velocidade</b> (quão rápido chega).</p>
+
+<p>Do ponto de vista fisiopatológico, a travessia da membrana pode ocorrer por mecanismos distintos, que convém distinguir desde o início porque determinam comportamentos cinéticos opostos. A <b>difusão passiva</b>, mecanismo predominante para a maioria dos fármacos, ocorre a favor do gradiente de concentração, não exige energia, não é saturável e depende criticamente da lipossolubilidade da molécula em sua forma não ionizada. A <b>difusão facilitada</b> e o <b>transporte ativo</b> empregam proteínas transportadoras específicas, exibem saturabilidade e competição entre substratos, e explicam a absorção de moléculas polares que jamais atravessariam a membrana por difusão simples, como ocorre com a levodopa, captada pelo transportador intestinal de aminoácidos neutros. A <b>filtração</b> através de poros aquosos restringe-se a moléculas muito pequenas, e a <b>endocitose</b>, a macromoléculas. Existe ainda um mecanismo de sentido inverso, o <b>efluxo ativo</b>, mediado sobretudo pela glicoproteína P, que devolve ao lúmen intestinal moléculas já absorvidas e reduz a fração que alcança a circulação — conceito que será retomado na discussão da barreira hematoencefálica.</p>
+
+<p>A soma desses processos, descontadas as perdas por degradação e por metabolismo pré-sistêmico, define a <mark>biodisponibilidade</mark>, parâmetro que o slide apresenta como "a taxa e a extensão com que um fármaco administrado alcança a circulação sistêmica". Formalmente, a biodisponibilidade absoluta (F) é calculada pela razão entre a área sob a curva de concentração plasmática versus tempo obtida pela via estudada e a área sob a curva obtida pela via intravenosa, corrigida pelas doses respectivas: <b>F = (AUC<sub>via</sub> × Dose<sub>IV</sub>) / (AUC<sub>IV</sub> × Dose<sub>via</sub>)</b>. O exemplo numérico do slide — 100 mg administrados, 70 mg alcançando a corrente sanguínea, biodisponibilidade de 70% — ilustra o conceito de extensão, mas convém acrescentar que dois produtos com a mesma extensão de absorção podem diferir na velocidade, apresentando concentrações máximas (C<sub>máx</sub>) e tempos até a concentração máxima (T<sub>máx</sub>) distintos, com consequências clínicas relevantes para fármacos de início de ação crítico, como analgésicos e hipnóticos. É precisamente por isso que os estudos de bioequivalência exigidos pela Agência Nacional de Vigilância Sanitária para o registro de medicamentos genéricos avaliam os três parâmetros — AUC, C<sub>máx</sub> e T<sub>máx</sub> — e não apenas a quantidade total absorvida.</p>
+
+<h2>Vias de administração e o conceito de primeira passagem</h2>
+
+<p>A afirmação do slide de que "administração intravenosa e intra-arterial não passam pela fase de absorção" constitui o ponto de partida lógico para compreender todas as demais vias, pois estabelece o padrão-ouro contra o qual elas são medidas: por definição, a via intravenosa apresenta biodisponibilidade de 100%, uma vez que a totalidade da dose é depositada diretamente no compartimento sanguíneo, sem qualquer barreira a transpor. Todas as outras vias são classificadas como vias de absorção e perdem, em maior ou menor grau, parte da dose no trajeto. A perda mais importante e clinicamente mais decisiva é o <mark>efeito de primeira passagem</mark>, que acomete especificamente os fármacos absorvidos no estômago e no intestino delgado: o sangue que drena esses segmentos não retorna diretamente ao coração, mas converge para a veia porta e atravessa obrigatoriamente o fígado, onde o fármaco fica exposto a toda a maquinaria enzimática hepatocitária antes de alcançar a circulação sistêmica. Fármacos com elevada taxa de extração hepática podem perder mais de noventa por cento da dose nessa travessia, o que explica por que a nitroglicerina é administrada por via sublingual, a naloxona por via parenteral e por que a dose oral de propranolol é várias vezes superior à dose intravenosa.</p>
+
+<div class="fig">
+  <p class="cap"><b>Esquema 2.</b> Vias de administração e biodisponibilidade. Escolha uma via para acompanhar o trajeto da dose até a circulação sistêmica, as barreiras transpostas e a fração que efetivamente chega ao destino.</p>
+  <div class="ctrls" id="rtBtns"></div>
+  <svg viewBox="0 0 900 400" role="img" aria-label="Trajeto do fármaco segundo a via de administração">
+    <rect x="300" y="26" width="300" height="46" rx="10" fill="#f9dedc" stroke="#b3261e" stroke-width="1.6"/>
+    <text x="450" y="47" font-size="13.5" text-anchor="middle" font-weight="bold" fill="#b3261e">CIRCULAÇÃO SISTÊMICA</text>
+    <text x="450" y="64" font-size="11.5" text-anchor="middle" fill="#7a3a35">o fármaco só age depois de chegar aqui</text>
+
+    <g id="gLiver" opacity=".35"><rect x="316" y="196" width="150" height="56" rx="10" fill="#fbe6d5" stroke="#c25b12" stroke-width="1.6"/><text x="391" y="219" font-size="13" text-anchor="middle" font-weight="bold" fill="#8a3e07">FÍGADO</text><text x="391" y="238" font-size="11.5" text-anchor="middle" fill="#8a3e07">1ª passagem</text></g>
+    <g id="gGut" opacity=".35"><rect x="316" y="300" width="150" height="56" rx="10" fill="#dce8f7" stroke="#1f5fa8" stroke-width="1.6"/><text x="391" y="323" font-size="13" text-anchor="middle" font-weight="bold" fill="#17497f">TUBO DIGESTIVO</text><text x="391" y="342" font-size="11.5" text-anchor="middle" fill="#17497f">dissolução e mucosa</text></g>
+    <g id="gMuc" opacity=".35"><rect x="60" y="196" width="170" height="56" rx="10" fill="#ece3f7" stroke="#6a3fa0" stroke-width="1.6"/><text x="145" y="219" font-size="13" text-anchor="middle" font-weight="bold" fill="#4f2d7a">MUCOSAS E PELE</text><text x="145" y="238" font-size="11.5" text-anchor="middle" fill="#4f2d7a">sublingual, retal, tópica</text></g>
+    <g id="gPar" opacity=".35"><rect x="660" y="196" width="180" height="56" rx="10" fill="#dff1e6" stroke="#2e7d4f" stroke-width="1.6"/><text x="750" y="219" font-size="13" text-anchor="middle" font-weight="bold" fill="#1f5c39">LEITO PARENTERAL</text><text x="750" y="238" font-size="11.5" text-anchor="middle" fill="#1f5c39">músculo, subcutâneo, alvéolo</text></g>
+
+    <path id="pGut" d="M391,300 V258" stroke="#1f5fa8" stroke-width="3" fill="none" opacity=".3"/>
+    <path id="pLiver" d="M391,196 V78" stroke="#c25b12" stroke-width="3" fill="none" opacity=".3"/>
+    <path id="pMuc" d="M145,196 V120 Q145,78 300,58" stroke="#6a3fa0" stroke-width="3" fill="none" opacity=".3"/>
+    <path id="pPar" d="M750,196 V120 Q750,78 600,58" stroke="#2e7d4f" stroke-width="3" fill="none" opacity=".3"/>
+    <path id="pIV" d="M450,150 V78" stroke="#b3261e" stroke-width="3" fill="none" opacity=".3"/>
+    <g id="gIV" opacity=".35"><rect x="380" y="118" width="140" height="42" rx="10" fill="#f9dedc" stroke="#b3261e" stroke-width="1.6"/><text x="450" y="144" font-size="12.5" text-anchor="middle" font-weight="bold" fill="#8c1d18">INJEÇÃO DIRETA</text></g>
+
+    <g id="site"><circle id="dot" cx="450" cy="104" r="8" fill="#8b1a1a" stroke="#fff" stroke-width="2"/></g>
+
+    <rect x="620" y="300" width="250" height="78" rx="10" fill="#fff" stroke="#e4ded9"/>
+    <text x="634" y="322" font-size="12" fill="#5d5d66">Biodisponibilidade estimada</text>
+    <text id="fTxt" x="634" y="356" font-size="26" font-weight="bold" fill="#8b1a1a">100%</text>
+    <rect x="634" y="364" width="220" height="8" rx="4" fill="#efe9e4"/>
+    <rect id="fBar" x="634" y="364" width="220" height="8" rx="4" fill="#8b1a1a"/>
+  </svg>
+  <div class="readout" id="ro2">Via intravenosa selecionada.</div>
+</div>
+
+<p>Nem toda via enteral sofre primeira passagem de modo integral, e essa é uma das distinções mais úteis na prática. A mucosa sublingual e a mucosa da porção distal do reto drenam para veias que desembocam na circulação sistêmica sem passar pelo fígado, razão pela qual a via sublingual produz início de ação rápido e preserva fármacos de alta extração hepática, e a via retal escapa parcialmente — estima-se que cerca de metade da dose absorvida no reto evite o primeiro trânsito hepático, proporção variável conforme a posição do supositório. As vias parenterais não enterais — intramuscular, subcutânea, inalatória e transdérmica — igualmente contornam o fígado na primeira passagem, embora cada uma imponha suas próprias limitações: a via intramuscular depende da perfusão muscular e pode produzir absorção errática em pacientes chocados ou hipotérmicos; a via subcutânea oferece absorção mais lenta e sustentada; a via inalatória explora a imensa superfície alveolar e a intensa vascularização pulmonar para produzir início de ação quase imediato; e a via transdérmica, embora limitada pela barreira córnea a moléculas potentes e muito lipofílicas, fornece liberação prolongada e constante.</p>
+
+<h2>Fatores que determinam a velocidade de absorção</h2>
+
+<p>Os slides destacam dois determinantes da velocidade de absorção que, embora apresentados de forma isolada, derivam da mesma equação fundamental descrita pela lei de Fick, segundo a qual o fluxo de uma substância através de uma membrana é diretamente proporcional à área de superfície disponível, ao coeficiente de partição e ao gradiente de concentração, e inversamente proporcional à espessura da barreira. Desse princípio decorrem as seguintes variáveis clinicamente manipuláveis:</p>
+
+<ul class="b">
+<li><b>Fluxo sanguíneo na área de absorção:</b> a perfusão regional mantém o gradiente de concentração através da membrana ao remover continuamente as moléculas já absorvidas do lado seroso. Fisiologicamente, quanto maior o fluxo, maior e mais rápida será a absorção, o que explica a superioridade da absorção intestinal sobre a gástrica e a absorção acelerada em músculos exercitados. Clinicamente, a implicação é direta e frequentemente subestimada: no choque circulatório, na insuficiência cardíaca descompensada e na hipotermia, a vasoconstrição esplâncnica e cutânea torna a absorção oral, subcutânea e intramuscular imprevisível, razão pela qual a via intravenosa é mandatória nessas situações. De modo inverso, a associação deliberada de vasoconstritor a anestésicos locais retarda a absorção sistêmica, prolonga o bloqueio e reduz a toxicidade.</li>
+<li><b>Número de barreiras a serem transpostas:</b> o slide registra, com precisão, que esse número é inversamente proporcional à quantidade absorvida e à velocidade de absorção. Fisiopatologicamente, cada interface adicional — camada de muco, membrana apical do enterócito, citoplasma, membrana basolateral, endotélio capilar — representa uma etapa em que a molécula pode ser degradada, bombeada de volta ou simplesmente retida. Clinicamente, essa relação explica a hierarquia de velocidade entre as vias e justifica, nas emergências, a preferência por vias com o menor número possível de interfaces, como a intravenosa, que tem zero barreiras, e a inalatória, que tem apenas o epitélio alveolar extremamente delgado.</li>
+<li><b>Superfície de absorção e tempo de contato:</b> a área absortiva do intestino delgado, ampliada por pregas, vilosidades e microvilosidades, supera em várias ordens de grandeza a do estômago, o que torna o intestino o principal sítio absortivo mesmo para ácidos fracos, que estariam predominantemente não ionizados no meio gástrico. Clinicamente, deriva daí a importância do esvaziamento gástrico: fármacos que o retardam, como os opioides e os anticolinérgicos, atrasam o T<sub>máx</sub> de medicamentos coadministrados, enquanto procinéticos o antecipam. A implicação prática é que a presença de alimento, ao retardar o esvaziamento gástrico, altera a velocidade de absorção de inúmeros fármacos, nem sempre reduzindo a extensão total absorvida.</li>
+<li><b>Grau de ionização e pH do meio:</b> apenas a fração não ionizada de um eletrólito fraco atravessa a membrana por difusão passiva, e a proporção entre as formas ionizada e não ionizada é governada pela equação de Henderson-Hasselbalch, que relaciona o pKa da molécula ao pH do compartimento. Fisiopatologicamente, ácidos fracos encontram-se predominantemente não ionizados em meio ácido e bases fracas em meio alcalino. Clinicamente, esse princípio sustenta a alcalinização urinária com bicarbonato de sódio no tratamento da intoxicação por salicilatos, manobra que ioniza o ácido no filtrado e impede sua reabsorção tubular, aumentando a eliminação renal.</li>
+</ul>
+
+<h2>Formas farmacêuticas: por que solução absorve mais rápido que comprimido</h2>
+
+<p>Além dos fatores atrelados à molécula, o slide chama atenção para os fatores associados às formas farmacêuticas, estabelecendo a hierarquia <b>solução &gt; suspensão &gt; cápsulas &gt; comprimido</b>. A lógica dessa sequência é inteiramente explicada pela etapa limitante da absorção: para ser absorvido, o fármaco precisa estar <mark>dissolvido</mark> em solução molecular no líquido gastrointestinal, pois apenas moléculas individuais atravessam a membrana. Uma forma sólida precisa, portanto, percorrer uma cascata de etapas antes de iniciar a absorção propriamente dita — desintegração do comprimido em grânulos, desagregação dos grânulos em partículas finas e dissolução das partículas —, e cada etapa consome tempo. A solução já se encontra no estado final dessa cascata e pode ser absorvida imediatamente; a suspensão contém partículas finas já dispersas, restando apenas a dissolução; a cápsula precisa que o invólucro se rompa; e o comprimido, especialmente se revestido ou compactado sob alta pressão, precisa percorrer a cascata completa.</p>
+
+<div class="fig">
+  <p class="cap"><b>Esquema 3.</b> A cascata da dissolução. Escolha uma forma farmacêutica e observe quantas etapas restam até que a molécula esteja dissolvida e apta a atravessar a membrana.</p>
+  <div class="ctrls" id="formBtns"></div>
+  <svg viewBox="0 0 900 230" role="img" aria-label="Etapas da desintegração à absorção">
+    <g id="stg0"><rect x="20" y="40" width="150" height="84" rx="10" fill="#fff" stroke="#c9bfb8" stroke-width="1.6"/><text x="95" y="68" font-size="13" text-anchor="middle" font-weight="bold">Sólido</text><text x="95" y="88" font-size="11.5" text-anchor="middle" fill="#5d5d66">comprimido</text><text x="95" y="105" font-size="11.5" text-anchor="middle" fill="#5d5d66">íntegro</text></g>
+    <g id="stg1"><rect x="196" y="40" width="150" height="84" rx="10" fill="#fff" stroke="#c9bfb8" stroke-width="1.6"/><text x="271" y="68" font-size="13" text-anchor="middle" font-weight="bold">Desintegração</text><text x="271" y="88" font-size="11.5" text-anchor="middle" fill="#5d5d66">grânulos e</text><text x="271" y="105" font-size="11.5" text-anchor="middle" fill="#5d5d66">partículas</text></g>
+    <g id="stg2"><rect x="372" y="40" width="150" height="84" rx="10" fill="#fff" stroke="#c9bfb8" stroke-width="1.6"/><text x="447" y="68" font-size="13" text-anchor="middle" font-weight="bold">Partículas finas</text><text x="447" y="88" font-size="11.5" text-anchor="middle" fill="#5d5d66">maior área de</text><text x="447" y="105" font-size="11.5" text-anchor="middle" fill="#5d5d66">superfície</text></g>
+    <g id="stg3"><rect x="548" y="40" width="150" height="84" rx="10" fill="#fff" stroke="#c9bfb8" stroke-width="1.6"/><text x="623" y="68" font-size="13" text-anchor="middle" font-weight="bold">Dissolução</text><text x="623" y="88" font-size="11.5" text-anchor="middle" fill="#5d5d66">fármaco em</text><text x="623" y="105" font-size="11.5" text-anchor="middle" fill="#5d5d66">solução</text></g>
+    <g id="stg4"><rect x="724" y="40" width="156" height="84" rx="10" fill="#dff1e6" stroke="#2e7d4f" stroke-width="1.8"/><text x="802" y="68" font-size="13" text-anchor="middle" font-weight="bold" fill="#1f5c39">Absorção</text><text x="802" y="88" font-size="11.5" text-anchor="middle" fill="#1f5c39">travessia da</text><text x="802" y="105" font-size="11.5" text-anchor="middle" fill="#1f5c39">membrana</text></g>
+    <path d="M170,82 H190" stroke="#8b7f78" stroke-width="1.8" marker-end="url(#ar1)" fill="none"/>
+    <path d="M346,82 H366" stroke="#8b7f78" stroke-width="1.8" marker-end="url(#ar1)" fill="none"/>
+    <path d="M522,82 H542" stroke="#8b7f78" stroke-width="1.8" marker-end="url(#ar1)" fill="none"/>
+    <path d="M698,82 H718" stroke="#8b7f78" stroke-width="1.8" marker-end="url(#ar1)" fill="none"/>
+    <text id="entry" x="95" y="164" font-size="12.5" font-weight="bold" fill="#8b1a1a">entrada</text>
+    <path id="entryArrow" d="M95,150 V130" stroke="#8b1a1a" stroke-width="2.4" marker-end="url(#ar1)" fill="none"/>
+    <text x="20" y="200" font-size="12" fill="#5d5d66">Quanto mais à direita a forma farmacêutica inicia o percurso, menor o tempo até o início da absorção.</text>
+    <text x="20" y="218" font-size="12" fill="#5d5d66">A etapa limitante de uma forma sólida é quase sempre a dissolução, não a travessia da membrana.</text>
+  </svg>
+  <div class="readout" id="ro3">Escolha uma forma farmacêutica.</div>
+</div>
+
+<p>Essa hierarquia, entretanto, não deve ser lida como hierarquia de qualidade terapêutica, e esse é um ponto em que o resumo do slide pede qualificação. Absorção mais rápida nem sempre é desejável: formas de liberação modificada — comprimidos de liberação prolongada, matrizes hidrofílicas, sistemas osmóticos — deliberadamente retardam a dissolução para reduzir flutuações de concentração, diminuir efeitos adversos dependentes de pico e permitir administração em dose única diária, com ganho de adesão. A consequência prática mais importante dessa tecnologia é a proibição absoluta de triturar, partir ou mastigar tais apresentações, conduta que destrói o mecanismo de controle de liberação e expõe o paciente, de uma só vez, a toda a carga do fármaco — acidente de particular gravidade com opioides e antagonistas dos canais de cálcio.</p>
+
+<p class="ni closing">A absorção constitui, portanto, a primeira e mais variável das etapas farmacocinéticas, e seu entendimento exige a articulação de três níveis de análise: o nível molecular, que explica por que apenas moléculas dissolvidas e não ionizadas atravessam a bicamada lipídica; o nível fisiológico, que explica por que a perfusão, a superfície absortiva e o trânsito gastrointestinal modulam a velocidade do processo; e o nível tecnológico, que explica por que a mesma molécula apresenta desempenhos distintos conforme a forma farmacêutica e a via escolhidas. Reconhecer esses três níveis permite ao prescritor antecipar falhas terapêuticas antes que ocorram — seja ajustando a via em um paciente hipoperfundido, seja evitando a trituração de uma formulação de liberação prolongada, seja compreendendo por que a dose oral e a dose intravenosa de um mesmo fármaco raramente coincidem.</p>
+
+<h2>Referências Bibliográficas</h2>
+<div class="refs">
+<p>AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA (Brasil). <b>Resolução da Diretoria Colegiada RDC nº 742, de 10 de agosto de 2022</b>: dispõe sobre os critérios para a condução de estudos de biodisponibilidade relativa/bioequivalência. Brasília, DF: Anvisa, 2022.</p>
+<p>BRUNTON, L. L.; KNOLLMANN, B. C. (ed.). <b>Goodman &amp; Gilman: as bases farmacológicas da terapêutica</b>. 14. ed. Porto Alegre: AMGH, 2023. Cap. 2 e Cap. 5: Metabolismo de fármacos.</p>
+<p>KATZUNG, B. G.; VANDERAH, T. W. (ed.). <b>Farmacologia básica e clínica</b>. 15. ed. Porto Alegre: AMGH, 2023. Cap. 3: Farmacocinética e farmacodinâmica, p. 37-57.</p>
+<p>RANG, H. P. <i>et al.</i> <b>Rang &amp; Dale: farmacologia</b>. 9. ed. Rio de Janeiro: Guanabara Koogan, 2020. Cap. 8: Absorção e distribuição de fármacos; Cap. 9: Vias de administração.</p>
+<p>SHARGEL, L.; YU, A. B. C. <b>Applied biopharmaceutics and pharmacokinetics</b>. 7. ed. New York: McGraw-Hill, 2016. Cap. 14-15.</p>
+</div>
+</section>
+<section class="blk" id="s3">
+<h1 class="q">3 — Lipossolubilidade quantificada: os coeficientes log P e log D e a razão dos exemplos da aula</h1>
+
+<p>Se a difusão passiva através da bicamada lipídica é o mecanismo predominante de travessia das membranas biológicas, torna-se necessário dispor de uma medida objetiva da afinidade de cada molécula pelo ambiente lipídico. Essa medida é obtida experimentalmente por um procedimento conceitualmente simples: o fármaco é colocado em um funil de separação contendo duas fases imiscíveis — uma orgânica, convencionalmente o <i>n</i>-octanol, escolhido por mimetizar razoavelmente o caráter anfifílico das membranas celulares, e outra aquosa, representando o meio extracelular. Após o equilíbrio, mede-se a concentração do fármaco em cada fase, e a razão entre elas define o <mark>coeficiente de partição (P)</mark>. Como esses valores variam por várias ordens de grandeza entre fármacos distintos, utiliza-se seu logaritmo decimal, o <b>log P</b>, de modo que um log P igual a zero significa distribuição idêntica entre as duas fases, valores positivos indicam preferência pelo octanol — isto é, lipossolubilidade — e valores negativos indicam preferência pela água, ou hidrossolubilidade.</p>
+
+<p>O log P, entretanto, possui uma limitação conceitual decisiva, explicitada nos slides: ele mede a lipossolubilidade da molécula <b>em sua forma não ionizada (neutra)</b>. Ocorre que a imensa maioria dos fármacos é constituída por ácidos ou bases fracas que, em solução aquosa, coexistem em equilíbrio entre a forma neutra e a forma ionizada, e a proporção entre elas depende do pH do meio e do pKa da molécula, conforme a equação de Henderson-Hasselbalch. Como a forma ionizada, por ser carregada e intensamente hidratada, praticamente não atravessa a bicamada lipídica, o log P isoladamente superestima a capacidade de permeação de qualquer eletrólito fraco em condições fisiológicas. Para corrigir essa distorção, define-se o <mark>coeficiente de distribuição (D)</mark>, cujo logaritmo, o <b>log D</b>, expressa a razão da concentração de <b>todas as formas do fármaco — ionizadas e não ionizadas — entre o octanol e a água em um pH determinado</b>, convencionalmente o pH fisiológico de 7,4. É por essa razão que os slides caracterizam o log D como a medida "mais realista para a clínica": ele informa o que de fato ocorre no plasma, no líquido intersticial e no lúmen intestinal, e não em uma condição idealizada de neutralidade.</p>
+
+<p>A relação matemática entre os dois parâmetros decorre diretamente da equação de Henderson-Hasselbalch. Para uma base fraca, log D = log P − log(1 + 10<sup>(pKa − pH)</sup>); para um ácido fraco, log D = log P − log(1 + 10<sup>(pH − pKa)</sup>). Dessas expressões decorrem três consequências que organizam todo o raciocínio clínico sobre lipossolubilidade: primeiro, o log D é sempre menor ou, no máximo, igual ao log P, jamais maior; segundo, para moléculas neutras ou com pKa muito distante do pH fisiológico, log D e log P praticamente coincidem; terceiro, para bases fortes em meio fisiológico — e para ácidos fortes igualmente —, a diferença entre log P e log D pode alcançar várias unidades logarítmicas, o que equivale a reduções de centenas ou milhares de vezes na lipossolubilidade efetiva. O slide registra, corretamente, que valores de log P ou log D maiores que zero geralmente indicam boa lipossolubilidade; cabe acrescentar que a faixa considerada ótima para fármacos de administração oral situa-se aproximadamente entre 1 e 3, intervalo que concilia permeabilidade de membrana suficiente com solubilidade aquosa adequada para a dissolução.</p>
+
+<div class="fig">
+  <p class="cap"><b>Esquema 4.</b> Funil de separação octanol/água com pH ajustável. Escolha um fármaco e desloque o pH para observar como a ionização altera a distribuição entre as fases — e por que o log D, e não o log P, prevê o comportamento clínico.</p>
+  <div class="ctrls" id="drugBtns"></div>
+  <div class="slider-row"><label for="phR">pH da fase aquosa</label><input type="range" id="phR" min="1" max="10" step="0.1" value="7.4"><output id="phOut">7,4</output></div>
+  <svg viewBox="0 0 900 300" role="img" aria-label="Partição entre octanol e água conforme o pH">
+    <rect x="40" y="26" width="200" height="110" rx="8" fill="#f0cf72" opacity=".6" stroke="#c9a93f"/>
+    <rect x="40" y="136" width="200" height="130" rx="8" fill="#9cc9f0" opacity=".55" stroke="#5d9bd0"/>
+    <text x="140" y="50" font-size="12.5" text-anchor="middle" font-weight="bold" fill="#7a6414">OCTANOL (fase lipídica)</text>
+    <text x="140" y="258" font-size="12.5" text-anchor="middle" font-weight="bold" fill="#1f5fa8">ÁGUA (fase aquosa, pH ajustável)</text>
+    <g id="dotsOct"></g>
+    <g id="dotsAq"></g>
+    <line x1="40" y1="136" x2="240" y2="136" stroke="#8b7f78" stroke-width="1.6"/>
+
+    <text x="290" y="48" font-size="13" font-weight="bold" fill="#8b1a1a" id="dName">Atenolol</text>
+    <text x="290" y="70" font-size="12.5" fill="#5d5d66" id="dClass">—</text>
+    <text x="290" y="104" font-size="12.5" fill="#1f1f22">log P (forma neutra)</text>
+    <text x="520" y="104" font-size="15" font-weight="bold" fill="#1f5fa8" id="dLogP">+0,16</text>
+    <text x="290" y="132" font-size="12.5" fill="#1f1f22">pKa</text>
+    <text x="520" y="132" font-size="15" font-weight="bold" fill="#6a3fa0" id="dPka">9,6 (base)</text>
+    <text x="290" y="160" font-size="12.5" fill="#1f1f22">Fração não ionizada neste pH</text>
+    <text x="520" y="160" font-size="15" font-weight="bold" fill="#c25b12" id="dFrac">0,6%</text>
+    <text x="290" y="188" font-size="12.5" font-weight="bold" fill="#1f1f22">log D neste pH</text>
+    <text x="520" y="188" font-size="19" font-weight="bold" fill="#8b1a1a" id="dLogD">−2,04</text>
+
+    <rect x="290" y="208" width="570" height="14" rx="7" fill="#efe9e4"/>
+    <rect id="scaleBar" x="290" y="208" width="10" height="14" rx="7" fill="#8b1a1a"/>
+    <text x="290" y="240" font-size="11.5" fill="#5d5d66">−5</text>
+    <text x="575" y="240" font-size="11.5" fill="#5d5d66" text-anchor="middle">0</text>
+    <text x="860" y="240" font-size="11.5" fill="#5d5d66" text-anchor="end">+5</text>
+    <text x="575" y="262" font-size="11.5" fill="#5d5d66" text-anchor="middle">← hidrossolúvel  |  lipossolúvel →</text>
+    <text x="290" y="286" font-size="11.5" fill="#8b7f78">A faixa de log D entre 1 e 3 reúne a maioria dos fármacos orais bem absorvidos.</text>
+  </svg>
+  <div class="readout" id="ro4">Escolha um fármaco para ler a interpretação clínica.</div>
+</div>
+
+<h2>Por que a aula escolheu atenolol e diazepam</h2>
+
+<p>A comparação entre atenolol e diazepam não é arbitrária: ela foi construída para isolar, em um único par, o contraste máximo entre uma base fraca intensamente ionizada em pH fisiológico e uma molécula praticamente neutra nesse mesmo pH, mantendo ambas no universo de fármacos de uso cotidiano. O <b>atenolol</b> é um betabloqueador cardiosseletivo cuja função amina apresenta pKa aproximado de 9,6; em pH 7,4, portanto, mais de 99% das moléculas encontram-se protonadas e carregadas positivamente, restando fração não ionizada inferior a um por cento. O resultado é um log D marcadamente negativo, e a consequência clínica é tripla: absorção oral incompleta, com biodisponibilidade em torno de 50% a 60%; distribuição restrita, com ligação às proteínas plasmáticas inferior a 10%; e, sobretudo, penetração mínima no sistema nervoso central, o que faz do atenolol um betabloqueador comparativamente pobre em efeitos adversos centrais como pesadelos, insônia e alteração do humor, à diferença do propranolol, muito mais lipofílico. Em contrapartida, sua eliminação é quase integralmente renal e sob forma inalterada, o que impõe ajuste de dose na doença renal crônica.</p>
+
+<div class="alert">
+<p><b>Correção necessária em relação aos slides.</b> O slide atribui ao atenolol log P de −0,16 e log D de −0,63 em pH 7,4. Os valores experimentais consolidados na literatura são <b>log P ≈ +0,16</b> (coeficiente de partição octanol/água da forma neutra, Hansch e colaboradores) e <b>log D<sub>7,4</sub> ≈ −2,0</b>. A diferença não é um detalhe de precisão: o log P do atenolol é discretamente positivo, e é justamente a protonação quase completa em pH fisiológico que derruba o valor efetivo em mais de duas unidades logarítmicas, o que corresponde a uma queda de cerca de cem vezes na lipossolubilidade real. A conclusão pedagógica do slide — de que o atenolol é pouco lipossolúvel e tem dificuldade em atravessar membranas — permanece integralmente correta; o mecanismo, porém, fica mais evidente com os números corretos, pois é a ionização, e não uma lipofilia intrinsecamente negativa, que explica o comportamento.</p>
+</div>
+
+<p>O <b>diazepam</b> ocupa a posição oposta do espectro. Trata-se de uma benzodiazepina cuja basicidade é extremamente fraca, com pKa em torno de 3,4, de modo que, em pH 7,4, a molécula encontra-se praticamente toda na forma neutra. Daí decorre a coincidência quase perfeita entre seu log P e seu log D — os slides registram 3,02 e 2,88, respectivamente, valores compatíveis com a literatura —, e dessa neutralidade derivam suas características clínicas mais marcantes: absorção oral rápida e praticamente completa, com biodisponibilidade superior a 90%; ligação às proteínas plasmáticas acima de 95%; volume de distribuição elevado, com acúmulo em tecido adiposo; e, decisivamente, entrada rápida no sistema nervoso central, responsável pelo início de ação em poucos minutos após administração intravenosa, propriedade que fundamenta seu emprego no estado de mal epiléptico. A contrapartida dessa mesma lipofilia é a redistribuição rápida do cérebro para o tecido adiposo, que encerra precocemente o efeito de uma dose única, e a meia-vida prolongada com acúmulo em uso repetido, particularmente problemática no idoso.</p>
+
+<h2>Por que a aula escolheu morfina e heroína</h2>
+
+<p>O segundo par de exemplos desloca a demonstração para outro plano conceitual. Enquanto atenolol e diazepam ilustram o contraste entre duas moléculas estruturalmente distintas, <b>morfina</b> e <b>heroína</b> ilustram algo mais sutil e mais instrutivo: o efeito da modificação química mínima de uma mesma estrutura sobre a farmacocinética, mantida essencialmente a farmacodinâmica. A heroína, ou diacetilmorfina, é a morfina com dois grupamentos hidroxila convertidos em ésteres acetílicos. Essa substituição mascara dois sítios polares formadores de ligações de hidrogênio e eleva o log P de aproximadamente 0,87 para cerca de 1,58, conforme registram os slides. A consequência é que a heroína atravessa a barreira hematoencefálica com velocidade várias vezes superior à da morfina.</p>
+
+<p>O aspecto conceitualmente decisivo — e que os slides, por concisão, não explicitam — é que a heroína é praticamente desprovida de afinidade intrínseca pelos receptores opioides: ela funciona como um <mark>pró-fármaco</mark>, sendo rapidamente desacetilada no encéfalo a 6-monoacetilmorfina e, em seguida, à própria morfina, que é a molécula farmacologicamente ativa. Em outras palavras, as duas substâncias produzem o mesmo efeito pelo mesmo mecanismo no mesmo receptor; o que difere é exclusivamente a velocidade de chegada ao alvo. Esse exemplo demonstra, portanto, três princípios de uma só vez: que a lipofilia governa a penetração no sistema nervoso central; que a modificação química de grupamentos polares é a estratégia clássica de otimização farmacocinética na química medicinal; e que a velocidade de entrada no sistema nervoso central, mais que a magnitude do efeito, é o determinante farmacológico do potencial de abuso de um opioide — razão pela qual a heroína é substância proscrita na maioria dos países, enquanto a morfina permanece medicamento essencial no controle da dor oncológica e no cuidado paliativo.</p>
+
+<h2>Por que a aula escolheu os dois ésteres da betametasona</h2>
+
+<p>O terceiro exemplo presente no material aborda o mesmo princípio sob a perspectiva da formulação injetável. A betametasona é comercializada em apresentações que combinam dois ésteres do mesmo corticosteroide: o <b>fosfato dissódico</b>, altamente hidrossolúvel, e o <b>dipropionato</b>, marcadamente lipossolúvel. O éster fosfato é rapidamente hidrolisado por fosfatases plasmáticas, liberando betametasona livre em minutos e produzindo efeito anti-inflamatório imediato; o éster dipropionato, ao contrário, forma um depósito microcristalino pouco solúvel no sítio de injeção, a partir do qual a hidrólise e a liberação ocorrem lentamente ao longo de semanas. A associação dos dois em uma única suspensão injetável cria, portanto, um perfil farmacocinético bifásico — início rápido fornecido pela fração hidrossolúvel e manutenção prolongada fornecida pela fração lipossolúvel —, exemplo didático de como a manipulação da lipossolubilidade, sem qualquer alteração do princípio ativo final, permite desenhar a curva de concentração desejada. A implicação prática é relevante: a fração de depósito responde pela supressão prolongada do eixo hipotálamo-hipófise-adrenal e pelo risco de atrofia local, razão pela qual a repetição indiscriminada de infiltrações é desaconselhada.</p>
+
+<table>
+<caption>Quadro Comparativo: log P, log D<sub>7,4</sub> e repercussão clínica dos exemplos discutidos</caption>
+<thead><tr><th style="width:17%">Fármaco</th><th style="width:16%">log P / log D<sub>7,4</sub></th><th style="width:16%">pKa e carga em pH 7,4</th><th>Repercussão farmacocinética e clínica</th></tr></thead>
+<tbody>
+<tr><td class="grp">Atenolol</td><td>+0,16 / ≈ −2,0</td><td>9,6; base quase totalmente protonada</td><td>Biodisponibilidade oral de 50% a 60%; ligação proteica inferior a 10%; penetração mínima no sistema nervoso central, com menos efeitos centrais; eliminação renal sob forma inalterada, exigindo ajuste na doença renal.</td></tr>
+<tr><td class="grp">Diazepam</td><td>≈ +2,8 a +3,0 / ≈ +2,9</td><td>3,4; base muito fraca, praticamente neutra</td><td>Absorção oral rápida e quase completa; ligação proteica acima de 95%; entrada rápida no sistema nervoso central; redistribuição para o tecido adiposo encerra o efeito da dose única e favorece acúmulo em uso crônico.</td></tr>
+<tr><td class="grp">Morfina</td><td>≈ +0,87 / ≈ +0,2</td><td>8,0; base parcialmente protonada</td><td>Entrada lenta no sistema nervoso central; início de ação retardado mesmo por via intravenosa; metabolização a morfina-6-glicuronídeo ativo, que se acumula na insuficiência renal.</td></tr>
+<tr><td class="grp">Heroína</td><td>≈ +1,58 / ≈ +1,2</td><td>7,6; base parcialmente protonada</td><td>Pró-fármaco sem afinidade intrínseca pelo receptor; travessia rápida da barreira hematoencefálica e conversão local a morfina; a velocidade de entrada no sistema nervoso central explica o elevado potencial de abuso.</td></tr>
+<tr><td class="grp">Betametasona (fosfato × dipropionato)</td><td>Hidrossolúvel × lipossolúvel</td><td>Ésteres neutros, hidrolisados <i>in vivo</i></td><td>O fosfato é hidrolisado em minutos e fornece efeito imediato; o dipropionato forma depósito microcristalino de liberação lenta por semanas, com risco de supressão adrenal prolongada e atrofia local.</td></tr>
+</tbody>
+</table>
+
+<p class="ni closing">Os coeficientes log P e log D traduzem, em um único número, a propriedade físico-química que mais condiciona o destino de um fármaco no organismo, e a distinção entre eles é precisamente a distinção entre o comportamento teórico da molécula neutra e o comportamento real da mistura de espécies que existe em pH fisiológico. Compreendê-la permite prever, sem recorrer a tabelas, três ordens de fenômenos clínicos: a extensão da absorção oral de uma base como o atenolol, a rapidez do efeito central de uma molécula neutra como o diazepam e a possibilidade de converter um fármaco lento em um fármaco rápido pela simples acetilação de hidroxilas, como demonstra o par morfina-heroína.</p>
+
+<h2>Referências Bibliográficas</h2>
+<div class="refs">
+<p>BRUNTON, L. L.; KNOLLMANN, B. C. (ed.). <b>Goodman &amp; Gilman: as bases farmacológicas da terapêutica</b>. 14. ed. Porto Alegre: AMGH, 2023. Cap. 2 e Cap. 20: Analgésicos opioides.</p>
+<p>HANSCH, C.; LEO, A.; HOEKMAN, D. <b>Exploring QSAR: hydrophobic, electronic, and steric constants</b>. Washington: American Chemical Society, 1995.</p>
+<p>KATZUNG, B. G.; VANDERAH, T. W. (ed.). <b>Farmacologia básica e clínica</b>. 15. ed. Porto Alegre: AMGH, 2023. Cap. 1 e Cap. 3.</p>
+<p>SCHEEN, A. J. Pharmacokinetic and toxicological considerations for the treatment of diabetes in patients with liver disease. <b>Expert Opinion on Drug Metabolism &amp; Toxicology</b>, v. 10, n. 6, p. 839-857, 2014.</p>
+<p>WATERBEEMD, H. van de; TESTA, B. (ed.). <b>Drug bioavailability: estimation of solubility, permeability, absorption and bioavailability</b>. 2. ed. Weinheim: Wiley-VCH, 2009. Cap. 2-4.</p>
+</div>
+</section>
+<section class="blk" id="s4">
+<h1 class="q">4 — Distribuição: perfusão tecidual, volume aparente, reservatórios e barreiras especializadas</h1>
+
+<p>A distribuição é definida nos slides como "o processo no qual a substância reversivelmente abandona a corrente sanguínea e passa para o interstício e/ou células ou tecidos", formulação cuja palavra mais importante é <mark>reversivelmente</mark>. A distribuição não constitui um processo de mão única, mas um equilíbrio dinâmico: a cada instante, moléculas deixam o plasma rumo aos tecidos enquanto outras retornam, e a concentração plasmática medida pelo laboratório representa apenas a fração que, naquele momento, encontra-se no compartimento vascular. Essa reversibilidade explica por que um fármaco pode desaparecer rapidamente do plasma sem ter sido eliminado do organismo — apenas redistribuído — e por que, inversamente, a interrupção de uma infusão não encerra imediatamente o efeito de substâncias acumuladas em compartimentos profundos.</p>
+
+<p>Dois conjuntos de variáveis governam esse equilíbrio. O primeiro é <b>fisiológico</b> e diz respeito ao fluxo sanguíneo regional: órgãos intensamente perfundidos — encéfalo, coração, fígado, rins e pulmões, que recebem cerca de três quartos do débito cardíaco apesar de representarem fração pequena da massa corporal — equilibram-se com o plasma em minutos, ao passo que músculo esquelético, pele e, sobretudo, tecido adiposo requerem horas ou dias. É dessa diferença temporal que emerge o fenômeno da <mark>redistribuição</mark>, decisivo em anestesiologia: o tiopental e o propofol, por serem muito lipofílicos, alcançam concentração encefálica eficaz em um único tempo de circulação e induzem hipnose em segundos; a seguir, à medida que o músculo e a gordura se equilibram, o fármaco migra do encéfalo para esses compartimentos e o paciente desperta, não por eliminação do agente, mas por sua redistribuição. O segundo conjunto é <b>físico-químico</b>: conforme registram os slides, medicamentos lipossolúveis atravessam as membranas mais rapidamente que os hidrossolúveis, enquanto estes tendem a permanecer no compartimento aquoso do sangue, com distribuição restrita ao líquido extracelular.</p>
+
+<p>Essas duas dimensões convergem no parâmetro que sintetiza quantitativamente a distribuição, o <mark>volume aparente de distribuição (V<sub>d</sub>)</mark>, definido como a razão entre a quantidade total de fármaco no organismo e sua concentração plasmática. Trata-se de um volume fictício, sem correspondência anatômica, que expressa a avidez relativa dos tecidos pelo fármaco em comparação com o plasma: valores baixos, próximos de 5 litros, indicam confinamento ao compartimento vascular, típico de moléculas grandes ou intensamente ligadas à albumina, como a varfarina; valores em torno de 15 a 40 litros sugerem distribuição pelo líquido extracelular ou pela água corporal total, como ocorre com a gentamicina e o etanol; e valores muito elevados, de centenas ou milhares de litros, denunciam sequestro tecidual maciço, como no caso da digoxina, que se acumula no músculo esquelético, e da cloroquina e da amiodarona, que alcançam volumes superiores a 5.000 litros. A implicação clínica mais imediata desse parâmetro é dupla: ele determina a dose de ataque necessária para atingir rapidamente a concentração-alvo, calculada como <b>dose de ataque = V<sub>d</sub> × concentração desejada</b>, e prevê a inutilidade da hemodiálise em intoxicações por fármacos de volume de distribuição elevado, já que a quantidade presente no plasma, único compartimento acessível ao dialisador, é irrisória frente ao total corporal.</p>
+
+<h2>Reservatórios teciduais e o tecido adiposo</h2>
+
+<p>Os slides observam que "alguns tecidos funcionam como reservatórios do medicamento, prolongando a distribuição" e acrescentam que fármacos acumulados no tecido adiposo deixam esses tecidos lentamente e, em consequência, circulam durante vários dias após a administração. O fenômeno merece detalhamento porque constitui causa frequente de efeitos prolongados inesperados. O tecido adiposo representa, em um adulto eutrófico, cerca de 15% a 25% da massa corporal — proporção que pode ultrapassar 40% na obesidade —, é escassamente perfundido, recebendo apenas 2% a 5% do débito cardíaco, e possui afinidade elevadíssima por moléculas lipofílicas. A combinação entre grande capacidade de armazenamento e baixo fluxo de entrada e saída transforma-o em um compartimento de enchimento lento e esvaziamento ainda mais lento, verdadeiro depósito que devolve o fármaco ao plasma por dias ou semanas após a suspensão do tratamento.</p>
+
+<ul class="b">
+<li><b>Tecido adiposo:</b> acumula fármacos lipofílicos como tiopental, diazepam, anfetaminas e organoclorados. Clinicamente, explica a sedação residual prolongada em idosos tratados com benzodiazepínicos de meia-vida longa, cuja composição corporal apresenta aumento proporcional de gordura e redução de água corporal total, e justifica a persistência de metabólitos detectáveis em exames toxicológicos muito após a última exposição.</li>
+<li><b>Músculo esquelético:</b> embora de afinidade individual modesta, sua massa expressiva o torna o principal reservatório da digoxina, ligada à enzima sódio-potássio-ATPase miofibrilar. A implicação prática é que a dose de digoxina deve ser calculada pelo peso magro, sob risco de superdosagem em pacientes obesos.</li>
+<li><b>Osso e dentes:</b> as tetraciclinas quelam cálcio e incorporam-se à hidroxiapatita, motivo pelo qual são contraindicadas em gestantes e em crianças menores de oito anos, nas quais produzem descoloração dentária permanente e podem comprometer o crescimento ósseo.</li>
+<li><b>Compartimentos transcelulares:</b> o fármaco pode acumular-se em líquidos como o humor aquoso, o líquido sinovial e as secreções gástricas; nestas últimas, bases fracas sofrem aprisionamento iônico pelo pH ácido, fenômeno explorado na eliminação de algumas intoxicações.</li>
+</ul>
+
+<h2>Barreiras especializadas: a barreira hematoencefálica e a barreira placentária</h2>
+
+<p>Nem todos os leitos capilares são igualmente permeáveis, e essa heterogeneidade constitui um dos mecanismos mais elegantes de proteção tecidual. O capilar somático convencional possui fenestrações e junções intercelulares relativamente frouxas que permitem a passagem paracelular de água e solutos de pequeno peso molecular independentemente de sua lipossolubilidade. Os slides apontam, corretamente, que a <mark>barreira hematoencefálica</mark> caracteriza-se pela presença de <b>capilares não fenestrados</b>, descrição que pode ser ampliada em três componentes estruturais e um funcional. Estruturalmente, a barreira é constituída por células endoteliais unidas por junções oclusivas contínuas, que abolem a via paracelular; por uma membrana basal espessa; e pelos prolongamentos podocitários dos astrócitos, que envolvem mais de 90% da superfície capilar e induzem o fenótipo de barreira no endotélio — exatamente a descrição contida no slide, segundo a qual a barreira é formada por células endoteliais e astrócitos alinhados uma a uma, dificultando a passagem de substâncias do sangue para o sistema nervoso central.</p>
+
+<p>O quarto componente, de natureza funcional e ausente do resumo dos slides, é decisivo para a compreensão dos exemplos clínicos: a barreira hematoencefálica expressa, na membrana luminal do endotélio, <mark>transportadores de efluxo</mark> dependentes de energia, entre os quais se destaca a <b>glicoproteína P</b>, produto do gene <i>ABCB1</i>. Essa bomba reconhece um amplo espectro de substratos lipofílicos e os devolve ativamente ao sangue, de modo que a barreira não é apenas um obstáculo passivo à difusão, mas um sistema de transporte ativo em sentido contrário. A existência desse mecanismo explica o paradoxo de moléculas lipossolúveis que, apesar de um log D favorável, não alcançam concentrações centrais relevantes — e constitui, como se verá, a chave do exemplo apresentado na aula.</p>
+
+<div class="fig">
+  <p class="cap"><b>Esquema 5.</b> Capilar somático convencional e capilar da barreira hematoencefálica. Escolha o tipo de molécula e observe por quais rotas ela consegue — ou não consegue — alcançar o tecido.</p>
+  <div class="ctrls" id="molBtns"></div>
+  <svg viewBox="0 0 900 320" role="img" aria-label="Comparação entre capilar fenestrado e barreira hematoencefálica">
+    <text x="20" y="26" font-size="13.5" font-weight="bold" fill="#1f5fa8">CAPILAR SOMÁTICO (fenestrado, junções frouxas)</text>
+    <rect x="20" y="40" width="400" height="92" rx="6" fill="#f9dedc" stroke="#b3261e" stroke-width="1.4"/>
+    <rect x="20" y="40" width="400" height="16" fill="#efd9cf"/>
+    <rect x="20" y="116" width="400" height="16" fill="#efd9cf"/>
+    <rect x="150" y="116" width="26" height="16" fill="#fff"/>
+    <rect x="280" y="116" width="26" height="16" fill="#fff"/>
+    <text x="30" y="52" font-size="10.5" fill="#8c1d18">endotélio</text>
+    <rect x="20" y="132" width="400" height="56" rx="6" fill="#dff1e6" stroke="#2e7d4f" stroke-width="1.2"/>
+    <text x="220" y="166" font-size="12.5" text-anchor="middle" fill="#1f5c39" font-weight="bold">INTERSTÍCIO TECIDUAL</text>
+
+    <text x="480" y="26" font-size="13.5" font-weight="bold" fill="#6a3fa0">BARREIRA HEMATOENCEFÁLICA</text>
+    <rect x="480" y="40" width="400" height="76" rx="6" fill="#f9dedc" stroke="#b3261e" stroke-width="1.4"/>
+    <rect x="480" y="40" width="400" height="16" fill="#efd9cf"/>
+    <rect x="480" y="116" width="400" height="28" fill="#d9c9ee" stroke="#6a3fa0" stroke-width="1"/>
+    <text x="490" y="135" font-size="10.5" fill="#4f2d7a">endotélio — junções oclusivas contínuas</text>
+    <rect x="480" y="150" width="400" height="38" rx="6" fill="#ece3f7" stroke="#6a3fa0" stroke-width="1.2"/>
+    <text x="680" y="174" font-size="12.5" text-anchor="middle" fill="#4f2d7a" font-weight="bold">ASTRÓCITOS E PARÊNQUIMA DO SNC</text>
+    <g id="pgpG">
+      <rect x="800" y="112" width="40" height="36" rx="6" fill="#fff" stroke="#c25b12" stroke-width="2"/>
+      <text x="820" y="135" font-size="11" text-anchor="middle" font-weight="bold" fill="#c25b12">P-gp</text>
+    </g>
+
+    <g id="molLeft"></g>
+    <g id="molRight"></g>
+
+    <text x="20" y="226" font-size="12" fill="#5d5d66">Rotas possíveis: paracelular (entre células) • transcelular passiva (através da bicamada) • transportador • efluxo ativo</text>
+    <text x="20" y="248" font-size="12" fill="#8b7f78">A barreira placentária segue a mesma lógica: deixa passar sobretudo moléculas lipossolúveis, neutras e de baixo peso molecular.</text>
+  </svg>
+  <div class="readout" id="ro5">Escolha um tipo de molécula.</div>
+</div>
+
+<p>A <mark>barreira placentária</mark>, mencionada nos slides com a observação de que "por ela passam somente drogas lipossolúveis", obedece aos mesmos princípios, embora seja funcionalmente menos restritiva que a barreira hematoencefálica. O sinciciotrofoblasto que separa a circulação materna da fetal permite difusão passiva de moléculas lipofílicas, não ionizadas e de peso molecular inferior a aproximadamente 500 dáltons, e expressa igualmente glicoproteína P e proteína de resistência do câncer de mama, que limitam a exposição fetal a diversos substratos. A formulação do slide merece, contudo, uma qualificação importante para a prática obstétrica: a barreira placentária não deve ser concebida como obstáculo confiável. Praticamente todos os fármacos de uso corrente atravessam a placenta em alguma extensão, e a ausência de passagem é exceção, restrita a moléculas muito grandes como a heparina não fracionada e a insulina. O raciocínio clínico correto, portanto, não consiste em presumir proteção fetal, mas em avaliar a relação entre benefício materno e risco fetal para cada agente, considerando ainda que o pH ligeiramente mais ácido do sangue fetal favorece o aprisionamento iônico de bases fracas, com acúmulo progressivo no feto — fenômeno relevante, por exemplo, com anestésicos locais administrados à parturiente.</p>
+
+<h2>O exemplo da aula: domperidona e bromoprida</h2>
+
+<p>A comparação entre domperidona e bromoprida foi escolhida pelos slides porque ambas são antagonistas dopaminérgicos D<sub>2</sub> empregados como procinéticos e antieméticos, com mecanismo farmacodinâmico essencialmente idêntico, mas com perfis de segurança neurológica radicalmente distintos. A <b>bromoprida</b>, análoga estrutural da metoclopramida, atravessa a barreira hematoencefálica e bloqueia receptores D<sub>2</sub> no sistema nervoso central, produzindo as reações adversas que os slides enumeram: tremores, acatisia — descrita como inquietude motora intensa e angustiante — e distonias agudas, caracterizadas por contrações musculares involuntárias sustentadas, frequentemente cervicais, oculógiras ou mandibulares. As bulas aprovadas pela Agência Nacional de Vigilância Sanitária registram que as reações extrapiramidais são mais frequentes em crianças e adultos jovens e podem ocorrer após dose única, e contraindicam formalmente o medicamento em menores de um ano, bem como em pacientes epilépticos ou em uso de outros agentes indutores de reações extrapiramidais. A <b>domperidona</b>, em contrapartida, exerce ação predominantemente periférica, sobre os receptores D<sub>2</sub> do plexo mioentérico e da zona de gatilho quimiorreceptora, esta última situada na área postrema, região desprovida de barreira hematoencefálica — o que explica a preservação do efeito antiemético apesar da ausência de penetração central.</p>
+
+<div class="alert">
+<p><b>Qualificação necessária em relação aos slides.</b> O material atribui a menor penetração central da domperidona à sua maior massa molecular, apresentando a comparação entre 425,9 g/mol e 344,25 g/mol e referindo-se ao estudo de Fischer, Gottschlich e Seelig (1998), segundo o qual a permeabilidade da barreira hematoencefálica diminui cerca de cem vezes quando o tamanho molecular aumenta de 300 para 450 g/mol. O princípio geral invocado é verdadeiro e o estudo é legítimo — a área de secção transversal da molécula é, de fato, determinante crítico da difusão passiva. Ocorre que, no caso específico da domperidona, o mecanismo predominante é outro: a domperidona é <b>substrato de alta afinidade da glicoproteína P</b>. Schinkel e colaboradores demonstraram, em 1996, que camundongos geneticamente desprovidos do gene <i>mdr1a</i> apresentam penetração encefálica muito aumentada de domperidona e desenvolvem efeitos neurolépticos centrais após administração oral, ao contrário dos animais normais. A domperidona é, portanto, continuamente bombeada de volta ao sangue, e não meramente retida por seu tamanho.</p>
+<p>A distinção não é acadêmica, pois tem consequência clínica direta: a coadministração de inibidores da glicoproteína P e do CYP3A4 — como cetoconazol, itraconazol, claritromicina, eritromicina e ritonavir — eleva a concentração plasmática e potencialmente central da domperidona, situação que as agências regulatórias consideram contraindicação formal, sobretudo pelo risco de prolongamento do intervalo QT e arritmias ventriculares.</p>
+</div>
+
+<div class="note">
+<p><b>Atualização regulatória sobre a afirmação de maior segurança pediátrica.</b> Os slides apresentam a domperidona como "mais segura na pediatria". Essa afirmação correspondia à prática corrente, mas foi revista: após estudo controlado por placebo que não demonstrou diferença de eficácia em relação ao placebo em crianças menores de 12 anos com náuseas e vômitos agudos, a Agência Europeia de Medicamentos retirou, em 2019, a indicação pediátrica da domperidona, que passou a ser autorizada apenas para adultos e adolescentes com 12 anos ou mais e peso igual ou superior a 35 kg. Permanecem vigentes as recomendações de usar a menor dose eficaz pelo menor tempo possível, habitualmente não superior a uma semana, e as contraindicações cardiológicas. Na prática pediátrica brasileira atual, o manejo da gastroenterite aguda privilegia a reidratação oral e, quando necessário, o ondansetrona, enquanto antagonistas dopaminérgicos são reservados a situações selecionadas.</p>
+</div>
+
+<p>A classificação de risco gestacional mencionada nos slides — categoria B para a domperidona e categoria C para a bromoprida, segundo o sistema anteriormente adotado pela agência regulatória norte-americana — reflete precisamente essa diferença de penetração em compartimentos protegidos. Convém registrar, todavia, que esse sistema de letras foi substituído, desde 2015, pela chamada Regra de Rotulagem para Gravidez e Lactação, que abandonou as categorias em favor de narrativas descritivas de risco, por se considerar que as letras transmitiam falsa impressão de hierarquia simples e precisa.</p>
+
+<p class="ni closing">A distribuição determina, em última análise, se a concentração plasmática medida corresponde ou não à concentração no sítio de ação, e essa correspondência depende simultaneamente da perfusão do órgão-alvo, das propriedades físico-químicas do fármaco, da existência de reservatórios competidores e da presença de barreiras especializadas dotadas de transporte ativo. O par domperidona-bromoprida sintetiza essa lição com rara clareza: duas moléculas com o mesmo alvo molecular e a mesma ação periférica produzem desfechos neurológicos opostos — seja pela diferença de tamanho molecular, seja, sobretudo, pela ação da glicoproteína P, seja pela presença de regiões encefálicas naturalmente desprovidas de barreira.</p>
+
+<h2>Referências Bibliográficas</h2>
+<div class="refs">
+<p>AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA (Brasil). <b>Bula do profissional de saúde: bromoprida</b>. Bulário Eletrônico. Brasília, DF: Anvisa. Disponível em: https://consultas.anvisa.gov.br/#/bulario/. Acesso em: 10 nov. 2026.</p>
+<p>EUROPEAN MEDICINES AGENCY. <b>Domperidone-containing medicines: Article 31 referral and 2019 product information update</b>. Amsterdam: EMA, 2019. Disponível em: https://www.ema.europa.eu/en/medicines/human/referrals/domperidone-containing-medicines. Acesso em: 10 nov. 2026.</p>
+<p>FISCHER, H.; GOTTSCHLICH, R.; SEELIG, A. Blood-brain barrier permeation: molecular parameters governing passive diffusion. <b>The Journal of Membrane Biology</b>, v. 165, n. 3, p. 201-211, 1998.</p>
+<p>RANG, H. P. <i>et al.</i> <b>Rang &amp; Dale: farmacologia</b>. 9. ed. Rio de Janeiro: Guanabara Koogan, 2020. Cap. 9: Absorção e distribuição de fármacos, p. 115-128.</p>
+<p>SCHINKEL, A. H. <i>et al.</i> P-glycoprotein in the blood-brain barrier of mice influences the brain penetration and pharmacological activity of many drugs. <b>The Journal of Clinical Investigation</b>, v. 97, n. 11, p. 2517-2524, 1996.</p>
+</div>
+</section>
+<section class="blk" id="s5">
+<h1 class="q">5 — Ligação às proteínas plasmáticas: fração livre, hipoalbuminemia e interações por deslocamento</h1>
+
+<p>Uma vez na circulação, o fármaco não permanece integralmente dissolvido no plasma sob forma livre. Parte das moléculas associa-se reversivelmente a proteínas plasmáticas, estabelecendo-se, conforme registram os slides, um <mark>equilíbrio entre a fração livre e a fração ligada</mark>. A proteína quantitativamente mais importante é a <b>albumina</b>, que responde por aproximadamente 60% do conteúdo proteico plasmático e liga preferencialmente fármacos de caráter ácido, como varfarina, fenitoína, furosemida, salicilatos e sulfonilureias. Fármacos básicos, por sua vez, ligam-se preferencialmente à <b>alfa-1-glicoproteína ácida</b>, proteína de fase aguda presente em concentrações muito inferiores, à qual se associam lidocaína, propranolol, imipramina e metadona. Lipoproteínas e globulinas de ligação específica, como a transcortina e a globulina ligadora de hormônios sexuais, completam o repertório.</p>
+
+<p>O princípio farmacológico central dessa associação está enunciado com precisão nos slides: <b>somente o fármaco livre pode produzir efeito farmacológico</b>, pois apenas a molécula não ligada tem dimensão e mobilidade suficientes para abandonar o leito vascular, difundir-se pelo interstício e alcançar o receptor. O complexo fármaco-proteína, de massa molecular elevada, permanece confinado ao plasma e, pela mesma razão, não é filtrado no glomérulo nem está disponível para captação hepatocitária por difusão passiva. Daí a dupla consequência também anotada nos slides: alta ligação a proteínas implica menor eliminação e, portanto, maior duração do efeito, ao passo que baixa ligação implica eliminação mais rápida e efeito mais breve. Convém acrescentar que a ligação proteica reduz igualmente o volume aparente de distribuição, retendo o fármaco no compartimento vascular, e que o complexo funciona como reservatório circulante: à medida que a fração livre é eliminada, o equilíbrio desloca-se e novas moléculas se desprendem da proteína, sustentando concentrações eficazes por período prolongado.</p>
+
+<div class="fig">
+  <p class="cap"><b>Esquema 6.</b> Equilíbrio entre fármaco livre e fármaco ligado. Escolha o fármaco e ajuste a albuminemia para observar como a fração livre — a única farmacologicamente ativa — se altera.</p>
+  <div class="ctrls" id="bndBtns"></div>
+  <div class="slider-row"><label for="albR">Albumina sérica (g/dL)</label><input type="range" id="albR" min="1.5" max="5" step="0.1" value="4.2"><output id="albOut">4,2</output></div>
+  <svg viewBox="0 0 900 290" role="img" aria-label="Fração livre e fração ligada do fármaco no plasma">
+    <rect x="20" y="30" width="860" height="130" rx="14" fill="#f9dedc" stroke="#b3261e" stroke-width="1.4"/>
+    <text x="34" y="52" font-size="12.5" font-weight="bold" fill="#8c1d18">COMPARTIMENTO PLASMÁTICO</text>
+    <g id="plasmaDots"></g>
+    <rect x="20" y="176" width="860" height="56" rx="12" fill="#dff1e6" stroke="#2e7d4f" stroke-width="1.3"/>
+    <text x="450" y="200" font-size="12.5" text-anchor="middle" font-weight="bold" fill="#1f5c39">TECIDOS, RECEPTORES, FILTRAÇÃO GLOMERULAR E METABOLISMO HEPÁTICO</text>
+    <text x="450" y="220" font-size="11.5" text-anchor="middle" fill="#1f5c39">só a fração livre chega até aqui</text>
+    <g id="freeArrows"></g>
+    <text x="34" y="258" font-size="12.5" fill="#1f1f22">Fração ligada</text>
+    <text x="190" y="258" font-size="15" font-weight="bold" fill="#6a3fa0" id="bTxt">99,5%</text>
+    <text x="300" y="258" font-size="12.5" fill="#1f1f22">Fração livre</text>
+    <text x="440" y="258" font-size="15" font-weight="bold" fill="#b3261e" id="fTxt2">0,5%</text>
+    <text x="560" y="258" font-size="12.5" fill="#1f1f22">Variação da fração livre</text>
+    <text x="800" y="258" font-size="15" font-weight="bold" fill="#c25b12" id="mTxt">× 1,0</text>
+    <text x="34" y="282" font-size="11.5" fill="#8b7f78">Círculos escuros: fármaco ligado à albumina. Círculos vermelhos: fármaco livre, difusível e eliminável.</text>
+  </svg>
+  <div class="readout" id="ro6">Escolha um fármaco para ler a interpretação clínica.</div>
+</div>
+
+<h2>Condições clínicas que reduzem a ligação proteica</h2>
+
+<p>Os slides agrupam quatro situações em que a capacidade de ligação se encontra comprometida, todas convergindo para o mesmo desfecho fisiopatológico — aumento da fração livre — por mecanismos distintos:</p>
+
+<ul class="b">
+<li><b>Doença hepática grave:</b> o hepatócito é o único sítio de síntese da albumina, produzindo normalmente entre 10 e 15 gramas diários. Fisiopatologicamente, na cirrose descompensada a síntese cai de modo proporcional à perda de massa funcional, e a hipoalbuminemia soma-se à redução da capacidade metabólica e ao desvio portossistêmico. Clinicamente, a consequência é a potencialização simultânea por dois mecanismos — mais fármaco livre e menor depuração —, o que impõe redução de dose e vigilância redobrada com benzodiazepínicos, opioides e anticoagulantes orais nesses pacientes.</li>
+<li><b>Síndrome nefrótica:</b> a lesão da barreira de filtração glomerular determina proteinúria superior a 3,5 gramas em 24 horas, com perda urinária maciça de albumina. Fisiopatologicamente, à hipoalbuminemia soma-se a presença, no plasma e no filtrado, de substâncias endógenas que competem pelos sítios de ligação. Clinicamente, o fenômeno é classicamente ilustrado pela resistência à furosemida: o diurético, intensamente ligado à albumina, depende da secreção tubular proximal para alcançar seu sítio de ação na alça de Henle, e, uma vez no lúmen, liga-se à albumina ali filtrada, o que reduz a fração ativa e exige doses superiores às habituais.</li>
+<li><b>Idade avançada:</b> o envelhecimento associa-se à redução fisiológica da albuminemia, habitualmente modesta em idosos hígidos mas acentuada na presença de desnutrição, inflamação crônica ou polipatologia. Clinicamente, a redução da ligação soma-se ao aumento da proporção de gordura corporal, à diminuição da água corporal total e à queda da filtração glomerular, compondo um perfil farmacocinético que justifica a máxima geriátrica de iniciar com dose baixa e progredir lentamente.</li>
+<li><b>Reação de fase aguda:</b> os slides indicam, corretamente, que a albumina diminui nesses estados, citando câncer, artrite, infarto do miocárdio e doença de Crohn. Fisiopatologicamente, a albumina comporta-se como proteína de fase aguda negativa, com síntese suprimida por interleucina-6 e fator de necrose tumoral alfa, enquanto a alfa-1-glicoproteína ácida comporta-se como proteína de fase aguda positiva e pode duplicar ou triplicar sua concentração. Clinicamente, a implicação é assimétrica e frequentemente negligenciada: fármacos ácidos tornam-se mais livres e mais ativos, enquanto fármacos básicos, como a lidocaína e o propranolol, tornam-se mais ligados e menos ativos durante o processo inflamatório agudo.</li>
+</ul>
+
+<h2>Interações por deslocamento e o alerta sobre o índice terapêutico estreito</h2>
+
+<p>O alerta final dos slides é clinicamente preciso: fármacos com baixo índice terapêutico que se ligam fortemente a proteínas podem produzir efeitos tóxicos quando coadministrados. A lista apresentada — ciclosporina com 93%, varfarina com 99,5%, tolbutamida com 96%, nifedipino com 96%, indometacina com 90% e benzodiazepínicos acima de 90% — reúne exatamente os agentes em que a aritmética do deslocamento se torna perigosa. O raciocínio quantitativo que fundamenta o alerta merece ser explicitado, pois é ele que torna o fenômeno intuitivo: se um fármaco está 99% ligado, apenas 1% circula livre; o deslocamento de apenas um ponto percentual da fração ligada, fazendo-a cair para 98%, duplica a fração livre, elevando-a de 1% para 2%, o que equivale a dobrar instantaneamente a concentração ativa sem qualquer alteração da dose prescrita. Quanto maior a ligação basal, mais dramático é o efeito de um deslocamento aparentemente pequeno.</p>
+
+<p>Esse raciocínio, entretanto, exige uma qualificação que a literatura farmacológica contemporânea considera essencial e que raramente aparece nos resumos. Para a maioria dos fármacos, o aumento da fração livre é <b>transitório</b>: as moléculas recém-liberadas tornam-se imediatamente disponíveis para distribuição tecidual e para eliminação hepática e renal, de modo que a depuração total aumenta e a concentração livre retorna, em um ou dois intervalos de meia-vida, ao valor anterior — ainda que a concentração total medida pelo laboratório permaneça reduzida. As consequências clinicamente significativas concentram-se, portanto, em três situações específicas: fármacos de índice terapêutico estreito, em que mesmo elevações transitórias produzem toxicidade; fármacos de eliminação restrita à fração livre e de baixa taxa de extração hepática; e, sobretudo, interações em que o deslocamento se combina à <b>inibição enzimática simultânea</b>. O exemplo clássico é o da varfarina com fenilbutazona ou com sulfametoxazol-trimetoprima, em que a potencialização anticoagulante decorre muito mais da inibição do CYP2C9 que do deslocamento propriamente dito.</p>
+
+<p>Duas aplicações práticas derivam diretamente desse conjunto de conceitos. A primeira é a interpretação da <b>fenitoinemia na hipoalbuminemia</b>: como o laboratório dosa a concentração total e a fenitoína liga-se em cerca de 90% à albumina, pacientes hipoalbuminêmicos apresentam concentrações totais falsamente baixas apesar de fração livre normal ou elevada, razão pela qual se aplica a correção de Sheiner-Tozer antes de qualquer aumento de dose — conduta que previne intoxicações iatrogênicas por ajustes baseados em valores não corrigidos. A segunda é o <b>deslocamento da bilirrubina em neonatos</b>, em que sulfonamidas e ceftriaxona competem pelos sítios de ligação albumínicos, elevam a bilirrubina livre e, dada a imaturidade da barreira hematoencefálica, aumentam o risco de encefalopatia bilirrubínica, motivo pelo qual a ceftriaxona é contraindicada em recém-nascidos ictéricos.</p>
+
+<p class="ni closing">A ligação às proteínas plasmáticas constitui, assim, um mecanismo de regulação silenciosa da atividade farmacológica, que simultaneamente prolonga a permanência do fármaco no organismo, restringe sua distribuição, retarda sua eliminação e amortece as flutuações de concentração livre. Sua relevância clínica manifesta-se sempre que o equilíbrio se altera — pela queda da albumina na hepatopatia, na síndrome nefrótica, na senescência ou na inflamação aguda, ou pela competição entre fármacos de alta afinidade —, e o raciocínio correto diante dessas situações exige distinguir três planos: a concentração total que o laboratório informa, a concentração livre que determina o efeito e a depuração que, em geral, restabelece o equilíbrio.</p>
+
+<h2>Referências Bibliográficas</h2>
+<div class="refs">
+<p>BENET, L. Z.; HOENER, B. A. Changes in plasma protein binding have little clinical relevance. <b>Clinical Pharmacology &amp; Therapeutics</b>, v. 71, n. 3, p. 115-121, 2002.</p>
+<p>BRUNTON, L. L.; KNOLLMANN, B. C. (ed.). <b>Goodman &amp; Gilman: as bases farmacológicas da terapêutica</b>. 14. ed. Porto Alegre: AMGH, 2023. Cap. 2, p. 21-40.</p>
+<p>KATZUNG, B. G.; VANDERAH, T. W. (ed.). <b>Farmacologia básica e clínica</b>. 15. ed. Porto Alegre: AMGH, 2023. Cap. 3 e Cap. 60: Aspectos especiais da farmacologia geriátrica.</p>
+<p>RANG, H. P. <i>et al.</i> <b>Rang &amp; Dale: farmacologia</b>. 9. ed. Rio de Janeiro: Guanabara Koogan, 2020. Cap. 9 e Cap. 57: Interações medicamentosas.</p>
+<p>ROWLAND, M.; TOZER, T. N. <b>Clinical pharmacokinetics and pharmacodynamics: concepts and applications</b>. 5. ed. Philadelphia: Wolters Kluwer, 2020. Cap. 4 e Cap. 21.</p>
+</div>
+</section>
+<section class="blk" id="s6">
+<h1 class="q">6 — Biotransformação: citocromo P450, reações de fase I e fase II, indução e inibição enzimática</h1>
+
+<p>A biotransformação corresponde ao "conjunto de transformações químicas que os fármacos sofrem após a absorção", conforme definem os slides, e seu propósito biológico é inequívoco: converter moléculas lipossolúveis, que o organismo não consegue eliminar porque seriam reabsorvidas nos túbulos renais tão logo filtradas, em moléculas mais polares, mais hidrofílicas e mais hidrossolúveis, portanto facilmente excretáveis pela urina ou pela bile. Trata-se, em essência, de um sistema evolutivamente destinado ao manejo de xenobióticos vegetais e ambientais, do qual os fármacos modernos se tornaram substratos acidentais. O fígado concentra a maior parte dessa atividade, mas, como os slides registram, as reações também ocorrem no plasma, no pulmão, no intestino e, em menor grau, no rim, na pele e na placenta.</p>
+
+<p>Duas ressalvas ao enunciado geral precisam ser incorporadas desde o início, e os próprios slides as antecipam. A primeira é que, embora de modo geral a atividade farmacológica seja perdida ou reduzida, <b>muitas moléculas originam metabólitos farmacologicamente ativos</b>, de modo que a biotransformação nem sempre é sinônimo de inativação. A segunda, implícita na primeira, é que o metabólito pode ser mais tóxico que a molécula original, convertendo a via metabólica em mecanismo de lesão em vez de proteção. Essas duas possibilidades configuram três destinos distintos para uma molécula que entra no hepatócito — inativação, bioativação terapêutica e bioativação tóxica —, e distinguir entre eles é condição para compreender fenômenos clínicos tão diversos quanto a falha terapêutica do clopidogrel, a variabilidade analgésica da codeína e a hepatotoxicidade do paracetamol.</p>
+
+<h2>As fases I e II e a superfamília do citocromo P450</h2>
+
+<p>As reações metabólicas organizam-se classicamente em duas fases sequenciais, embora muitas moléculas sofram apenas uma delas. As <mark>reações de fase I</mark>, descritas nos slides como reações não sintéticas de oxidação, redução e hidrólise, introduzem ou expõem um grupamento funcional reativo — hidroxila, amina, carboxila ou sulfidrila — na molécula, aumentando discretamente sua polaridade e, sobretudo, preparando-a para a fase seguinte. As <mark>reações de fase II</mark>, descritas como reações sintéticas de conjugação, acoplam ao grupamento exposto uma molécula endógena volumosa e fortemente polar — ácido glicurônico, sulfato, acetato, glutationa, glicina ou um grupo metila —, produzindo, nas palavras do slide, metabólitos menos reativos e menos tóxicos e aumentando acentuadamente a polaridade, a hidrofilia e a hidrossolubilidade. A glicuronidação é a via quantitativamente mais importante, e sua imaturidade no recém-nascido explica acidentes históricos como a síndrome do bebê cinzento pelo cloranfenicol.</p>
+
+<p>O protagonista das reações de fase I é a superfamília do <mark>citocromo P450</mark>, abreviada CYP, descrita nos slides como ampla e diversificada família de proteínas responsáveis por oxidar grande número de substâncias para torná-las mais polares e hidrossolúveis. São hemoproteínas ancoradas na membrana do retículo endoplasmático liso do hepatócito — daí a designação de isoenzimas microssomais —, cuja denominação deriva do pico de absorção em 450 nanômetros exibido pelo complexo com monóxido de carbono. A nomenclatura segue lógica hierárquica que convém dominar: o numeral que segue a sigla indica a família, definida por identidade de sequência superior a 40%; a letra indica a subfamília, com identidade superior a 55%; e o numeral final identifica a isoforma individual. Assim, em CYP3A4 lê-se família 3, subfamília A, isoforma 4. Em termos quantitativos, as famílias 1, 2 e 3 respondem pelo metabolismo da quase totalidade dos fármacos, com destaque absoluto para a <b>CYP3A4</b>, responsável por aproximadamente metade de todas as reações oxidativas conhecidas e abundantemente expressa não apenas no fígado, mas também no enterócito, onde participa do efeito de primeira passagem.</p>
+
+<div class="fig">
+  <p class="cap"><b>Esquema 7.</b> Destinos metabólicos de uma molécula. Escolha um exemplo para percorrer sua rota pelas fases I e II e identificar se o resultado é inativação, ativação terapêutica ou formação de metabólito tóxico.</p>
+  <div class="ctrls" id="metBtns"></div>
+  <svg viewBox="0 0 900 300" role="img" aria-label="Rotas de fase I e fase II">
+    <rect x="18" y="96" width="150" height="70" rx="10" fill="#fff" stroke="#8b1a1a" stroke-width="1.8"/>
+    <text x="93" y="124" font-size="12.5" text-anchor="middle" font-weight="bold" id="mParent">Paracetamol</text>
+    <text x="93" y="144" font-size="11" text-anchor="middle" fill="#5d5d66">molécula administrada</text>
+
+    <rect x="258" y="30" width="180" height="70" rx="10" fill="#dce8f7" stroke="#1f5fa8" stroke-width="1.6"/>
+    <text x="348" y="54" font-size="12.5" text-anchor="middle" font-weight="bold" fill="#17497f">FASE I</text>
+    <text x="348" y="74" font-size="11" text-anchor="middle" fill="#17497f">oxidação, redução, hidrólise</text>
+    <text x="348" y="90" font-size="11" text-anchor="middle" fill="#17497f" id="mEnz">CYP2E1 / CYP3A4</text>
+
+    <rect x="258" y="170" width="180" height="70" rx="10" fill="#ece3f7" stroke="#6a3fa0" stroke-width="1.6"/>
+    <text x="348" y="194" font-size="12.5" text-anchor="middle" font-weight="bold" fill="#4f2d7a">FASE II</text>
+    <text x="348" y="214" font-size="11" text-anchor="middle" fill="#4f2d7a">conjugação</text>
+    <text x="348" y="230" font-size="11" text-anchor="middle" fill="#4f2d7a" id="mConj">glicuronidação e sulfatação</text>
+
+    <rect x="528" y="30" width="190" height="70" rx="10" fill="#f9dedc" stroke="#b3261e" stroke-width="1.6"/>
+    <text x="623" y="54" font-size="12.5" text-anchor="middle" font-weight="bold" fill="#8c1d18" id="mM1Lab">Metabólito reativo</text>
+    <text x="623" y="76" font-size="11.5" text-anchor="middle" fill="#8c1d18" id="mM1">NAPQI</text>
+
+    <rect x="528" y="170" width="190" height="70" rx="10" fill="#dff1e6" stroke="#2e7d4f" stroke-width="1.6"/>
+    <text x="623" y="194" font-size="12.5" text-anchor="middle" font-weight="bold" fill="#1f5c39">Conjugado polar</text>
+    <text x="623" y="216" font-size="11.5" text-anchor="middle" fill="#1f5c39" id="mM2">glicuronídeo e sulfato</text>
+
+    <rect x="760" y="100" width="124" height="70" rx="10" fill="#fff" stroke="#8b7f78" stroke-width="1.5"/>
+    <text x="822" y="128" font-size="12" text-anchor="middle" font-weight="bold">Excreção</text>
+    <text x="822" y="147" font-size="11" text-anchor="middle" fill="#5d5d66">urina e bile</text>
+
+    <path d="M168,116 Q210,116 252,74" stroke="#1f5fa8" stroke-width="2.2" marker-end="url(#ar1)" fill="none"/>
+    <path d="M168,146 Q210,146 252,196" stroke="#6a3fa0" stroke-width="2.2" marker-end="url(#ar1)" fill="none"/>
+    <path d="M438,64 H522" stroke="#b3261e" stroke-width="2.2" marker-end="url(#ar1)" fill="none"/>
+    <path d="M438,204 H522" stroke="#2e7d4f" stroke-width="2.2" marker-end="url(#ar1)" fill="none"/>
+    <path d="M718,204 Q760,204 790,176" stroke="#8b7f78" stroke-width="2" marker-end="url(#ar1)" fill="none"/>
+    <path d="M718,64 Q760,64 790,96" stroke="#8b7f78" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#ar1)" fill="none"/>
+    <text x="18" y="276" font-size="11.5" fill="#8b7f78">Nem toda molécula percorre as duas fases: algumas sofrem apenas conjugação, outras apenas oxidação.</text>
+  </svg>
+  <div class="readout" id="ro7">Escolha um exemplo metabólico.</div>
+</div>
+
+<h2>Interferências entre fármacos: inibição e indução enzimática</h2>
+
+<p>A consequência clínica mais relevante da existência de um sistema enzimático compartilhado por centenas de substratos é a possibilidade de que um fármaco altere o metabolismo de outro. Os slides resumem corretamente os dois sentidos possíveis dessa interferência, e a distinção entre eles organiza boa parte da prática de prescrição segura.</p>
+
+<ul class="b">
+<li><b>Inibição enzimática:</b> ocorre quando um fármaco impede a atividade de uma enzima, geralmente do complexo CYP450, impedindo que ela metabolize outro fármaco. Mecanisticamente, a inibição pode ser competitiva, quando dois substratos disputam o mesmo sítio ativo, ou irreversível, quando o inibidor se liga covalentemente à enzima e exige nova síntese proteica para restaurar a função. Cineticamente, o efeito é <mark>rápido</mark>, instalando-se em horas, tão logo o inibidor atinja concentrações plasmáticas suficientes. Clinicamente, as consequências anotadas nos slides são o risco de intoxicação e o aumento da concentração e da meia-vida do fármaco afetado. São inibidores potentes de uso corrente os antifúngicos azólicos, os macrolídeos, o ritonavir, a fluoxetina, a amiodarona e o suco de toranja, que inibe seletivamente a CYP3A4 intestinal.</li>
+<li><b>Indução enzimática:</b> ocorre quando um fármaco estimula o fígado a produzir mais enzimas — ou, na analogia dos slides, quando o fígado aumenta sua equipe de limpeza. Mecanisticamente, o indutor ativa receptores nucleares, notadamente o receptor de pregnano X e o receptor constitutivo de androstano, que promovem a transcrição dos genes correspondentes e aumentam a quantidade de enzima disponível. Cineticamente, o efeito é <mark>lento</mark>, requerendo dias a semanas para se estabelecer e período equivalente para se dissipar após a suspensão, já que depende de síntese e degradação proteicas. Clinicamente, as consequências registradas nos slides são a redução da eficácia do fármaco afetado e a diminuição de sua meia-vida. São indutores clássicos a rifampicina, a carbamazepina, a fenitoína, o fenobarbital, a erva-de-são-joão e o tabagismo, este último sobre a CYP1A2.</li>
+</ul>
+
+<div class="fig">
+  <p class="cap"><b>Esquema 8.</b> Concentração plasmática em doses repetidas sob inibição e sob indução enzimática — a representação gráfica reproduzida nos slides. Ajuste o momento de introdução do segundo fármaco e observe a defasagem temporal entre os dois fenômenos.</p>
+  <div class="ctrls" id="indBtns"></div>
+  <div class="slider-row"><label for="startR">Introdução do segundo fármaco (hora)</label><input type="range" id="startR" min="24" max="120" step="6" value="72"><output id="startOut">72 h</output></div>
+  <svg viewBox="0 0 900 330" role="img" aria-label="Curvas de concentração sob inibição e indução">
+    <line x1="70" y1="20" x2="70" y2="268" stroke="#8b7f78" stroke-width="1.4"/>
+    <line x1="70" y1="268" x2="870" y2="268" stroke="#8b7f78" stroke-width="1.4"/>
+    <text x="24" y="150" font-size="12" fill="#5d5d66" transform="rotate(-90 24 150)" text-anchor="middle">Concentração plasmática</text>
+    <text x="470" y="300" font-size="12" fill="#5d5d66" text-anchor="middle">Tempo (horas) — doses regulares a cada 8 horas</text>
+    <g id="grid"></g>
+    <polyline id="curveBase" fill="none" stroke="#8b7f78" stroke-width="1.6" stroke-dasharray="4 4" points=""/>
+    <polyline id="curveMain" fill="none" stroke="#8b1a1a" stroke-width="2.4" points=""/>
+    <line id="startLine" x1="0" y1="20" x2="0" y2="268" stroke="#1f5fa8" stroke-width="1.6" stroke-dasharray="5 4"/>
+    <text id="startLbl" x="0" y="16" font-size="11.5" fill="#1f5fa8" text-anchor="middle">2º fármaco</text>
+    <text x="106" y="42" font-size="12" fill="#8b7f78">— — sem interação</text>
+    <text x="106" y="62" font-size="12" fill="#8b1a1a" id="legend">—— com inibidor</text>
+  </svg>
+  <div class="readout" id="ro8">Escolha o cenário.</div>
+</div>
+
+<p>Três situações clínicas ilustram por que essa distinção temporal é mandatória na prática. A primeira é a <b>interação entre rifampicina e contraceptivos hormonais</b>: por indução da CYP3A4, o tuberculostático reduz as concentrações de etinilestradiol e progestágeno a ponto de comprometer a eficácia contraceptiva, impondo método adicional durante todo o tratamento e por período de até quatro semanas após seu término, dada a persistência da indução. A segunda é a <b>interação entre macrolídeos ou azólicos e estatinas</b>: a inibição da CYP3A4 eleva de modo abrupto as concentrações de sinvastatina e atorvastatina, com risco de miopatia e rabdomiólise, razão pela qual se recomenda suspender temporariamente a estatina durante cursos curtos de claritromicina. A terceira é a <b>suspensão de um indutor</b>, situação de risco frequentemente esquecida: um paciente estabilizado com dose elevada de imunossupressor sob efeito da carbamazepina sofrerá elevação progressiva das concentrações ao longo das semanas seguintes à retirada do indutor, com toxicidade tardia e aparentemente inexplicada.</p>
+
+<h2>Variabilidade genética e implicações para o uso racional</h2>
+
+<p>A velocidade do metabolismo não depende apenas de interações medicamentosas, mas também do genótipo individual. O polimorfismo da <b>CYP2D6</b>, responsável pelo metabolismo de aproximadamente um quarto dos fármacos de uso clínico, distribui a população em metabolizadores lentos, intermediários, rápidos e ultrarrápidos, com repercussões opostas conforme o substrato seja uma molécula ativa ou um pró-fármaco. No caso da codeína, que depende da CYP2D6 para converter-se em morfina, metabolizadores lentos experimentam analgesia insuficiente, enquanto metabolizadores ultrarrápidos produzem morfina em excesso e correm risco de depressão respiratória — circunstância que motivou restrições regulatórias ao uso de codeína em crianças e em lactantes. Fenômeno análogo ocorre com o clopidogrel, pró-fármaco ativado pela CYP2C19, cujos alelos de perda de função associam-se a menor inibição plaquetária e maior taxa de eventos trombóticos após implante de <i>stent</i> coronariano.</p>
+
+<p>Cabe ainda mencionar dois fenômenos que completam o quadro da biotransformação e frequentemente são omitidos em resumos. O primeiro é a <b>circulação êntero-hepática</b>: conjugados glicuronídeos excretados na bile podem ser hidrolisados pela betaglicuronidase da microbiota intestinal, liberando o fármaco original, que é então reabsorvido e devolvido à circulação portal. Esse ciclo prolonga a meia-vida de substâncias como estrogênios, morfina e micofenolato, e sua interrupção por antibióticos de amplo espectro constitui mecanismo clássico, embora de magnitude debatida, de falha de contraceptivos orais. O segundo é a existência de <b>vias não dependentes do citocromo P450</b>, entre as quais se destacam as esterases plasmáticas, que hidrolisam a succinilcolina e o remifentanil em minutos, a monoaminoxidase, a álcool-desidrogenase e as enzimas de fase II, cuja relevância é desproporcional à atenção que recebem.</p>
+
+<p class="ni closing">A biotransformação encerra o percurso farmacocinético convertendo moléculas lipossolúveis em produtos excretáveis, mas faz muito mais do que inativar: ela ativa pró-fármacos, gera metabólitos reativos capazes de lesar o próprio fígado e constitui o principal palco das interações medicamentosas clinicamente relevantes. Dominar seus três eixos — a sequência das fases I e II, a arquitetura da superfamília do citocromo P450 e a assimetria temporal entre inibição e indução — permite ao prescritor antecipar o que acontecerá quando um novo medicamento for acrescentado a um esquema estável, seja pela elevação abrupta das concentrações sob inibição, seja pela perda silenciosa de eficácia sob indução, seja pela toxicidade tardia que sucede à retirada do indutor.</p>
+
+<h2>Referências Bibliográficas</h2>
+<div class="refs">
+<p>BRUNTON, L. L.; KNOLLMANN, B. C. (ed.). <b>Goodman &amp; Gilman: as bases farmacológicas da terapêutica</b>. 14. ed. Porto Alegre: AMGH, 2023. Cap. 5: Metabolismo de fármacos, p. 85-102.</p>
+<p>KATZUNG, B. G.; VANDERAH, T. W. (ed.). <b>Farmacologia básica e clínica</b>. 15. ed. Porto Alegre: AMGH, 2023. Cap. 4: Biotransformação de fármacos, p. 59-76.</p>
+<p>LYNCH, T.; PRICE, A. The effect of cytochrome P450 metabolism on drug response, interactions, and adverse effects. <b>American Family Physician</b>, v. 76, n. 3, p. 391-396, 2007.</p>
+<p>RANG, H. P. <i>et al.</i> <b>Rang &amp; Dale: farmacologia</b>. 9. ed. Rio de Janeiro: Guanabara Koogan, 2020. Cap. 10: Metabolismo e eliminação de fármacos, p. 129-142.</p>
+<p>ROBERTSON, S. M.; PENZAK, S. R. Drug interactions. <i>In</i>: ATKINSON JR., A. J. <i>et al.</i> (ed.). <b>Principles of clinical pharmacology</b>. 2. ed. Burlington: Elsevier Academic Press, 2007. p. 229-247.</p>
+</div>
+</section>
+<section class="blk" id="s7">
+<h1 class="q">7 — Quadro integrador e resumo</h1>
+
+<p>As quatro etapas estudadas não operam isoladamente, mas em permanente competição: enquanto a absorção adiciona moléculas ao compartimento central, a distribuição as subtrai temporariamente, a ligação proteica as imobiliza de modo reversível e a biotransformação as converte em produtos excretáveis. A concentração plasmática observada em qualquer instante é o saldo líquido dessa disputa, e a variabilidade interindividual da resposta terapêutica decorre, em grande medida, de diferenças quantitativas em cada um desses processos. O quadro a seguir reúne, em um único eixo comparativo, o determinante físico-químico dominante de cada etapa, a variável clínica que a modifica e a consequência prática mais relevante.</p>
+
+<table>
+<caption>Quadro Integrador: etapas farmacocinéticas vs. determinante dominante vs. repercussão clínica</caption>
+<thead><tr><th style="width:16%">Etapa</th><th style="width:22%">Determinante físico-químico dominante</th><th style="width:28%">Variáveis clínicas que a modificam</th><th>Repercussão prática principal</th></tr></thead>
+<tbody>
+<tr><td class="grp">Absorção</td><td>Lipossolubilidade da fração não ionizada (log D); dissolução da forma farmacêutica.</td><td>Via de administração; perfusão do sítio; esvaziamento gástrico; alimento; primeira passagem hepática; efluxo intestinal.</td><td>Define a biodisponibilidade e, portanto, a diferença entre a dose oral e a dose intravenosa do mesmo fármaco.</td></tr>
+<tr><td class="grp">Distribuição</td><td>Lipofilia; peso molecular; carga em pH fisiológico.</td><td>Débito cardíaco regional; composição corporal; barreiras especializadas; transportadores de efluxo.</td><td>Determina o volume aparente de distribuição, a dose de ataque e a viabilidade da hemodiálise na intoxicação.</td></tr>
+<tr><td class="grp">Ligação proteica</td><td>Afinidade por albumina (ácidos) ou alfa-1-glicoproteína ácida (bases).</td><td>Hepatopatia; síndrome nefrótica; senescência; reação de fase aguda; competição entre fármacos.</td><td>Governa a fração livre ativa; impõe correção da dosagem sérica na hipoalbuminemia e cautela com índice terapêutico estreito.</td></tr>
+<tr><td class="grp">Biotransformação</td><td>Presença de grupamentos oxidáveis ou conjugáveis.</td><td>Genótipo das isoformas CYP; inibidores e indutores; idade; função hepática; tabagismo e dieta.</td><td>Define a meia-vida e constitui o principal mecanismo de interações medicamentosas clinicamente relevantes.</td></tr>
+</tbody>
+</table>
+
+<h2>Resumo</h2>
+
+<ol class="sum">
+<li><b>Arquitetura conceitual.</b> Farmacocinética é o que o organismo faz com o fármaco (absorção, distribuição, biotransformação, excreção); farmacodinâmica é o que o fármaco faz com o organismo (alvo, afinidade, efeito). A cadeia vai de dose administrada → concentração sistêmica → concentração no sítio de ação → efeito → resposta clínica, com desfecho em eficácia ou toxicidade. A farmacocinética depende de propriedades físico-químicas; a farmacodinâmica, de reconhecimento molecular.</li>
+<li><b>Absorção.</b> Travessia de barreiras — essencialmente a bicamada lipídica — por difusão passiva (predominante), difusão facilitada, transporte ativo, filtração e endocitose, com efluxo ativo em sentido inverso. Biodisponibilidade = taxa e extensão com que o fármaco alcança a circulação sistêmica; F = AUC<sub>via</sub>/AUC<sub>IV</sub> corrigida pela dose. Vias intravenosa e intra-arterial: F = 100%, sem fase de absorção. Primeira passagem hepática acomete estômago e intestino delgado; sublingual, retal parcial, inalatória, transdérmica, intramuscular e subcutânea a contornam. Determinantes da velocidade: fluxo sanguíneo local (diretamente proporcional); número de barreiras (inversamente proporcional); superfície absortiva; pH e pKa. Formas farmacêuticas: solução &gt; suspensão &gt; cápsula &gt; comprimido, porque a etapa limitante é a dissolução; liberação modificada não deve ser triturada.</li>
+<li><b>Coeficientes.</b> Log P = lipossolubilidade da forma neutra (octanol/água). Log D = razão de todas as formas, ionizadas e não ionizadas, em pH definido, habitualmente 7,4; log D ≤ log P sempre. Faixa ótima para absorção oral: log D entre 1 e 3.
+  <ul class="c">
+    <li><b>Atenolol</b> — log P ≈ +0,16; log D<sub>7,4</sub> ≈ −2,0 (pKa 9,6; base protonada em 99%): F de 50% a 60%, baixa penetração central. <i>Os valores do slide (−0,16 e −0,63) requerem correção.</i></li>
+    <li><b>Diazepam</b> — log P ≈ log D ≈ +2,9 (pKa 3,4, praticamente neutro): absorção rápida, entrada veloz no sistema nervoso central, redistribuição para gordura.</li>
+    <li><b>Morfina (0,87) × heroína (1,58)</b> — a acetilação das hidroxilas eleva a lipofilia; a heroína é pró-fármaco convertido a morfina no encéfalo: mesma farmacodinâmica, cinética distinta.</li>
+    <li><b>Betametasona fosfato × dipropionato</b> — éster hidrossolúvel de ação imediata associado a éster lipossolúvel de depósito, gerando perfil bifásico.</li>
+  </ul>
+</li>
+<li><b>Distribuição.</b> Passagem reversível do sangue para interstício e células. Órgãos muito perfundidos equilibram-se em minutos; gordura, em dias — daí a redistribuição que desperta o paciente anestesiado. V<sub>d</sub> = quantidade total/concentração plasmática; dose de ataque = V<sub>d</sub> × concentração-alvo; V<sub>d</sub> elevado inviabiliza a hemodiálise. Reservatórios: gordura (lipofílicos), músculo (digoxina), osso (tetraciclinas). Barreira hematoencefálica = capilares não fenestrados + junções oclusivas + membrana basal + astrócitos + glicoproteína P; área postrema é desprovida de barreira. Barreira placentária deixa passar moléculas lipossolúveis, neutras e abaixo de 500 dáltons — não é obstáculo confiável.
+  <ul class="c">
+    <li><b>Bromoprida</b> — atravessa a barreira; tremores, acatisia e distonias, mais frequentes em crianças e adultos jovens; contraindicada abaixo de 1 ano; risco gestacional C.</li>
+    <li><b>Domperidona</b> — ação periférica; o fator decisivo é o efluxo pela glicoproteína P, e não apenas a massa molecular; risco gestacional B; desde 2019 sem indicação europeia abaixo de 12 anos ou 35 kg; contraindicada com inibidores de CYP3A4 pelo risco de prolongamento do intervalo QT.</li>
+  </ul>
+</li>
+<li><b>Ligação às proteínas plasmáticas.</b> Albumina liga ácidos; alfa-1-glicoproteína ácida liga bases. Só a fração livre age, distribui-se, é filtrada e é metabolizada. Alta ligação → menor eliminação → maior duração; baixa ligação → eliminação rápida → efeito breve. Reduzem a ligação: hepatopatia grave, síndrome nefrótica, senescência e reação de fase aguda (albumina é proteína de fase aguda negativa; alfa-1-glicoproteína ácida, positiva). Deslocamento de fármacos muito ligados e de índice terapêutico estreito — ciclosporina 93%, varfarina 99,5%, tolbutamida 96%, nifedipino 96%, indometacina 90%, benzodiazepínicos acima de 90% — pode duplicar a fração livre; o efeito costuma ser transitório, salvo quando há inibição enzimática concomitante. Aplicações: correção de Sheiner-Tozer para fenitoína na hipoalbuminemia; risco de encefalopatia bilirrubínica no neonato.</li>
+<li><b>Biotransformação.</b> Converte moléculas lipossolúveis em polares, hidrofílicas e hidrossolúveis. Ocorre no plasma, pulmão, intestino e principalmente no fígado. Fase I: reações não sintéticas de oxidação, redução e hidrólise, que preparam para a fase II. Fase II: conjugação com ácido glicurônico, sulfato ou acetato; metabólitos menos reativos e menos tóxicos. CYP450: hemoproteínas microssomais; nomenclatura família-subfamília-isoforma; CYP3A4 responde por cerca de metade das oxidações. Três destinos: inativação, ativação de pró-fármaco (codeína, clopidogrel, enalapril) e bioativação tóxica (paracetamol → NAPQI).
+  <ul class="c">
+    <li><b>Inibição</b> — instala-se em horas; eleva concentração e meia-vida; risco de intoxicação. Azólicos, macrolídeos, ritonavir, fluoxetina, amiodarona, suco de toranja.</li>
+    <li><b>Indução</b> — instala-se e desaparece em dias a semanas; reduz eficácia e meia-vida. Rifampicina, carbamazepina, fenitoína, fenobarbital, erva-de-são-joão, tabagismo.</li>
+  </ul>
+</li>
+</ol>
+
+<div class="note">
+<p><b>Limite deste referencial.</b> O conteúdo acima cobre as páginas 1 a 28 do material, que tratam exclusivamente da farmacocinética até a biotransformação. Os objetivos de aprendizagem propostos abrangem ainda a <b>excreção</b>, a <b>relação dose-resposta</b> — curvas graduais e quantais, potência, eficácia máxima, DE<sub>50</sub>, DL<sub>50</sub> e índice terapêutico — e os <b>alvos moleculares</b> — receptores acoplados à proteína G, canais iônicos, receptores com atividade enzimática, receptores nucleares, enzimas e transportadores —, além dos conceitos de agonismo pleno, parcial e inverso, antagonismo competitivo e não competitivo, dessensibilização e regulação de receptores. Esses temas correspondem às páginas seguintes dos slides e podem ser desenvolvidos em continuação a este documento.</p>
+</div>
+</section>
+</main>
+<script>
+"use strict";
+var $=function(i){return document.getElementById(i)};
+function nf(x,d){return x.toFixed(d===undefined?2:d).replace(".",",")}
+function mkBtns(host,items,cb){
+  var h=$(host); if(!h) return;
+  items.forEach(function(it,i){
+    var b=document.createElement("button");
+    b.className="pill"; b.type="button"; b.textContent=it.label;
+    b.setAttribute("aria-pressed", i===0?"true":"false");
+    b.addEventListener("click",function(){
+      Array.prototype.forEach.call(h.children,function(c){c.setAttribute("aria-pressed","false")});
+      b.setAttribute("aria-pressed","true"); cb(it);
+    });
+    h.appendChild(b);
+  });
+  cb(items[0]);
+}
+
+/* ---------- Esquema 1 ---------- */
+var T1={
+ dose:"<b>Dose administrada.</b> Quantidade que entra pela porta de entrada do organismo. Ainda não é dose disponível: entre ela e o efeito há perdas por dissolução incompleta, degradação, metabolismo pré-sistêmico e efluxo intestinal.",
+ abs:"<b>Absorção e primeira passagem.</b> O fármaco atravessa a mucosa e segue pela veia porta até o fígado, onde parte é metabolizada antes de alcançar o coração esquerdo. Fármacos de alta extração hepática podem perder mais de 90% da dose nessa travessia.",
+ circ:"<b>Concentração na circulação sistêmica.</b> Primeiro ponto mensurável da cadeia e base de todo cálculo farmacocinético. Corresponde à fração que sobreviveu à absorção, e é com ela que se define a biodisponibilidade.",
+ dist:"<b>Distribuição.</b> Saída reversível do plasma para o interstício e as células. Órgãos muito perfundidos equilibram-se em minutos; o tecido adiposo, em dias, funcionando como reservatório que devolve o fármaco lentamente.",
+ meta:"<b>Biotransformação e excreção.</b> O fígado converte a molécula em metabólitos mais polares e o rim, a bile, o pulmão e a pele os eliminam. Esta etapa define a meia-vida e é o palco principal das interações medicamentosas.",
+ alvo:"<b>Concentração no local de ação.</b> Fronteira entre os dois domínios: até aqui o organismo agiu sobre o fármaco; a partir daqui o fármaco age sobre o organismo. Só a fração livre que alcançou o tecido participa.",
+ efe:"<b>Efeito farmacológico.</b> Consequência bioquímica imediata da ligação ao alvo — bloqueio de um receptor, inibição de uma enzima, abertura de um canal. Depende da afinidade e da densidade de receptores disponíveis.",
+ resp:"<b>Resposta clínica.</b> Tradução do efeito molecular em desfecho observável: queda da pressão arterial, analgesia, controle da crise convulsiva. É o que o paciente percebe e o que o prescritor mede.",
+ efic:"<b>Eficácia.</b> Resposta desejada obtida dentro da janela terapêutica. Exige que a concentração no sítio de ação permaneça acima do limiar eficaz e abaixo do limiar tóxico pelo tempo necessário.",
+ tox:"<b>Toxicidade.</b> Resposta indesejada por concentração excessiva, por ação em alvos não pretendidos ou por metabólito reativo. Frequentemente tem origem farmacocinética — acúmulo — e não erro de indicação."
+};
+Array.prototype.forEach.call(document.querySelectorAll("[data-k]"),function(g){
+  g.addEventListener("click",function(){ $("ro1").innerHTML=T1[g.getAttribute("data-k")]; });
+});
+
+/* ---------- Esquema 2: vias ---------- */
+var ROUTES=[
+ {label:"Intravenosa",f:100,on:["gIV","pIV"],dot:[450,104],
+  txt:"<b>Intravenosa.</b> Única via sem fase de absorção: a dose é depositada diretamente no compartimento vascular, e a biodisponibilidade é, por definição, de 100%. Início de ação imediato e dose integralmente previsível — motivo pelo qual é mandatória no choque, na parada cardiorrespiratória e sempre que a perfusão periférica está comprometida. Em contrapartida, não há possibilidade de reverter a administração."},
+ {label:"Oral",f:45,on:["gGut","pGut","gLiver","pLiver"],dot:[332,348],
+  txt:"<b>Oral.</b> Percorre o maior número de barreiras: dissolução, mucosa gástrica e intestinal, enterócito com CYP3A4 e glicoproteína P, veia porta e fígado. A biodisponibilidade é variável e frequentemente baixa — aqui representada em torno de 45%, valor típico de fármacos de extração hepática intermediária. É a via mais cômoda, mais segura e mais barata, mas a menos previsível."},
+ {label:"Sublingual",f:80,on:["gMuc","pMuc"],dot:[74,243],
+  txt:"<b>Sublingual.</b> A mucosa sublingual é delgada e muito vascularizada, e suas veias drenam para a circulação sistêmica sem passar pelo fígado. Escapa, portanto, da primeira passagem, o que produz início de ação em poucos minutos e preserva fármacos de alta extração hepática — fundamento do uso da nitroglicerina na angina. Exige molécula lipofílica, potente e de sabor tolerável."},
+ {label:"Retal",f:60,on:["gMuc","pMuc","gLiver","pLiver"],dot:[74,243],
+  txt:"<b>Retal.</b> Escape parcial da primeira passagem: as veias retais inferiores drenam para a circulação sistêmica, enquanto a veia retal superior segue para o sistema porta. Estima-se que cerca de metade da dose absorvida evite o fígado, proporção que varia conforme a profundidade de inserção. Útil em vômitos, convulsão e em pacientes incapazes de deglutir; absorção irregular."},
+ {label:"Intramuscular",f:85,on:["gPar","pPar"],dot:[676,243],
+  txt:"<b>Intramuscular.</b> O músculo é bem perfundido e permite absorção relativamente rápida de soluções aquosas, além de admitir formulações de depósito oleosas com liberação por semanas. Evita a primeira passagem. A grande limitação é a dependência do fluxo sanguíneo muscular: no choque e na hipotermia a absorção torna-se errática e imprevisível."},
+ {label:"Subcutânea",f:80,on:["gPar","pPar"],dot:[676,243],
+  txt:"<b>Subcutânea.</b> Tecido pouco vascularizado, o que resulta em absorção mais lenta e sustentada que a intramuscular — característica explorada por insulinas, heparinas de baixo peso molecular e implantes. Evita a primeira passagem. Admite apenas pequenos volumes e substâncias não irritantes, sob risco de necrose local."},
+ {label:"Inalatória",f:90,on:["gPar","pPar"],dot:[676,243],
+  txt:"<b>Inalatória.</b> A superfície alveolar é extensa e separada do sangue por um epitélio extremamente delgado, o que produz absorção quase imediata, comparável à intravenosa em velocidade. Permite ainda ação tópica pulmonar com dose sistêmica mínima, princípio dos broncodilatadores e corticosteroides inalatórios. Depende criticamente da técnica de uso do dispositivo."},
+ {label:"Transdérmica",f:70,on:["gMuc","pMuc"],dot:[74,243],
+  txt:"<b>Transdérmica.</b> O estrato córneo é a barreira mais restritiva do organismo e só é vencido por moléculas muito lipofílicas, de baixo peso molecular e alta potência — fentanila, nicotina, estradiol, escopolamina. Evita a primeira passagem e fornece liberação constante por dias, com a vantagem da remoção imediata em caso de efeito adverso."}
+];
+var ALLG=["gIV","pIV","gGut","pGut","gLiver","pLiver","gMuc","pMuc","gPar","pPar"];
+mkBtns("rtBtns",ROUTES.map(function(r){return {label:r.label,r:r}}),function(it){
+  var r=it.r;
+  ALLG.forEach(function(id){var e=$(id); if(e) e.setAttribute("opacity",".28")});
+  r.on.forEach(function(id){var e=$(id); if(e) e.setAttribute("opacity","1")});
+  var d=$("dot"); d.setAttribute("cx",r.dot[0]); d.setAttribute("cy",r.dot[1]);
+  $("fTxt").textContent=r.f+"%";
+  $("fBar").setAttribute("width",String(220*r.f/100));
+  $("ro2").innerHTML=r.txt+" <i>Valores de biodisponibilidade são ilustrativos e variam amplamente conforme o fármaco.</i>";
+});
+
+/* ---------- Esquema 3: formas ---------- */
+var FORMS=[
+ {label:"Comprimido",s:0,x:95,txt:"<b>Comprimido.</b> Inicia no ponto mais distante da absorção: precisa desintegrar-se em grânulos, desagregar-se em partículas finas e só então dissolver-se. Comprimidos revestidos ou compactados sob alta pressão acrescentam etapas. É a forma mais estável, mais barata e de dosagem mais precisa, porém a de início de ação mais lento."},
+ {label:"Cápsula",s:1,x:271,txt:"<b>Cápsula.</b> O invólucro de gelatina rompe-se em minutos no estômago e libera pó ou grânulos já subdivididos, poupando a etapa de desintegração do comprimido. Mascara sabor e odor desagradáveis e permite formulações líquidas oleosas, mas é mais cara e mais sensível à umidade."},
+ {label:"Suspensão",s:2,x:447,txt:"<b>Suspensão.</b> As partículas sólidas já se encontram finamente dispersas no veículo, restando apenas a dissolução. A grande área de superfície acelera essa etapa. Exige agitação antes do uso, sob pena de dose incorreta — erro frequente e clinicamente relevante em pediatria."},
+ {label:"Solução",s:3,x:623,txt:"<b>Solução.</b> O fármaco já está dissolvido em nível molecular e pode ser absorvido assim que alcança a membrana: nenhuma etapa da cascata permanece. É a forma oral de absorção mais rápida e mais uniforme, com a desvantagem da menor estabilidade química e da dificuldade de mascarar sabor."}
+];
+mkBtns("formBtns",FORMS.map(function(f){return {label:f.label,f:f}}),function(it){
+  var f=it.f;
+  for(var i=0;i<4;i++){
+    var g=$("stg"+i); if(!g) continue;
+    g.setAttribute("opacity", i<f.s ? ".3" : "1");
+  }
+  $("entryArrow").setAttribute("d","M"+f.x+",150 V130");
+  var t=$("entry"); t.setAttribute("x",f.x); t.setAttribute("text-anchor","middle");
+  $("ro3").innerHTML=f.txt;
+});
+
+/* ---------- Esquema 4: logP / logD ---------- */
+var DRUGS=[
+ {label:"Atenolol",name:"Atenolol",cls:"betabloqueador cardiosseletivo",logP:0.16,pka:9.6,base:true,
+  txt:"<b>Atenolol.</b> Base fraca com pKa de 9,6: em pH 7,4 cerca de 99,4% das moléculas estão protonadas, e o log D despenca para perto de −2,0, cerca de cem vezes abaixo do log P. Daí decorrem biodisponibilidade oral de 50% a 60%, ligação proteica inferior a 10%, eliminação renal sob forma inalterada e penetração mínima no sistema nervoso central, com menos pesadelos e alterações do humor que o propranolol."},
+ {label:"Diazepam",name:"Diazepam",cls:"benzodiazepínico",logP:2.82,pka:3.4,base:true,
+  txt:"<b>Diazepam.</b> Base extremamente fraca: em pH 7,4 está praticamente todo neutro, e por isso log D e log P quase coincidem. A alta lipofilia resultante explica a absorção oral rápida e completa, a ligação proteica acima de 95%, a entrada veloz no sistema nervoso central — base do uso no estado de mal epiléptico — e a redistribuição para o tecido adiposo, que encerra o efeito da dose única e favorece acúmulo no uso crônico."},
+ {label:"Morfina",name:"Morfina",cls:"agonista opioide",logP:0.87,pka:8.0,base:true,
+  txt:"<b>Morfina.</b> Base com pKa próximo de 8,0: em pH fisiológico cerca de 80% está ionizada, e o log D efetivo cai para perto de 0,2. A consequência clínica é a entrada lenta no encéfalo, com pico de efeito analgésico em 15 a 30 minutos mesmo por via intravenosa — defasagem conhecida como histerese, que exige paciência na titulação e explica acidentes por redoses precoces."},
+ {label:"Heroína",name:"Heroína (diacetilmorfina)",cls:"pró-fármaco opioide",logP:1.58,pka:7.6,base:true,
+  txt:"<b>Heroína.</b> A acetilação de duas hidroxilas da morfina mascara sítios polares e eleva o log P de 0,87 para 1,58, aumentando várias vezes a velocidade de travessia da barreira hematoencefálica. A molécula é praticamente desprovida de afinidade pelo receptor opioide: atua como pró-fármaco, sendo desacetilada no encéfalo a 6-monoacetilmorfina e a morfina. Mesmo alvo, mesmo mecanismo — apenas chegada mais rápida, o que responde pelo potencial de abuso."},
+ {label:"Ácido acetilsalicílico",name:"Ácido acetilsalicílico",cls:"anti-inflamatório não esteroidal",logP:1.19,pka:3.5,base:false,
+  txt:"<b>Ácido acetilsalicílico.</b> Ácido fraco com pKa de 3,5: comporta-se de modo espelhado às bases. No pH ácido do estômago permanece não ionizado e atravessa a mucosa gástrica, onde o pH intracelular neutro o ioniza e o aprisiona, contribuindo para a lesão da mucosa. Em pH 7,4 encontra-se quase totalmente ionizado, com log D negativo. Esse mesmo princípio fundamenta a alcalinização urinária na intoxicação por salicilatos."}
+];
+var curDrug=DRUGS[0];
+function fracNeutral(d,ph){
+  var e = d.base ? (d.pka-ph) : (ph-d.pka);
+  return 1/(1+Math.pow(10,e));
+}
+function drawPartition(logD){
+  var D=Math.pow(10,logD), fo=D/(1+D), N=26, no=Math.round(N*fo);
+  var o="",a="",i,x,y,s=1;
+  function rnd(){ s=(s*9301+49297)%233280; return s/233280; }
+  for(i=0;i<N;i++){
+    if(i<no){ x=56+rnd()*168; y=58+rnd()*66; o+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="5" fill="#8b1a1a" opacity=".85"/>'; }
+    else { x=56+rnd()*168; y=152+rnd()*96; a+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="5" fill="#1f5fa8" opacity=".8"/>'; }
+  }
+  $("dotsOct").innerHTML=o; $("dotsAq").innerHTML=a;
+}
+function updDrug(){
+  var ph=parseFloat($("phR").value), d=curDrug;
+  var fn=fracNeutral(d,ph), logD=d.logP+Math.log10(fn);
+  $("phOut").textContent=nf(ph,1);
+  $("dName").textContent=d.name;
+  $("dClass").textContent=d.cls;
+  $("dLogP").textContent=(d.logP>=0?"+":"−")+nf(Math.abs(d.logP),2);
+  $("dPka").textContent=nf(d.pka,1)+(d.base?" (base)":" (ácido)");
+  $("dFrac").textContent=(fn*100>=1?nf(fn*100,1):nf(fn*100,3))+"%";
+  $("dLogD").textContent=(logD>=0?"+":"−")+nf(Math.abs(logD),2);
+  var cl=Math.max(-5,Math.min(5,logD));
+  $("scaleBar").setAttribute("width",String(Math.max(8,(cl+5)/10*570)));
+  drawPartition(logD);
+}
+mkBtns("drugBtns",DRUGS.map(function(d){return {label:d.label,d:d}}),function(it){
+  curDrug=it.d; updDrug(); $("ro4").innerHTML=it.d.txt;
+});
+$("phR").addEventListener("input",updDrug);
+
+/* ---------- Esquema 5: barreiras ---------- */
+var MOLS=[
+ {label:"Lipossolúvel neutra",
+  left:'<circle cx="120" cy="80" r="8" fill="#2e7d4f"/><path d="M120,92 V150" stroke="#2e7d4f" stroke-width="2.4" marker-end="url(#ar1)"/><circle cx="120" cy="162" r="8" fill="#2e7d4f"/>',
+  right:'<circle cx="560" cy="78" r="8" fill="#2e7d4f"/><path d="M560,90 V162" stroke="#2e7d4f" stroke-width="2.4" marker-end="url(#ar1)"/><circle cx="560" cy="172" r="8" fill="#2e7d4f"/>',
+  txt:"<b>Molécula lipossolúvel e neutra</b> (diazepam, tiopental, fentanila). Atravessa ambos os endotélios por difusão transcelular, dissolvendo-se na bicamada lipídica. É a única classe que alcança livremente o sistema nervoso central, o que explica tanto a utilidade dos anestésicos e anticonvulsivantes quanto os efeitos centrais indesejados de anti-histamínicos de primeira geração e betabloqueadores lipofílicos."},
+ {label:"Hidrossolúvel ou ionizada",
+  left:'<circle cx="163" cy="80" r="8" fill="#1f5fa8"/><path d="M163,92 Q163,120 163,150" stroke="#1f5fa8" stroke-width="2.4" marker-end="url(#ar1)"/><circle cx="163" cy="162" r="8" fill="#1f5fa8"/><text x="196" y="112" font-size="10.5" fill="#1f5fa8">passa pela fenestração</text>',
+  right:'<circle cx="560" cy="78" r="8" fill="#1f5fa8"/><path d="M560,90 V106" stroke="#1f5fa8" stroke-width="2.4"/><line x1="544" y1="112" x2="576" y2="112" stroke="#b3261e" stroke-width="3.6"/><text x="590" y="116" font-size="10.5" fill="#b3261e">detida pelas junções oclusivas</text>',
+  txt:"<b>Molécula hidrossolúvel ou ionizada</b> (atenolol, gentamicina, penicilinas). Atravessa o capilar somático pela via paracelular, através de fenestrações e junções frouxas, mas é detida na barreira hematoencefálica, onde as junções oclusivas contínuas abolem essa rota. Daí a necessidade de doses muito elevadas ou de administração intratecal de certos antimicrobianos na meningite, situação em que a inflamação aumenta transitoriamente a permeabilidade da barreira."},
+ {label:"Substrato da glicoproteína P",
+  left:'<circle cx="120" cy="80" r="8" fill="#c25b12"/><path d="M120,92 V150" stroke="#c25b12" stroke-width="2.4" marker-end="url(#ar1)"/><circle cx="120" cy="162" r="8" fill="#c25b12"/>',
+  right:'<circle cx="820" cy="76" r="8" fill="#c25b12"/><path d="M820,88 V106" stroke="#c25b12" stroke-width="2.2"/><path d="M790,140 Q762,120 790,96" stroke="#c25b12" stroke-width="2.4" fill="none" marker-end="url(#ar1)"/><text x="776" y="80" font-size="10.5" fill="#c25b12" text-anchor="end">bombeada de volta ao sangue</text>',
+  txt:"<b>Substrato da glicoproteína P</b> (domperidona, loperamida, digoxina, ciclosporina). Mesmo sendo suficientemente lipofílica para entrar na célula endotelial, a molécula é reconhecida pela bomba de efluxo dependente de ATP e devolvida ao sangue antes de alcançar o parênquima. Esse mecanismo é o que mantém a domperidona e a loperamida praticamente restritas à periferia — e a razão pela qual inibidores da glicoproteína P podem converter fármacos seguros em fármacos com efeitos centrais."}
+];
+mkBtns("molBtns",MOLS.map(function(m){return {label:m.label,m:m}}),function(it){
+  $("molLeft").innerHTML=it.m.left; $("molRight").innerHTML=it.m.right;
+  $("pgpG").setAttribute("opacity", it.label==="Substrato da glicoproteína P" ? "1" : ".35");
+  $("ro5").innerHTML=it.m.txt;
+});
+
+/* ---------- Esquema 6: ligação proteica ---------- */
+var BIND=[
+ {label:"Varfarina 99,5%",b:0.995,
+  txt:"<b>Varfarina — 99,5% ligada.</b> Apenas meio por cento circula livre, de modo que a queda de um único ponto percentual na ligação triplica a fração ativa. Somada ao índice terapêutico estreito e à dependência do CYP2C9, essa característica faz da varfarina o protótipo das interações perigosas. Na prática, a vigilância se faz pela razão normalizada internacional, e não pela previsão teórica do deslocamento."},
+ {label:"Tolbutamida 96%",b:0.96,
+  txt:"<b>Tolbutamida — 96% ligada.</b> Sulfonilureia de primeira geração cujo deslocamento por anti-inflamatórios não esteroidais e sulfonamidas eleva a fração livre e pode precipitar hipoglicemia grave, sobretudo no idoso. O risco é amplificado quando o mesmo agente também inibe o CYP2C9, somando deslocamento e redução da depuração."},
+ {label:"Nifedipino 96%",b:0.96,
+  txt:"<b>Nifedipino — 96% ligado.</b> Antagonista dos canais de cálcio di-hidropiridínico; o aumento da fração livre manifesta-se por vasodilatação excessiva, cefaleia, rubor e hipotensão. Como é substrato preferencial do CYP3A4, a associação com azólicos, macrolídeos ou suco de toranja produz elevação clinicamente significativa das concentrações."},
+ {label:"Ciclosporina 93%",b:0.93,
+  txt:"<b>Ciclosporina — 93% ligada</b>, sobretudo a lipoproteínas. Imunossupressor de índice terapêutico estreito, em que concentrações baixas implicam rejeição do enxerto e concentrações altas, nefrotoxicidade. Exige monitorização sérica sistemática, e qualquer alteração de albuminemia, lipidemia ou coadministração de inibidores do CYP3A4 impõe reavaliação da dose."},
+ {label:"Indometacina 90%",b:0.90,
+  txt:"<b>Indometacina — 90% ligada.</b> Anti-inflamatório não esteroidal que compete com outros ácidos pelos sítios albumínicos e, no neonato, desloca a bilirrubina, elevando o risco de encefalopatia bilirrubínica. Soma-se a isso a inibição da síntese de prostaglandinas renais, que reduz a filtração glomerular e potencializa a toxicidade de fármacos de eliminação renal."},
+ {label:"Atenolol 5%",b:0.05,
+  txt:"<b>Atenolol — cerca de 5% ligado.</b> Contraponto didático ao grupo anterior: praticamente todo o fármaco circula livre, de modo que variações da albuminemia e interações por deslocamento são irrelevantes. Em compensação, a eliminação é rápida e quase integralmente renal sob forma inalterada, o que transloca a preocupação clínica da albumina para a taxa de filtração glomerular."}
+];
+var curB=BIND[0];
+function updBind(){
+  var alb=parseFloat($("albR").value), b0=curB.b;
+  var b=Math.max(0,Math.min(0.999, b0*(alb/4.2)));
+  var f=1-b, f0=1-b0, mult=f/f0;
+  $("albOut").textContent=nf(alb,1);
+  $("bTxt").textContent=nf(b*100,1)+"%";
+  $("fTxt2").textContent=(f*100>=1?nf(f*100,1):nf(f*100,2))+"%";
+  $("mTxt").textContent="× "+nf(mult,2);
+  var N=40, nfree=Math.max(1,Math.round(N*f)), s=7, i, x, y, h="", ar="";
+  function rnd(){ s=(s*9301+49297)%233280; return s/233280; }
+  for(i=0;i<N;i++){
+    x=50+rnd()*800; y=62+rnd()*86;
+    if(i<nfree){
+      h+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="6" fill="#b3261e"/>';
+      ar+='<path d="M'+x.toFixed(1)+','+(y+8).toFixed(1)+' V170" stroke="#b3261e" stroke-width="1.5" opacity=".55" marker-end="url(#ar1)"/>';
+    } else {
+      h+='<g><ellipse cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" rx="13" ry="9" fill="#6a3fa0" opacity=".30"/><circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="5" fill="#4f2d7a"/></g>';
+    }
+  }
+  $("plasmaDots").innerHTML=h; $("freeArrows").innerHTML=ar;
+}
+mkBtns("bndBtns",BIND.map(function(b){return {label:b.label,b:b}}),function(it){
+  curB=it.b; updBind(); $("ro6").innerHTML=it.b.txt+" <i>O modelo assume que a capacidade de ligação varia proporcionalmente à albuminemia, simplificação adequada para fins didáticos.</i>";
+});
+$("albR").addEventListener("input",updBind);
+
+/* ---------- Esquema 7: rotas metabólicas ---------- */
+var MET=[
+ {label:"Paracetamol",parent:"Paracetamol",enz:"CYP2E1 e CYP3A4",conj:"glicuronidação e sulfatação",
+  m1lab:"Metabólito reativo",m1:"NAPQI",m2:"glicuronídeo e sulfato",
+  txt:"<b>Bioativação tóxica.</b> Em doses terapêuticas, mais de 90% do paracetamol segue pela fase II, formando conjugados inertes. Uma fração pequena é oxidada pela CYP2E1 a N-acetil-p-benzoquinona imina, metabólito eletrofílico neutralizado pela glutationa hepática. Na superdosagem, ou quando a glutationa está depletada por jejum, desnutrição ou etilismo crônico, o NAPQI acumula-se e provoca necrose centrolobular. O antídoto, a N-acetilcisteína, repõe o substrato para a síntese de glutationa e é tanto mais eficaz quanto mais precocemente administrado."},
+ {label:"Codeína",parent:"Codeína",enz:"CYP2D6 (O-desmetilação)",conj:"glicuronidação",
+  m1lab:"Metabólito ativo",m1:"Morfina",m2:"codeína-6-glicuronídeo",
+  txt:"<b>Ativação de pró-fármaco com variabilidade genética.</b> A codeína possui afinidade desprezível pelo receptor opioide e depende da CYP2D6 para converter-se em morfina. Metabolizadores lentos — cerca de 5% a 10% dos indivíduos de ascendência europeia — não obtêm analgesia; metabolizadores ultrarrápidos produzem morfina em excesso, com risco de depressão respiratória. Esse polimorfismo motivou restrições ao uso em crianças e em mulheres que amamentam, após casos fatais descritos em lactentes."},
+ {label:"Clopidogrel",parent:"Clopidogrel",enz:"CYP2C19 e CYP3A4",conj:"hidrólise por esterases (via inativa)",
+  m1lab:"Metabólito ativo",m1:"tiol ativo que bloqueia o P2Y₁₂",m2:"ácido carboxílico inativo (85%)",
+  txt:"<b>Ativação de pró-fármaco com interação clinicamente relevante.</b> Cerca de 85% da dose é hidrolisada a um derivado inativo; apenas a fração restante é bioativada em duas etapas oxidativas dependentes sobretudo da CYP2C19. Portadores de alelos de perda de função apresentam menor inibição plaquetária e maior risco de trombose de <i>stent</i>, e inibidores potentes da CYP2C19, como o omeprazol, reduzem a formação do metabólito ativo — razão pela qual se prefere o pantoprazol quando a gastroproteção é necessária."},
+ {label:"Diazepam",parent:"Diazepam",enz:"CYP2C19 e CYP3A4",conj:"glicuronidação do oxazepam",
+  m1lab:"Metabólitos ativos",m1:"nordazepam, temazepam, oxazepam",m2:"glicuronídeos inativos",
+  txt:"<b>Metabólitos ativos com meia-vida prolongada.</b> O diazepam origina nordazepam, cuja meia-vida pode ultrapassar 100 horas, e este, por sua vez, temazepam e oxazepam, igualmente ativos. O efeito clínico, portanto, não se encerra com a depuração da molécula original, o que explica a sedação residual e o acúmulo em uso repetido, sobretudo no idoso. É por esse motivo que se preferem, nessa faixa etária, benzodiazepínicos que sofrem apenas conjugação direta, como lorazepam e oxazepam."},
+ {label:"Enalapril",parent:"Enalapril",enz:"esterases hepáticas (hidrólise)",conj:"não requer fase II",
+  m1lab:"Metabólito ativo",m1:"Enalaprilato",m2:"excreção renal inalterada",
+  txt:"<b>Pró-fármaco desenhado para absorção.</b> O enalaprilato, inibidor ativo da enzima conversora de angiotensina, é muito polar e tem absorção oral precária. A esterificação produz o enalapril, suficientemente lipofílico para ser absorvido, que é hidrolisado no fígado ao composto ativo. Trata-se do mesmo princípio químico empregado nos ésteres da betametasona, aqui a serviço da biodisponibilidade oral. Na insuficiência hepática grave a conversão pode ser lenta e incompleta."}
+];
+mkBtns("metBtns",MET.map(function(m){return {label:m.label,m:m}}),function(it){
+  var m=it.m;
+  $("mParent").textContent=m.parent; $("mEnz").textContent=m.enz; $("mConj").textContent=m.conj;
+  $("mM1Lab").textContent=m.m1lab; $("mM1").textContent=m.m1; $("mM2").textContent=m.m2;
+  $("ro7").innerHTML=m.txt;
+});
+
+/* ---------- Esquema 8: inibição e indução ---------- */
+var SCEN=[
+ {label:"Inibição enzimática",k:"inh",
+  txt:"<b>Inibição enzimática.</b> A competição pelo sítio ativo instala-se em horas, tão logo o inibidor alcance concentrações suficientes: a curva descola abruptamente da linha de base e as concentrações sobem até um novo platô mais elevado, com risco de toxicidade em fármacos de índice terapêutico estreito. A reversão é igualmente rápida após a suspensão, salvo na inibição irreversível, que exige nova síntese enzimática."},
+ {label:"Indução enzimática",k:"ind",
+  txt:"<b>Indução enzimática.</b> Depende de transcrição gênica e síntese proteica, de modo que o efeito se instala progressivamente ao longo de dias a semanas e persiste por período equivalente após a retirada do indutor. A curva afasta-se lentamente da linha de base, e a perda de eficácia é silenciosa — falha contraceptiva, rejeição de enxerto, recidiva convulsiva. O risco inverso ocorre na suspensão do indutor, com elevação tardia das concentrações."}
+];
+var curS=SCEN[0];
+function drawCurve(){
+  var t0=parseFloat($("startR").value);
+  $("startOut").textContent=t0+" h";
+  var dt=0.25, T=168, keB=Math.LN2/8, A=[], B=[], c=0, cb=0, t, ke, ramp, nextDose=0;
+  for(t=0;t<=T;t+=dt){
+    if(t>=nextDose-1e-9){ c+=1; cb+=1; nextDose+=8; }
+    if(t<t0){ ke=keB; }
+    else if(curS.k==="inh"){ ke=keB/3; }
+    else { ramp=Math.min(1,(t-t0)/72); ke=keB*(1+2*ramp); }
+    c-=c*ke*dt; cb-=cb*keB*dt;
+    A.push([t,c]); B.push([t,cb]);
+  }
+  var mx=0; A.concat(B).forEach(function(p){ if(p[1]>mx) mx=p[1]; });
+  function pts(arr){ return arr.map(function(p){
+    return (70+p[0]/T*800).toFixed(1)+","+(268-p[1]/mx*232).toFixed(1); }).join(" "); }
+  $("curveMain").setAttribute("points",pts(A));
+  $("curveBase").setAttribute("points",pts(B));
+  var x=70+t0/T*800;
+  $("startLine").setAttribute("x1",x); $("startLine").setAttribute("x2",x);
+  $("startLbl").setAttribute("x",x);
+  $("legend").textContent = curS.k==="inh" ? "—— com inibidor" : "—— com indutor";
+  var g="",i;
+  for(i=0;i<=7;i++){ var gx=70+i*800/7; g+='<line x1="'+gx.toFixed(0)+'" y1="20" x2="'+gx.toFixed(0)+'" y2="268" stroke="#efe9e4" stroke-width="1"/><text x="'+gx.toFixed(0)+'" y="284" font-size="10.5" fill="#8b7f78" text-anchor="middle">'+(i*24)+'</text>'; }
+  $("grid").innerHTML=g;
+}
+mkBtns("indBtns",SCEN.map(function(s){return {label:s.label,s:s}}),function(it){
+  curS=it.s; drawCurve(); $("ro8").innerHTML=it.s.txt+" <i>Simulação de dose fixa a cada 8 horas, com meia-vida basal de 8 horas; as curvas são ilustrativas.</i>";
+});
+$("startR").addEventListener("input",drawCurve);
+</script>
+</body>
+</html>
